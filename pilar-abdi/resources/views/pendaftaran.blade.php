@@ -52,7 +52,7 @@
                                     <option value="">-- Pilih Sekolah --</option>
                                     <option>IPDN</option>
                                     <option>STAN</option>
-                                    <option>AKPOL</option>
+                                    <option>SSN</option>
                                     <option>STIN</option>
                                     <option>POLTEKIM</option>
                                     <option>Lainnya</option>
