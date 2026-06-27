@@ -44,6 +44,12 @@
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top py-3">
     <div class="container">
+        @if(!request()->is('/'))
+            <a href="{{ url('/') }}" class="btn btn-outline-warning d-flex align-items-center justify-content-center me-3" style="width:40px; height:40px; border-radius:50%;">
+                <i class="bi bi-arrow-left fs-5"></i>
+            </a>
+        @endif
+
         <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
             <img
                 src="{{ asset('assets/logoo.png') }}"
@@ -66,6 +72,14 @@
                 <li class="nav-item"><a class="nav-link" href="{{ url('/keunggulan') }}">Keunggulan</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/testimoni') }}">Testimoni</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/kontak') }}">Kontak</a></li>
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-warning text-dark px-3 ms-2" href="{{ url('/register') }}">Daftar</a>
+                    </li>
+                @endguest
             </ul>
         </div>
     </div>
@@ -75,6 +89,33 @@
 <div style="padding-top: 80px;">
     @yield('content')
 </div>
+
+<!-- FOOTER -->
+<footer class="footer mt-5">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mb-3">
+                <h6 class="text-uppercase fw-bold mb-3">Hubungi Kami</h6>
+                <div class="d-flex justify-content-center flex-wrap gap-4">
+                    <div>
+                        <span class="fw-semibold">Email:</span> <a href="mailto:info@pilarabdi.id">info@pilarabdi.id</a>
+                    </div>
+                    <div>
+                        <span class="fw-semibold">Telepon:</span> 0812-3456-7890
+                    </div>
+                    <div>
+                        <span class="fw-semibold">Alamat:</span> Jakarta, Indonesia
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center pt-4 border-top mt-4">
+            © {{ date('Y') }} Pilar Abdi. Semua hak cipta dilindungi.
+        </div>
+    </div>
+</footer>
+
+@yield('scripts')
 
 </body>
 </html>

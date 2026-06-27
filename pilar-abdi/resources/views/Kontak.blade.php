@@ -35,7 +35,11 @@
         border-radius: 20px;
         padding: 32px;
         box-shadow: 0 8px 25px rgba(0,0,0,.07);
-        height: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
     }
 
     .kontak-card h4 {
@@ -43,6 +47,21 @@
         color: #071739;
         margin-bottom: 24px;
         font-size: 20px;
+    }
+
+    .side-note {
+        background: #fffbf0;
+        border-radius: 12px;
+        border-left: 3px solid #f5b93b;
+        padding: 22px 18px;
+        margin-top: 24px;
+    }
+
+    .side-note p {
+        font-size: 13px;
+        color: #444;
+        margin: 0;
+        line-height: 1.7;
     }
 
     .info-item {
@@ -172,10 +191,10 @@
 <!-- KONTAK -->
 <section class="kontak-section">
     <div class="container">
-        <div class="row g-4">
+        <div class="row g-4 justify-content-center align-items-stretch">
 
             <!-- Info Kontak -->
-            <div class="col-lg-4">
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10">
                 <div class="kontak-card">
                     <h4>Info Kontak</h4>
 
@@ -217,38 +236,8 @@
                 </div>
             </div>
 
-            <!-- Form Pesan -->
-            <div class="col-lg-5">
-                <div class="kontak-card">
-                    <h4>Kirim Pesan</h4>
-                    <div class="mb-3">
-                        <label class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" placeholder="Masukkan nama kamu">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Nomor WhatsApp</label>
-                        <input type="text" class="form-control" placeholder="08xxxxxxxxxx">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Paket yang Diminati</label>
-                        <select class="form-select">
-                            <option value="">-- Pilih Paket --</option>
-                            <option>Paket Dasar (3 Bulan)</option>
-                            <option>Paket Intensif (6 Bulan)</option>
-                            <option>Paket Pro (12 Bulan)</option>
-                            <option>Belum tahu, ingin konsultasi dulu</option>
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label class="form-label">Pesan</label>
-                        <textarea class="form-control" rows="4" placeholder="Tulis pertanyaan atau pesan kamu..."></textarea>
-                    </div>
-                    <button class="btn-kirim">Kirim Pesan →</button>
-                </div>
-            </div>
-
             <!-- Jam Operasional -->
-            <div class="col-lg-3">
+            <div class="col-xl-4 col-lg-5 col-md-6 col-sm-10">
                 <div class="kontak-card">
                     <h4>Jam Operasional</h4>
                     <div class="jam-item">
@@ -264,8 +253,8 @@
                         <span class="tutup">Libur</span>
                     </div>
 
-                    <div class="mt-4 p-3" style="background:#fffbf0;border-radius:12px;border-left:3px solid #f5b93b;">
-                        <p style="font-size:13px;color:#444;margin:0;line-height:1.7;">
+                    <div class="side-note">
+                        <p>
                             💡 Pertanyaan seputar pendaftaran dan paket biasanya dibalas dalam <strong>kurang dari 1 jam</strong> di hari kerja.
                         </p>
                     </div>
@@ -276,4 +265,4 @@
     </div>
 </section>
 
-@endsection
+@endsectionar
