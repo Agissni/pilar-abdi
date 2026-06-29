@@ -9,9 +9,10 @@ class Payment extends Model
 {
     use HasFactory;
 
+    protected $table = 'pembayaran';
+
     protected $fillable = [
-        'user_id',
-        'package',
+    'id_user',
         'bank',
         'account_number',
         'sender_name',
@@ -23,8 +24,8 @@ class Payment extends Model
         'status',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+   public function user()
+{
+    return $this->belongsTo(User::class, 'id_user', 'id_user');
+}
 }

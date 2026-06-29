@@ -18,6 +18,18 @@
 
         <div class="card-body">
 
+            @if(session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="alert alert-danger" role="alert">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <table class="table table-bordered align-middle">
 
                 <thead class="table-light">
@@ -39,7 +51,7 @@
                                     <br>
                                     <small><?php echo e(optional($payment->user)->email ?? '-'); ?></small>
                                 </td>
-                                <td><?php echo e(ucfirst($payment->package ?? '-')); ?></td>
+                                <td><?php echo e(ucfirst(optional($payment->user)->package ?? '-')); ?></td>
                                 <td>
                                     <?php if($payment->status === 'pending'): ?>
                                         <span class="badge bg-warning text-dark">Menunggu Verifikasi</span>

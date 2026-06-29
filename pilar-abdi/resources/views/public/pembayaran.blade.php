@@ -61,7 +61,7 @@
                         </div>
                     @endif
 
-                    @if(optional($user)->id)
+                   @if(optional($user)->id_user)
 
                         <div class="row g-4 mb-4">
                             <div class="col-md-6">
@@ -123,9 +123,7 @@
 
                                             <form method="POST" action="/pembayaran/upload" enctype="multipart/form-data">
                                                 @csrf
-                                                <input type="hidden" name="user_id" value="{{ $user->id }}">
-                                                <input type="hidden" name="package" value="{{ old('package', $user->package) }}">
-
+                                                <input type="hidden" name="id_user" value="{{ $user->id_user }}">
                                                 <div class="row g-3">
                                                     <div class="col-md-6">
                                                         <label class="form-label">Bank Pengirim <span class="text-danger">*</span></label>

@@ -2,22 +2,24 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    // Nama tabel
+    protected $table = 'users';
+
+    // Primary key
+    protected $primaryKey = 'id_user';
+
+    // Auto increment
+    public $incrementing = true;
+
+    // Kolom yang boleh diisi
     protected $fillable = [
         'name',
         'email',
@@ -27,33 +29,26 @@ class User extends Authenticatable
         'package',
         'sekdin',
         'address',
+        'role',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    // Kolom yang disembunyikan
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
+    // Cast bawaan Laravel
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
 
+    // Relasi ke tabel pembayaran
     public function payments()
-    {
-        return $this->hasMany(Payment::class);
-    }
+{
+    return $this->hasMany(Payment::class, 'id_user', 'id_user');
+}
 }

@@ -17,24 +17,25 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        Log::info('Register request received', ['input' => $request->except(['password','password_confirmation'])]);
+        Log::info('Register request received', [
+            'input' => $request->except(['password', 'password_confirmation'])
+        ]);
 
+        // Validasi input
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email',
-            'whatsapp' => 'required|string',
+            'whatsapp' => 'required|string|max:20',
             'password' => 'required|string|min:6|confirmed',
-            'package' => 'required|string',
-            'sekdin' => 'required|string',
+            'package' => 'required|string|max:100',
+            'sekdin' => 'required|string|max:100',
             'address' => 'required|string',
         ]);
 
-        // keep raw password in session for one-time display only
+        // Simpan password asli hanya untuk ditampilkan sekali
         $rawPassword = $data['password'];
 
-        // store hashed password in database
-        Log::info('Register validation succeeded', ['input' => $request->except(['password','password_confirmation'])]);
-
+        // Simpan user ke database
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -44,17 +45,18 @@ class RegisterController extends Controller
             'package' => $data['package'],
             'sekdin' => $data['sekdin'],
             'address' => $data['address'],
+            'role' => 'siswa',
         ]);
 
-        if ($user && $user->id) {
-            Log::info('User record created', ['user_id' => $user->id, 'email' => $user->email]);
-        } else {
-            Log::error('User::create returned falsy value', ['input' => $request->except(['password','password_confirmation'])]);
-        }
+        Log::info('User created', [
+            'user_id' => $user->id_user,
+            'email' => $user->email,
+        ]);
 
-        session(['user_id' => $user->id]);
-
-        Log::info('Register redirecting to pendaftaran', ['user_id' => $user->id]);
+        // Simpan id user ke session
+        session([
+            'user_id' => $user->id_user
+        ]);
 
         return redirect('/pendaftaran')
             ->with('success', 'Pendaftaran berhasil. Silakan lanjut ke pembayaran.')

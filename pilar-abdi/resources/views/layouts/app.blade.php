@@ -41,16 +41,22 @@
 </head>
 <body>
 
+@php
+    $isStudentArea = request()->is('dashboard') || request()->is('kelas') || request()->is('tryout') || request()->is('profil') || request()->is('hasil*') || request()->is('siswa*');
+    $homeUrl = $isStudentArea ? url('/dashboard') : url('/');
+    $backUrl = $isStudentArea ? url('/dashboard') : url('/');
+@endphp
+
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top py-3">
     <div class="container">
         @if(!request()->is('/'))
-            <a href="{{ url('/') }}" class="btn btn-outline-warning d-flex align-items-center justify-content-center me-3" style="width:40px; height:40px; border-radius:50%;">
+            <a href="{{ $backUrl }}" class="btn btn-outline-warning d-flex align-items-center justify-content-center me-3" style="width:40px; height:40px; border-radius:50%;">
                 <i class="bi bi-arrow-left fs-5"></i>
             </a>
         @endif
 
-        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url('/') }}">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="{{ $homeUrl }}">
             <img
                 src="{{ asset('assets/logoo.png') }}"
                 style="width:38px; height:38px; object-fit:cover; border-radius:50%;"
@@ -67,19 +73,28 @@
 
         <div class="collapse navbar-collapse" id="navbarMenu">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/program') }}">Program</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/keunggulan') }}">Keunggulan</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/testimoni') }}">Testimoni</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/kontak') }}">Kontak</a></li>
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-warning text-dark px-3 ms-2" href="{{ url('/register') }}">Daftar</a>
-                    </li>
-                @endguest
+                @if($isStudentArea)
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/kelas') }}">Kelas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/tryout') }}">Tryout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Hasil Tryout</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/dashboard') }}">Keluar</a></li>
+                @else
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/program') }}">Program</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/keunggulan') }}">Keunggulan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/testimoni') }}">Testimoni</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/kontak') }}">Kontak</a></li>
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link btn btn-warning text-dark px-3 ms-2" href="{{ url('/register') }}">Daftar</a>
+                        </li>
+                    @endguest
+                @endif
             </ul>
         </div>
     </div>

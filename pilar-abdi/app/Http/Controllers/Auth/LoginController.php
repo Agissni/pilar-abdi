@@ -28,7 +28,7 @@ class LoginController extends Controller
             }
 
             if ($user->status === 'active') {
-                session(['user_id' => $user->id]);
+                session(['user_id' => $user->id_user]);
                 return redirect('/dashboard');
             }
 
