@@ -8,22 +8,26 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('package')->nullable();
+            $table->unsignedBigInteger('id_user');
             $table->string('bank')->nullable();
             $table->string('account_number')->nullable();
+            $table->string('sender_name')->nullable();
+            $table->date('transfer_date')->nullable();
+            $table->time('transfer_time')->nullable();
+            $table->unsignedBigInteger('amount')->nullable();
+            $table->text('note')->nullable();
             $table->string('proof_path')->nullable();
-            $table->enum('status', ['pending','lunas','ditolak'])->default('pending');
+            $table->enum('status', ['pending', 'lunas', 'ditolak'])->default('pending');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('pembayaran');
     }
 };
