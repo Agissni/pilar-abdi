@@ -121,13 +121,20 @@ class PaymentController extends Controller
         ]);
     }
 
-    public function indexAdmin()
+    public function indexAdmin(Request $request)
     {
-        $payments = Payment::with('user')
-            ->latest()
-            ->get();
+        $status = $request->query('status', 'pending');
 
-        return view('admin.pembayaran', compact('payments'));
+        $query = Payment::with('user')->latest();
+
+        if ($status !== 'all' && in_array($status, ['pending', 'lunas', 'ditolak'])) {
+            $query->where('status', $status);
+        }
+
+        $payments = $query->get();
+        $admin = User::find(session('user_id'));
+
+        return view('admin.pembayaran', compact('payments', 'admin', 'status'));
     }
 
     public function verify(Request $request, $id)

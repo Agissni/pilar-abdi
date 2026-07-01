@@ -7,7 +7,10 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
 
     <style>
         body {
@@ -79,7 +82,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/tryout') }}">Tryout</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Hasil Tryout</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/dashboard') }}">Keluar</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}">Keluar</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/program') }}">Program</a></li>
@@ -131,6 +134,11 @@
 </footer>
 
 @yield('scripts')
+
+<!-- Bootstrap 5 JS Bundle (with Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </body>
 </html>
