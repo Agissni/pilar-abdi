@@ -41,6 +41,9 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $request->session()->forget('user_id');
-        return redirect('/login');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

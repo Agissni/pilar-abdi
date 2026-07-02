@@ -79,7 +79,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/tryout') }}">Tryout</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Hasil Tryout</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/dashboard') }}">Keluar</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}">Keluar</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/program') }}">Program</a></li>
