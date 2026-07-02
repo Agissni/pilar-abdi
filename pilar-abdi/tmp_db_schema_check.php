@@ -1,7 +1,7 @@
 <?php
 $db = __DIR__ . '/database/database.sqlite';
 $pdo = new PDO('sqlite:' . $db);
-foreach (['users', 'payments'] as $t) {
+foreach (['users', 'pembayaran', 'gurus', 'kelas'] as $t) {
     echo "TABLE:$t\n";
     $stmt = $pdo->query('PRAGMA table_info(' . $t . ')');
     foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $col) {
@@ -9,3 +9,4 @@ foreach (['users', 'payments'] as $t) {
     }
     echo "\n";
 }
+

@@ -17,22 +17,57 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $data = $request->validate([
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required|string',
         ]);
 
+        // 1. Cek di tabel users (Siswa / Admin)
         $user = User::where('email', $data['email'])->first();
-        if ($user && Hash::check($data['password'], $user->password)) {
-            if ($user->status === 'pending') {
-                return back()->withErrors(['account' => 'Akun Anda masih menunggu verifikasi admin.'])->withInput();
+
+        if ($user) {
+            if (!Hash::check($data['password'], $user->password)) {
+                return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
             }
 
-            if ($user->status === 'active') {
-                session(['user_id' => $user->id_user]);
-                return redirect('/dashboard');
+            if ($user->role === 'siswa') {
+                if ($user->status === 'pending') {
+                    return back()->withErrors(['account' => 'Akun Anda masih menunggu verifikasi admin.'])->withInput();
+                }
+
+                if ($user->status !== 'active') {
+                    return back()->withErrors(['account' => 'Status akun tidak valid. Silakan hubungi admin.'])->withInput();
+                }
             }
 
-            return back()->withErrors(['account' => 'Status akun tidak valid. Silakan hubungi admin.'])->withInput();
+            // Simpan user_id ke session
+            session([
+                'user_id'   => $user->id_user,
+                'user_role' => $user->role
+            ]);
+
+            // Redirect berdasarkan role
+            if ($user->role === 'admin') {
+                return redirect('/admin/dashboard');
+            }
+
+            return redirect('/dashboard');
+        }
+
+        // 2. Cek di tabel gurus (Guru)
+        $guru = \App\Models\Guru::where('email', $data['email'])->first();
+
+        if ($guru && $guru->password) {
+            if (!Hash::check($data['password'], $guru->password)) {
+                return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+            }
+
+            // Simpan guru_id ke session
+            session([
+                'guru_id'   => $guru->id,
+                'user_role' => 'guru'
+            ]);
+
+            return redirect('/guru/dashboard');
         }
 
         return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
@@ -40,10 +75,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        $request->session()->forget('user_id');
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return redirect('/');
+        $request->session()->forget(['user_id', 'guru_id', 'user_role']);
+        return redirect('/login');
     }
 }
