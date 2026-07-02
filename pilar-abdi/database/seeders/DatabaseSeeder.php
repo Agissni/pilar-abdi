@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Guru;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -13,27 +14,66 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Buat akun admin default
-        User::create([
-            'name'     => 'Admin Pilar Abdi',
-            'email'    => 'admin@pilarabdi.id',
-            'password' => Hash::make('admin123'),
-            'role'     => 'admin',
-            'status'   => 'active',
-            'whatsapp' => '081234567890',
+        // 1. Buat atau update akun admin default
+        User::updateOrCreate(
+            ['email' => 'admin@pilarabdi.id'],
+            [
+                'name'     => 'Admin Pilar Abdi',
+                'password' => Hash::make('admin123'),
+                'role'     => 'admin',
+                'status'   => 'active',
+                'whatsapp' => '081234567890',
+            ]
+        );
+
+        // 2. Buat atau update akun siswa contoh (opsional untuk testing)
+        User::updateOrCreate(
+            ['email' => 'siswa@pilarabdi.id'],
+            [
+                'name'     => 'Siswa Contoh',
+                'password' => Hash::make('siswa123'),
+                'role'     => 'siswa',
+                'status'   => 'active',
+                'whatsapp' => '089876543210',
+                'package'  => 'Paket Premium',
+                'sekdin'   => 'PKN STAN',
+                'address'  => 'Jakarta, Indonesia',
+            ]
+        );
+
+        // 3. Bersihkan data guru lama untuk menghindari data usang/duplikat
+        Guru::query()->delete();
+
+        // 4. Buat 3 akun guru baru (1 guru untuk 1 materi/spesialisasi)
+        // Guru TWK
+        Guru::create([
+            'nama'         => 'Sri Wahyuni, S.Pd.',
+            'spesialisasi' => 'TWK',
+            'whatsapp'     => '081234567801',
+            'email'        => 'sri.twk@pilarabdi.id',
+            'password'     => Hash::make('guru111'),
+            'bio'          => 'Guru spesialis Tes Wawasan Kebangsaan (TWK) dengan pengalaman membimbing materi UUD 1945, Pancasila, dan Sejarah Nasional.',
         ]);
 
-        // Buat akun siswa contoh (opsional untuk testing)
-        User::create([
-            'name'     => 'Siswa Contoh',
-            'email'    => 'siswa@pilarabdi.id',
-            'password' => Hash::make('siswa123'),
-            'role'     => 'siswa',
-            'status'   => 'active',
-            'whatsapp' => '089876543210',
-            'package'  => 'Paket Premium',
-            'sekdin'   => 'PKN STAN',
-            'address'  => 'Jakarta, Indonesia',
+        // Guru TIU
+        Guru::create([
+            'nama'         => 'Budi Santoso, M.Pd.',
+            'spesialisasi' => 'TIU',
+            'whatsapp'     => '081234567802',
+            'email'        => 'budi.tiu@pilarabdi.id',
+            'password'     => Hash::make('guru222'),
+            'bio'          => 'Guru spesialis Tes Inteligensia Umum (TIU) dengan metode hitung cepat dan logika penalaran analitis.',
+        ]);
+
+        // Guru TKP
+        Guru::create([
+            'nama'         => 'Dewi Lestari, S.Psi.',
+            'spesialisasi' => 'TKP',
+            'whatsapp'     => '081234567803',
+            'email'        => 'dewi.tkp@pilarabdi.id',
+            'password'     => Hash::make('guru333'),
+            'bio'          => 'Guru spesialis Tes Karakteristik Pribadi (TKP) yang fokus pada pembinaan integritas, jejaring kerja, dan pelayanan publik.',
         ]);
     }
 }
+
