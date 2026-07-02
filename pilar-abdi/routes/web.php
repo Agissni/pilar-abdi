@@ -372,8 +372,32 @@ Route::post('/pembayaran/upload', [App\Http\Controllers\PaymentController::class
 Route::get('/pembayaran/berhasil', [App\Http\Controllers\PaymentController::class, 'success']);
 
 // admin payment verification
-Route::get('/admin/pembayaran', [App\Http\Controllers\PaymentController::class, 'indexAdmin']);
-Route::post('/admin/pembayaran/{id}/verify', [App\Http\Controllers\PaymentController::class, 'verify']);
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin/pembayaran', [App\Http\Controllers\PaymentController::class, 'indexAdmin']);
+    Route::post('/admin/pembayaran/{id}/verify', [App\Http\Controllers\PaymentController::class, 'verify']);
+
+    // Admin routes — menggunakan AdminController dengan data real
+    Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']);
+    Route::get('/admin/siswa',     [App\Http\Controllers\AdminController::class, 'siswa']);
+
+    // Guru CRUD
+    Route::get('/admin/guru',          [App\Http\Controllers\AdminGuruController::class, 'index']);
+    Route::post('/admin/guru',         [App\Http\Controllers\AdminGuruController::class, 'store']);
+    Route::put('/admin/guru/{id}',     [App\Http\Controllers\AdminGuruController::class, 'update']);
+    Route::delete('/admin/guru/{id}',  [App\Http\Controllers\AdminGuruController::class, 'destroy']);
+
+    // Kelas CRUD
+    Route::get('/admin/kelas',          [App\Http\Controllers\AdminKelasController::class, 'index']);
+    Route::post('/admin/kelas',         [App\Http\Controllers\AdminKelasController::class, 'store']);
+    Route::put('/admin/kelas/{id}',     [App\Http\Controllers\AdminKelasController::class, 'update']);
+    Route::delete('/admin/kelas/{id}',  [App\Http\Controllers\AdminKelasController::class, 'destroy']);
+
+    // Halaman statis
+    Route::get('/admin/tryout', function () {
+        $admin = \App\Models\User::find(session('user_id'));
+        return view('admin.tryout', compact('admin'));
+    });
+});
 
 Route::get('/testimoni', function () {
     return view('public.testimoni');
@@ -391,44 +415,24 @@ Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'show'])
 Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout']);
 
-Route::get('/dashboard', [App\Http\Controllers\SiswaController::class, 'dashboard']);
+// Student routes group (only for active students)
+Route::middleware(['siswa'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\SiswaController::class, 'dashboard']);
 
-Route::get('/kelas', function () {
-    return view('siswa.kelas');
+    Route::get('/kelas', function () {
+        $user = \App\Models\User::find(session('user_id'));
+        $kelas = \App\Models\Kelas::with('guru')->latest()->get();
+        return view('siswa.kelas', compact('user', 'kelas'));
+    });
+
+    Route::get('/tryout', function () {
+        $user = \App\Models\User::find(session('user_id'));
+        return view('siswa.tryout', compact('user'));
+    });
 });
 
-Route::get('/tryout', function () {
-    return view('siswa.tryout');
-});
-
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-});
-
-Route::get('/admin/siswa', function () {
-    return view('admin.siswa');
-});
-
-Route::get('/admin/guru', function () {
-    return view('admin.guru');
-});
-
-Route::get('/admin/kelas', function () {
-    return view('admin.kelas');
-});
-
-Route::get('/admin/tryout', function () {
-    return view('admin.tryout');
-});
-
-Route::get('/admin/siswa', function () {
-    return view('admin.siswa');
-});
-
-Route::get('/admin/guru', function () {
-    return view('admin.guru');
-});
-
-Route::get('/admin/kelas', function () {
-    return view('admin.kelas');
+// Guru routes group
+Route::middleware(['guru'])->group(function () {
+    Route::get('/guru/dashboard', [App\Http\Controllers\GuruController::class, 'dashboard']);
+    Route::post('/guru/kelas/{id}/update', [App\Http\Controllers\GuruController::class, 'updateKelas']);
 });
