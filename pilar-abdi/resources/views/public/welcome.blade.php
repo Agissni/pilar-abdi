@@ -306,7 +306,7 @@
                 <div class="col-md-4 col-lg-3">
                     <a href="{{ url('/sekdin/pip-makassar') }}" class="text-decoration-none text-dark">
                         <div class="sekdin-item">
-                            <h5>PIP Makassar</h5>
+                            <h5>Polbangtan</h5>
                         </div>
                     </a>
                 </div>

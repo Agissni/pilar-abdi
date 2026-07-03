@@ -98,7 +98,7 @@
                                     <option value="ptdi-sttd">PTDI-STTD</option>
                                     <option value="stip-jakarta">STIP Jakarta</option>
                                     <option value="pip-semarang">PIP Semarang</option>
-                                    <option value="pip-makassar">PIP Makassar</option>
+                                    <option value="pip-makassar">Polbangtan</option>
                                     <option value="poltekbang">Poltekbang</option>
                                     <option value="poltektrans-sdp">Poltektrans SDP</option>
                                     <option value="lainnya">Lainnya</option>

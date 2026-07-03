@@ -21,7 +21,7 @@ Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, '
 Route::get('/sekdin/{slug}', function ($slug) {
     $sekdins = [
         'stan' => [
-            'name' => 'PKN STAN',
+            'name' => 'Politeknik Keuangan Negara (PKN STAN)',
             'ministry' => 'Kementerian Keuangan',
             'location' => 'Jakarta Selatan, DKI Jakarta',
             'logo' => 'stan.png',
@@ -47,7 +47,7 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'ipdn' => [
-            'name' => 'IPDN',
+            'name' => 'Institut Pemerintahan Dalam Negeri (IPDN)',
             'ministry' => 'Kementerian Dalam Negeri',
             'location' => 'Jatinangor, Kabupaten Sumedang',
             'logo' => 'ipdn.png',
@@ -76,8 +76,8 @@ Route::get('/sekdin/{slug}', function ($slug) {
             'name' => 'Politeknik Statistika STIS',
             'ministry' => 'Badan Pusat Statistik',
             'location' => 'Tangerang Selatan, Banten',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'STIS.jpg',
+            'background' => 'STIS.jpg',
             'description' => 'STIS fokus pada pendidikan statistik, data analis, dan survei nasional untuk kebutuhan BPS.',
             'requirements' => [
                 'WNI maksimal 21 tahun',
@@ -97,11 +97,11 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'stmkg' => [
-            'name' => 'STMKG',
+            'name' => 'Sekolah Tinggi Meteorologi, Klimatologi, dan Geofisika (STMKG)',
             'ministry' => 'Badan Meteorologi, Klimatologi, dan Geofisika',
             'location' => 'Jakarta Utara, DKI Jakarta',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'STMKG.jpg',
+            'background' => 'STMKG.jpg',
             'description' => 'STMKG mempersiapkan peserta untuk karir di bidang meteorologi, klimatologi, geofisika, dan kebencanaan.',
             'requirements' => [
                 'WNI maksimal 21 tahun',
@@ -121,11 +121,11 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'poltek-ssn' => [
-            'name' => 'Poltek SSN',
+            'name' => 'Politeknik Siber dan Sandi Negara (Poltek SSN)',
             'ministry' => 'Badan Siber dan Sandi Negara',
             'location' => 'Jakarta',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'SSN.png',
+            'background' => 'SSN.png',
             'description' => 'Poltek SSN mendidik calon ahli keamanan siber, kriptografi, dan perlindungan data negara.',
             'requirements' => [
                 'WNI maksimal 22 tahun',
@@ -145,7 +145,7 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'stin' => [
-            'name' => 'STIN',
+            'name' => 'Sekolah Tinggi Intelijen Negara (STIN)',
             'ministry' => 'Badan Intelijen Negara',
             'location' => 'Bogor, Jawa Barat',
             'logo' => 'stin.png',
@@ -169,11 +169,11 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'poltekip' => [
-            'name' => 'Poltekip',
+            'name' => 'Politeknik Ilmu Pemasyarakatan (POLTEKIP)',
             'ministry' => 'Kementerian Hukum dan HAM',
             'location' => 'Klaten, Jawa Tengah',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'Poltekip.jpg',
+            'background' => 'Poltekip.jpg',
             'description' => 'Poltekip melatih calon petugas pemasyarakatan dan staf hukum dalam sistem pemasyarakatan nasional.',
             'requirements' => [
                 'WNI maksimal 21 tahun',
@@ -193,7 +193,7 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'poltekim' => [
-            'name' => 'Poltekim',
+            'name' => 'Politeknik Imigrasi (POLTEKIM)',
             'ministry' => 'Kementerian Hukum dan HAM',
             'location' => 'Karawang, Jawa Barat',
             'logo' => 'poltekim.png',
@@ -217,11 +217,11 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'ptdi-sttd' => [
-            'name' => 'PTDI-STTD',
+            'name' => 'Politeknik Transportasi Darat Indonesia (PTDI-STTD)',
             'ministry' => 'Kementerian Perhubungan',
             'location' => 'Tegal, Jawa Tengah',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'STTD.png',
+            'background' => 'STTD.png',
             'description' => 'PTDI-STTD mempersiapkan peserta untuk karir di bidang transportasi darat, penerbangan, dan logistik.',
             'requirements' => [
                 'WNI maksimal 22 tahun',
@@ -243,8 +243,8 @@ Route::get('/sekdin/{slug}', function ($slug) {
             'name' => 'STIP Jakarta',
             'ministry' => 'Kementerian Perhubungan',
             'location' => 'Jakarta Utara, DKI Jakarta',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'STIP WARNA.jpg',
+            'background' => 'STIP WARNA.jpg',
             'description' => 'STIP Jakarta adalah sekolah penerbangan Kemenhub yang fokus pada pelayaran, navigasi, dan transportasi laut.',
             'requirements' => [
                 'WNI maksimal 22 tahun',
@@ -266,8 +266,8 @@ Route::get('/sekdin/{slug}', function ($slug) {
             'name' => 'PIP Semarang',
             'ministry' => 'Kementerian Perhubungan',
             'location' => 'Semarang, Jawa Tengah',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'PIP.png',
+            'background' => 'PIP.png',
             'description' => 'PIP Semarang mendidik calon pelaut dan profesional maritim untuk industri pelayaran nasional.',
             'requirements' => [
                 'WNI maksimal 22 tahun',
@@ -286,34 +286,58 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'pip-makassar' => [
-            'name' => 'PIP Makassar',
-            'ministry' => 'Kementerian Perhubungan',
-            'location' => 'Makassar, Sulawesi Selatan',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
-            'description' => 'PIP Makassar mempersiapkan calon pelaut dan tenaga maritim untuk industri pelayaran Indonesia timur.',
+            'name' => 'Politeknik Pembangunan Pertanian (POLBANGTAN)',
+            'ministry' => 'Kementerian Pertanian',
+            'location' => 'Beberapa lokasi (Medan, Bogor, Yogyakarta-Magelang, Malang, Gowa, Manokwari)',
+            'logo' => 'polbangtan.png',
+            'background' => 'polbangtan.png',
+            'description' => 'Institusi pendidikan vokasi di bawah Kementan yang fokus mencetak wirausahawan muda pertanian dan tenaga ahli profesional di bidang pertanian.',
             'requirements' => [
-                'WNI maksimal 22 tahun',
-                'Lulus SMA/SMK/MA sederajat',
-                'Sehat jasmani dan rohani',
+                'Lulusan SMA/SMK Pertanian/MA sederajat.',
+                'Maksimal 21-22 tahun (tergantung ketentuan tahun berjalan).',
+                'Sehat jasmani dan rohani.',
+                'Tidak memiliki riwayat penyakit yang menghambat proses pendidikan di lapangan.'
             ],
             'terms' => [
-                'Administrasi lengkap',
-                'Surat sehat',
+                'Pendaftaran melalui portal resmi PMB Polbangtan (biasanya terpisah dari SSCASN Dikdin).',
+                'Seleksi Administrasi, Tes Tulis, dan Wawancara.'
             ],
             'selection' => [
                 'Seleksi Administrasi',
-                'SKD',
-                'Tes kesehatan',
-                'Pengumuman'
+                'Tes Potensi Akademik',
+                'Wawancara & Psikotes',
+                'Pengumuman Final'
+            ]
+        ],
+        'polbangtan' => [
+            'name' => 'Politeknik Pembangunan Pertanian (POLBANGTAN)',
+            'ministry' => 'Kementerian Pertanian',
+            'location' => 'Beberapa lokasi (Medan, Bogor, Yogyakarta-Magelang, Malang, Gowa, Manokwari)',
+            'logo' => 'polbangtan.png',
+            'background' => 'polbangtan.png',
+            'description' => 'Institusi pendidikan vokasi di bawah Kementan yang fokus mencetak wirausahawan muda pertanian dan tenaga ahli profesional di bidang pertanian.',
+            'requirements' => [
+                'Akademik' => ['Lulusan SMA/SMK Pertanian/MA sederajat.'],
+                'Usia' => 'Maksimal 21-22 tahun (tergantung ketentuan tahun berjalan).',
+                'Fisik' => ['Sehat jasmani dan rohani.', 'Tidak memiliki riwayat penyakit yang menghambat proses pendidikan di lapangan.']
+            ],
+            'terms' => [
+                'Pendaftaran' => 'Melalui portal resmi PMB Polbangtan (biasanya terpisah dari SSCASN Dikdin).',
+                'Seleksi' => 'Seleksi Administrasi, Tes Tulis, dan Wawancara.'
+            ],
+            'selection' => [
+                'Seleksi Administrasi',
+                'Tes Potensi Akademik',
+                'Wawancara & Psikotes',
+                'Pengumuman Final'
             ]
         ],
         'poltekbang' => [
-            'name' => 'Poltekbang',
+            'name' => 'Politeknik Penerbangan (POLTEKBANG)',
             'ministry' => 'Kementerian Perhubungan',
             'location' => 'Berbagai lokasi (Jakarta, Makassar, Sorong, dll)',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'POLTEKBANG.png',
+            'background' => 'POLTEKBANG.png',
             'description' => 'Poltekbang melatih calon tenaga transportasi darat, laut, dan udara di beberapa lokasi strategis.',
             'requirements' => [
                 'WNI maksimal 22 tahun',
@@ -332,11 +356,11 @@ Route::get('/sekdin/{slug}', function ($slug) {
             ]
         ],
         'poltektrans-sdp' => [
-            'name' => 'Poltektrans SDP',
+            'name' => 'Politeknik Transportasi Sungai, Danau, dan Penyeberangan (POLTEKTRANS SDP)',
             'ministry' => 'Kementerian Perhubungan',
             'location' => 'Jakarta',
-            'logo' => 'logoo.png',
-            'background' => 'logoo.png',
+            'logo' => 'POLTEKTRANS.jpg',
+            'background' => 'POLTEKTRANS.jpg',
             'description' => 'Poltektrans SDP adalah sekolah kedinasan Kemenhub untuk calon ahli transportasi dan logistik darat.',
             'requirements' => [
                 'WNI maksimal 22 tahun',

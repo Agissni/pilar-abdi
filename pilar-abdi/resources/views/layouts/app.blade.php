@@ -91,10 +91,10 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/kontak') }}">Kontak</a></li>
                     @guest
                         <li class="nav-item">
-                            <a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/login') }}">Login</a>
+                            <a class="nav-link btn btn-warning text-dark px-3 ms-2" href="{{ url('/register') }}">Daftar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn btn-warning text-dark px-3 ms-2" href="{{ url('/register') }}">Daftar</a>
+                            <a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/login') }}">Login</a>
                         </li>
                     @endguest
                 @endif
