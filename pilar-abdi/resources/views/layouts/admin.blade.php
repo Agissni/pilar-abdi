@@ -539,7 +539,13 @@
         <a href="/admin/tryout"
            class="sidebar-nav-item {{ request()->is('admin/tryout*') ? 'active' : '' }}">
             <i class="bi bi-patch-question-fill"></i>
-            Kelola Tryout
+            Kelola Try Out
+        </a>
+
+        <a href="/admin/pengumuman"
+           class="sidebar-nav-item {{ request()->is('admin/pengumuman*') ? 'active' : '' }}">
+            <i class="bi bi-megaphone-fill"></i>
+            Kelola Pengumuman
         </a>
 
         <div class="sidebar-section-label mt-2">Website</div>
@@ -561,7 +567,7 @@
                 <div class="admin-profile-name">{{ $admin->name ?? 'Admin' }}</div>
                 <div class="admin-profile-role">Administrator</div>
             </div>
-            <a href="/logout" class="btn-logout-mini" title="Logout">
+            <a href="/logout" class="btn-logout-mini" title="Logout" onclick="return confirm('Apakah Anda yakin ingin keluar?');">
                 <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
@@ -593,7 +599,7 @@
                     <span class="notif-dot"></span>
                 @endif
             </a>
-            <a href="/logout" class="topbar-btn" title="Logout">
+            <a href="/logout" class="topbar-btn" title="Logout" onclick="return confirm('Apakah Anda yakin ingin keluar?');">
                 <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
@@ -605,6 +611,9 @@
     </main>
 
 </div>
+
+<!-- Axios JS -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <!-- Bootstrap 5 JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

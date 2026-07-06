@@ -80,9 +80,9 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/kelas') }}">Kelas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/tryout') }}">Tryout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Hasil Tryout</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}">Keluar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalProfilSaya">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Keluar</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/program') }}">Program</a></li>
@@ -139,6 +139,57 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+@if(isset($user))
+{{-- ===== MODAL PROFIL SAYA GLOBAL ===== --}}
+<div class="modal fade" id="modalProfilSaya" tabindex="-1" aria-hidden="true" style="backdrop-filter: blur(5px);">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 20px;">
+            <div class="modal-header py-3 text-white" style="background: #071739; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                <h5 class="modal-title fw-bold"><i class="bi bi-person-bounding-box me-2 text-warning"></i>Profil Saya</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4 text-start">
+                <div class="text-center mb-4">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-warning bg-opacity-10 text-warning mb-2 rounded-circle" style="width: 70px; height: 70px; border: 2px solid rgba(245, 185, 59, 0.2);">
+                        <i class="bi bi-person-fill fs-2"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark mb-0">{{ $user->name }}</h5>
+                    <span class="badge bg-success bg-opacity-10 text-success mt-2 px-3 py-1 fw-bold" style="border-radius: 20px;">
+                        <i class="bi bi-patch-check-fill me-1"></i>Akun Aktif
+                    </span>
+                </div>
+                
+                <div class="p-3 rounded-3" style="background-color: #f8fafc;">
+                    <div class="mb-3 border-bottom pb-2">
+                        <label class="text-secondary small d-block mb-1">Email Terdaftar</label>
+                        <span class="text-dark fw-bold" style="font-size: 14px;">{{ $user->email }}</span>
+                    </div>
+                    <div class="mb-3 border-bottom pb-2">
+                        <label class="text-secondary small d-block mb-1">Nomor WhatsApp</label>
+                        <span class="text-dark fw-bold" style="font-size: 14px;">{{ $user->whatsapp }}</span>
+                    </div>
+                    <div class="mb-3 border-bottom pb-2">
+                        <label class="text-secondary small d-block mb-1">Sekolah Kedinasan Tujuan</label>
+                        <span class="text-primary fw-bold text-uppercase" style="font-size: 14px;">{{ str_replace('-', ' ', $user->sekdin) }}</span>
+                    </div>
+                    <div class="mb-3 border-bottom pb-2">
+                        <label class="text-secondary small d-block mb-1">Paket Bimbingan</label>
+                        <span class="text-dark fw-bold text-capitalize" style="font-size: 14px;">{{ $user->package }}</span>
+                    </div>
+                    <div class="mb-0">
+                        <label class="text-secondary small d-block mb-1">Alamat Asal</label>
+                        <span class="text-dark fw-semibold" style="font-size: 14px;">{{ $user->address ?? '— Tidak ada alamat' }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 d-flex justify-content-center pb-4">
+                <button type="button" class="btn text-white px-5 py-2.5 fw-bold" data-bs-dismiss="modal" style="background: #071739; border-radius: 12px;">Tutup</button>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 
 </body>
 </html>

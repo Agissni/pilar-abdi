@@ -74,6 +74,34 @@ class DatabaseSeeder extends Seeder
             'password'     => Hash::make('guru333'),
             'bio'          => 'Guru spesialis Tes Karakteristik Pribadi (TKP) yang fokus pada pembinaan integritas, jejaring kerja, dan pelayanan publik.',
         ]);
+
+        // 5. Seed default announcements
+        \App\Models\Pengumuman::updateOrCreate(
+            ['judul' => '📣 Uji Coba Tryout CAT Nasional Gelombang II'],
+            [
+                'isi' => 'Simulasi Tryout CAT Nasional untuk seluruh sekolah kedinasan akan dilaksanakan secara serentak pada tanggal 12-14 Juli 2026. Pastikan Anda sudah mempersiapkan diri.',
+                'tanggal_publikasi' => '2026-07-06 00:00:00',
+                'status' => 'aktif',
+            ]
+        );
+
+        \App\Models\Pengumuman::updateOrCreate(
+            ['judul' => '📚 Tambahan Kelas Pendalaman TIU & TWK'],
+            [
+                'isi' => 'Akan diadakan kelas tambahan materi Analisis Figural & Pilar Kebangsaan pada hari Sabtu, 11 Juli 2026 jam 19.30 WIB. Link Zoom akan dibagikan di menu Kelas.',
+                'tanggal_publikasi' => '2026-07-05 00:00:00',
+                'status' => 'aktif',
+            ]
+        );
+
+        \App\Models\Pengumuman::updateOrCreate(
+            ['judul' => '💳 Batas Akhir Verifikasi Pembayaran'],
+            [
+                'isi' => 'Bagi siswa yang baru mendaftar, harap segera mengunggah bukti pembayaran di menu Pembayaran agar akun Anda dapat diverifikasi secara penuh oleh admin.',
+                'tanggal_publikasi' => '2026-07-04 00:00:00',
+                'status' => 'aktif',
+            ]
+        );
     }
 }
 
