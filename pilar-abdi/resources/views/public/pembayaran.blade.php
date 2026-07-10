@@ -1,9 +1,25 @@
 @extends('layouts.app')
 @section('title', 'Pembayaran - Pilar Abdi')
 
+@section('styles')
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+@endsection
+
 @section('content')
 
-<div class="container py-5">
+<div class="container py-5 mt-4">
     <div class="row justify-content-center">
         <div class="col-xl-10">
             <div class="card shadow-lg border-0">

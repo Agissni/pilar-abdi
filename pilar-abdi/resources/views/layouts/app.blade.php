@@ -80,9 +80,9 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Dashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/kelas') }}">Kelas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/tryout') }}">Tryout</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard') }}">Hasil Tryout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/hasil-tryout') }}">Hasil Tryout</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalProfilSaya">Profil</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}" onclick="return confirm('Apakah Anda yakin ingin keluar?')">Keluar</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}" data-confirm="Sesi Anda akan diakhiri." data-confirm-title="Yakin Ingin Keluar?" data-confirm-button="Ya, Keluar" data-confirm-color="#e53e3e" data-confirm-type="question">Keluar</a></li>
                 @else
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/program') }}">Program</a></li>
@@ -139,6 +139,86 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Axios -->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Global override for window.alert
+    window.alert = function(message) {
+        Swal.fire({
+            text: message,
+            icon: 'warning',
+            confirmButtonColor: '#071739',
+            confirmButtonText: 'OK'
+        });
+    };
+
+    // Generic confirmation handler via SweetAlert2 attributes
+    document.addEventListener('click', function(e) {
+        const confirmEl = e.target.closest('[data-confirm]');
+        if (confirmEl) {
+            e.preventDefault();
+            const message = confirmEl.getAttribute('data-confirm');
+            const title = confirmEl.getAttribute('data-confirm-title') || 'Apakah Anda yakin?';
+            const type = confirmEl.getAttribute('data-confirm-type') || 'warning';
+            const buttonText = confirmEl.getAttribute('data-confirm-button') || 'Ya, Lanjutkan';
+            const buttonColor = confirmEl.getAttribute('data-confirm-color') || '#071739';
+
+            Swal.fire({
+                title: title,
+                text: message,
+                icon: type,
+                showCancelButton: true,
+                confirmButtonColor: buttonColor,
+                cancelButtonColor: '#64748b',
+                confirmButtonText: buttonText,
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (confirmEl.tagName === 'A') {
+                        window.location.href = confirmEl.getAttribute('href');
+                    } else {
+                        const form = confirmEl.closest('form');
+                        if (form) {
+                            if (confirmEl.getAttribute('name')) {
+                                const hiddenInput = document.createElement('input');
+                                hiddenInput.type = 'hidden';
+                                hiddenInput.name = confirmEl.getAttribute('name');
+                                hiddenInput.value = confirmEl.getAttribute('value');
+                                form.appendChild(hiddenInput);
+                            }
+                            form.submit();
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    // Flash message toasts
+    @if(session('success'))
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true
+        });
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true
+        });
+    @endif
+</script>
 
 @if(isset($user))
 {{-- ===== MODAL PROFIL SAYA GLOBAL ===== --}}

@@ -186,6 +186,30 @@
                 </div>
             </div>
 
+            <div class="col-lg-4 col-md-6">
+                <div class="keunggulan-card">
+                    <div class="icon">💻</div>
+                    <h4>Kelas Zoom Premium & PDF</h4>
+                    <p>Pembelajaran interaktif menggunakan platform Zoom premium, rekaman kelas yang bisa diakses kapan saja, serta modul materi digital PDF terlengkap.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="keunggulan-card">
+                    <div class="icon">💬</div>
+                    <h4>Konsultasi Eksklusif 24/7</h4>
+                    <p>Layanan tanya jawab dan konsultasi langsung bersama mentor ahli untuk memecahkan soal-soal sulit, info pendaftaran, hingga pendampingan penuh sampai kelulusan.</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="keunggulan-card">
+                    <div class="icon">⚡</div>
+                    <h4>Tips & Trik Taktis SKD</h4>
+                    <p>Diajarkan metode hitung cepat untuk TIU, analisis logika praktis untuk TKP, dan penguasaan kata kunci materi wawasan kebangsaan (TWK) secara sistematis.</p>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

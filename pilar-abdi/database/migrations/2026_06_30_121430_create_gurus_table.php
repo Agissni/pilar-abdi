@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('gurus', function (Blueprint $table) {
-            $table->id();
+        Schema::create('guru', function (Blueprint $table) {
+            $table->id('id_guru');
             $table->string('nama');
             $table->string('spesialisasi');   // TIU, TWK, TKP, dll
             $table->string('whatsapp')->nullable();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('gurus');
+        Schema::dropIfExists('guru');
     }
 };

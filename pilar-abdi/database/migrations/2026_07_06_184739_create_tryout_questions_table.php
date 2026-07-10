@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tryout_questions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('tryout_id')->constrained('tryouts')->onDelete('cascade');
+            $table->id('id_tryout_question');
+            $table->foreignId('id_tryout')->nullable()->constrained('tryouts', 'id_tryout')->onDelete('cascade');
             $table->integer('nomor_soal');
             $table->enum('kategori', ['TIU', 'TWK', 'TKP']);
             $table->text('pertanyaan');

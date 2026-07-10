@@ -12,8 +12,16 @@ class AdminTryoutQuestionController extends Controller
     public function index($tryout_id)
     {
         $tryout = Tryout::findOrFail($tryout_id);
-        $questions = $tryout->questions()->orderBy('nomor_soal', 'asc')->get();
-        return view('admin.soal', compact('tryout', 'questions'));
+        
+        // Fetch all questions from the general bank grouped by category
+        $questions_twk = TryoutQuestion::where('kategori', 'TWK')->orderBy('id_tryout_question', 'asc')->get();
+        $questions_tiu = TryoutQuestion::where('kategori', 'TIU')->orderBy('id_tryout_question', 'asc')->get();
+        $questions_tkp = TryoutQuestion::where('kategori', 'TKP')->orderBy('id_tryout_question', 'asc')->get();
+
+        // Selected question IDs for this tryout
+        $selected_ids = $tryout->questions()->pluck('id_tryout_question')->toArray();
+
+        return view('admin.kelola_paket', compact('tryout', 'questions_twk', 'questions_tiu', 'questions_tkp', 'selected_ids'));
     }
 
     public function store(Request $request, $tryout_id)
@@ -49,7 +57,7 @@ class AdminTryoutQuestionController extends Controller
             'jawaban_benar.required' => 'Jawaban benar wajib ditentukan.',
         ]);
 
-        $data['tryout_id'] = $tryout->id;
+        $data['id_tryout'] = $tryout->id_tryout;
         $data['nomor_soal'] = $existingCount + 1;
 
         TryoutQuestion::create($data);
@@ -97,19 +105,19 @@ class AdminTryoutQuestionController extends Controller
 
         Log::info('Tryout question updated', ['id' => $id, 'nomor_soal' => $question->nomor_soal]);
 
-        return redirect("/admin/tryout/{$question->tryout_id}/soal")->with('success', 'Soal berhasil diperbarui.');
+        return redirect("/admin/tryout/{$question->id_tryout}/soal")->with('success', 'Soal berhasil diperbarui.');
     }
 
     public function destroy($id)
     {
         $question = TryoutQuestion::findOrFail($id);
-        $tryoutId = $question->tryout_id;
+        $tryoutId = $question->id_tryout;
         $deletedNum = $question->nomor_soal;
         
         $question->delete();
 
         // Re-sequence remaining questions
-        $remaining = TryoutQuestion::where('tryout_id', $tryoutId)
+        $remaining = TryoutQuestion::where('id_tryout', $tryoutId)
             ->where('nomor_soal', '>', $deletedNum)
             ->orderBy('nomor_soal', 'asc')
             ->get();
@@ -121,5 +129,37 @@ class AdminTryoutQuestionController extends Controller
         Log::info('Tryout question deleted and re-sequenced', ['tryout_id' => $tryoutId, 'deleted_num' => $deletedNum]);
 
         return redirect("/admin/tryout/{$tryoutId}/soal")->with('success', 'Soal berhasil dihapus.');
+    }
+
+    public function sync(Request $request, $tryout_id)
+    {
+        $tryout = Tryout::findOrFail($tryout_id);
+        $questionIds = $request->input('question_ids', []);
+
+        if (count($questionIds) > $tryout->jumlah_soal) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['limit' => 'Jumlah soal terpilih (' . count($questionIds) . ') melebihi batas maksimal (' . $tryout->jumlah_soal . ') untuk Try Out ini.']);
+        }
+
+        // Unassign questions currently in this tryout
+        TryoutQuestion::where('id_tryout', $tryout->id_tryout)->update(['id_tryout' => null]);
+
+        // Assign newly selected questions
+        if (!empty($questionIds)) {
+            TryoutQuestion::whereIn('id_tryout_question', $questionIds)->update(['id_tryout' => $tryout->id_tryout]);
+
+            // Re-sequence nomor_soal for selected questions starting from 1 to N
+            $questions = TryoutQuestion::where('id_tryout', $tryout->id_tryout)
+                ->orderBy('kategori', 'asc')
+                ->orderBy('id_tryout_question', 'asc')
+                ->get();
+
+            foreach ($questions as $index => $q) {
+                $q->update(['nomor_soal' => $index + 1]);
+            }
+        }
+
+        return redirect('/admin/tryout')->with('success', 'Paket Tryout berhasil disusun dan dirilis.');
     }
 }

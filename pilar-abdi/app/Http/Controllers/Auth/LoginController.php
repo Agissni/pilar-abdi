@@ -63,7 +63,7 @@ class LoginController extends Controller
 
             // Simpan guru_id ke session
             session([
-                'guru_id'   => $guru->id,
+                'guru_id'   => $guru->id_guru,
                 'user_role' => 'guru'
             ]);
 

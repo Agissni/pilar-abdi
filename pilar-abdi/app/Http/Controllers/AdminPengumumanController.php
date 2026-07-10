@@ -21,12 +21,16 @@ class AdminPengumumanController extends Controller
             'isi' => 'required|string',
             'tanggal_publikasi' => 'required|date',
             'status' => 'required|in:aktif,nonaktif',
+            'target_role' => 'required|in:semua,siswa,guru',
         ], [
             'judul.required' => 'Judul pengumuman wajib diisi.',
             'isi.required' => 'Isi pengumuman wajib diisi.',
             'tanggal_publikasi.required' => 'Tanggal publikasi wajib diisi.',
             'status.required' => 'Status wajib dipilih.',
+            'target_role.required' => 'Target pembaca wajib dipilih.',
         ]);
+
+        $data['id_user'] = $request->session()->get('user_id');
 
         Pengumuman::create($data);
 
@@ -53,11 +57,13 @@ class AdminPengumumanController extends Controller
             'isi' => 'required|string',
             'tanggal_publikasi' => 'required|date',
             'status' => 'required|in:aktif,nonaktif',
+            'target_role' => 'required|in:semua,siswa,guru',
         ], [
             'judul.required' => 'Judul pengumuman wajib diisi.',
             'isi.required' => 'Isi pengumuman wajib diisi.',
             'tanggal_publikasi.required' => 'Tanggal publikasi wajib diisi.',
             'status.required' => 'Status wajib dipilih.',
+            'target_role.required' => 'Target pembaca wajib dipilih.',
         ]);
 
         $item->update($data);

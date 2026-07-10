@@ -254,8 +254,9 @@
                     </div>
 
                     <div class="side-note">
-                        <p>
-                            💡 Pertanyaan seputar pendaftaran dan paket biasanya dibalas dalam <strong>kurang dari 1 jam</strong> di hari kerja.
+                        <p class="mb-1"><strong>💡 Butuh bantuan?</strong></p>
+                        <p class="mb-0">
+                            Hubungi admin melalui WhatsApp pada jam operasional untuk informasi pendaftaran, paket bimbel, pembayaran, maupun kendala akun.
                         </p>
                     </div>
                 </div>

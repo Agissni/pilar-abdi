@@ -83,11 +83,11 @@ class PaymentController extends Controller
             ]);
 
             Log::info('Payment created', [
-                'payment_id' => $payment->id,
+                'payment_id' => $payment->id_pembayaran,
                 'id_user' => $payment->id_user,
             ]);
 
-            return redirect('/pembayaran/berhasil?payment_id=' . $payment->id)
+            return redirect('/pembayaran/berhasil?payment_id=' . $payment->id_pembayaran)
                 ->with('success', 'Bukti pembayaran berhasil dikirim.');
 
         } catch (\Exception $e) {

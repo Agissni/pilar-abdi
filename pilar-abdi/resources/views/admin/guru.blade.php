@@ -83,13 +83,13 @@
                                 {{-- Tombol Edit --}}
                                 <button class="btn btn-sm fw-semibold"
                                         style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;padding:5px 12px;"
-                                        onclick="editGuru({{ $guru->id }}, '{{ addslashes($guru->nama) }}', '{{ addslashes($guru->spesialisasi) }}', '{{ addslashes($guru->whatsapp ?? '') }}', '{{ addslashes($guru->email ?? '') }}', '{{ addslashes($guru->bio ?? '') }}')">
+                                        onclick="editGuru({{ $guru->id_guru }}, '{{ addslashes($guru->nama) }}', '{{ addslashes($guru->spesialisasi) }}', '{{ addslashes($guru->whatsapp ?? '') }}', '{{ addslashes($guru->email ?? '') }}', '{{ addslashes($guru->bio ?? '') }}')">
                                     <i class="bi bi-pencil-fill me-1"></i>Edit
                                 </button>
                                 {{-- Tombol Hapus --}}
                                 <button class="btn btn-sm fw-semibold"
                                         style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;padding:5px 12px;"
-                                        onclick="hapusGuru({{ $guru->id }}, '{{ addslashes($guru->nama) }}')">
+                                        onclick="hapusGuru({{ $guru->id_guru }}, '{{ addslashes($guru->nama) }}')">
                                     <i class="bi bi-trash-fill me-1"></i>Hapus
                                 </button>
                             </div>

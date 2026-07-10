@@ -73,4 +73,25 @@ class AdminController extends Controller
 
         return view('admin.siswa', compact('admin', 'siswa', 'keyword'));
     }
+
+    public function toggleStatus(Request $request, $id)
+    {
+        $admin = $this->checkAdmin($request);
+        if ($admin instanceof \Illuminate\Http\RedirectResponse) return $admin;
+
+        $user = User::findOrFail($id);
+        if ($user->role !== 'siswa') {
+            return back()->with('error', 'Hanya siswa yang dapat dinonaktifkan.');
+        }
+
+        if ($user->status === 'active') {
+            $user->status = 'inactive';
+            $user->save();
+            return back()->with('success', 'Siswa ' . $user->name . ' berhasil dinonaktifkan.');
+        } else {
+            $user->status = 'active';
+            $user->save();
+            return back()->with('success', 'Siswa ' . $user->name . ' berhasil diaktifkan.');
+        }
+    }
 }

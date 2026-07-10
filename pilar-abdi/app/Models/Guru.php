@@ -9,7 +9,8 @@ class Guru extends Model
 {
     use HasFactory;
 
-    protected $table = 'gurus';
+    protected $table = 'guru';
+    protected $primaryKey = 'id_guru';
 
     protected $fillable = [
         'nama',
@@ -23,6 +24,12 @@ class Guru extends Model
     // Relasi ke kelas
     public function kelas()
     {
-        return $this->hasMany(Kelas::class, 'guru_id');
+        return $this->hasMany(Kelas::class, 'id_guru', 'id_guru');
+    }
+
+    // Relasi ke bimbingan privat
+    public function bimbinganPrivat()
+    {
+        return $this->hasMany(BimbinganPrivat::class, 'id_guru', 'id_guru');
     }
 }

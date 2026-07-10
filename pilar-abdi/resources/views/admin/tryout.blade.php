@@ -129,20 +129,20 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
-                                                <a href="/admin/tryout/{{ $to->id }}/soal" class="btn btn-sm text-white" 
+                                                <a href="/admin/tryout/{{ $to->id_tryout }}/soal" class="btn btn-sm text-white" 
                                                    style="background:#071739; border:none; border-radius:8px;" title="Kelola Soal">
                                                     <i class="bi bi-patch-question-fill"></i> Soal
                                                 </a>
                                                 <button class="btn btn-sm" style="background:#e0f2fe;color:#0369a1;border:none;border-radius:8px;" 
-                                                        onclick="showDetail({{ $to->id }})" title="Detail">
+                                                        onclick="showDetail({{ $to->id_tryout }})" title="Detail">
                                                     <i class="bi bi-eye-fill"></i>
                                                 </button>
                                                 <button class="btn btn-sm" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;" 
-                                                        onclick="editTryout({{ $to->id }})" title="Edit">
+                                                        onclick="editTryout({{ $to->id_tryout }})" title="Edit">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </button>
                                                 <button class="btn btn-sm" style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;" 
-                                                        onclick="deleteTryout({{ $to->id }}, '{{ addslashes($to->nama_tryout) }}')" title="Hapus">
+                                                        onclick="deleteTryout({{ $to->id_tryout }}, '{{ addslashes($to->nama_tryout) }}')" title="Hapus">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
                                             </div>

@@ -10,6 +10,7 @@ class Tryout extends Model
     use HasFactory;
 
     protected $table = 'tryouts';
+    protected $primaryKey = 'id_tryout';
 
     protected $fillable = [
         'nama_tryout',
@@ -28,6 +29,6 @@ class Tryout extends Model
 
     public function questions()
     {
-        return $this->hasMany(TryoutQuestion::class, 'tryout_id');
+        return $this->hasMany(TryoutQuestion::class, 'id_tryout', 'id_tryout');
     }
 }

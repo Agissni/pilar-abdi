@@ -10,11 +10,12 @@ class Kelas extends Model
     use HasFactory;
 
     protected $table = 'kelas';
+    protected $primaryKey = 'id_kelas';
 
     protected $fillable = [
         'nama_kelas',
         'materi',
-        'guru_id',
+        'id_guru',
         'hari',
         'jam',
         'deskripsi',
@@ -26,6 +27,12 @@ class Kelas extends Model
     // Relasi ke guru
     public function guru()
     {
-        return $this->belongsTo(Guru::class, 'guru_id');
+        return $this->belongsTo(Guru::class, 'id_guru', 'id_guru');
+    }
+
+    // Relasi ke siswa (Many-to-Many via kelas_siswa)
+    public function siswa()
+    {
+        return $this->belongsToMany(User::class, 'kelas_siswa', 'id_kelas', 'id_user', 'id_kelas', 'id_user');
     }
 }

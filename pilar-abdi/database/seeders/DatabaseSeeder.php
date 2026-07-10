@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@pilarabdi.id'],
             [
                 'name'     => 'Admin Pilar Abdi',
-                'password' => Hash::make('admin123'),
+                'password' => Hash::make('Pilaradmin26!'),
                 'role'     => 'admin',
                 'status'   => 'active',
                 'whatsapp' => '081234567890',
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         Guru::create([
             'nama'         => 'Budi Santoso, M.Pd.',
             'spesialisasi' => 'TIU',
-            'whatsapp'     => '081234567802',
+            'whatsapp'     => '083178560055',
             'email'        => 'budi.tiu@pilarabdi.id',
             'password'     => Hash::make('guru222'),
             'bio'          => 'Guru spesialis Tes Inteligensia Umum (TIU) dengan metode hitung cepat dan logika penalaran analitis.',

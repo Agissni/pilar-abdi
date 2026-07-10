@@ -88,7 +88,8 @@
                                 <th>Judul Pengumuman</th>
                                 <th>Isi Pengumuman</th>
                                 <th style="width: 180px;">Tanggal Publikasi</th>
-                                <th style="width: 130px;">Status</th>
+                                <th style="width: 120px;">Target</th>
+                                <th style="width: 120px;">Status</th>
                                 <th class="text-center" style="width: 180px;">Aksi</th>
                             </tr>
                         </thead>
@@ -117,6 +118,15 @@
                                             <i class="bi bi-calendar3 me-1 text-primary"></i>{{ $item->tanggal_publikasi->format('d M Y, H:i') }}
                                         </td>
                                         <td>
+                                            @if($item->target_role === 'semua')
+                                                <span class="badge bg-primary text-white" style="border-radius:20px; font-size:11px; padding: 4px 10px;"><i class="bi bi-people-fill me-1"></i> Semua</span>
+                                            @elseif($item->target_role === 'siswa')
+                                                <span class="badge bg-warning text-dark" style="border-radius:20px; font-size:11px; padding: 4px 10px;"><i class="bi bi-mortarboard-fill me-1"></i> Siswa</span>
+                                            @else
+                                                <span class="badge bg-info text-dark" style="border-radius:20px; font-size:11px; padding: 4px 10px;"><i class="bi bi-person-workspace me-1"></i> Guru</span>
+                                            @endif
+                                        </td>
+                                        <td>
                                             @if($item->status === 'aktif')
                                                 <span class="status-badge active"><i class="bi bi-check-circle-fill me-1"></i> Aktif</span>
                                             @else
@@ -126,15 +136,15 @@
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
                                                 <button class="btn btn-sm text-white" style="background:#071739;border:none;border-radius:8px;" 
-                                                        onclick="showDetail({{ $item->id }})" title="Detail">
+                                                        onclick="showDetail({{ $item->id_pengumuman }})" title="Detail">
                                                     <i class="bi bi-eye-fill"></i> Detail
                                                 </button>
                                                 <button class="btn btn-sm" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;" 
-                                                        onclick="editPengumuman({{ $item->id }})" title="Edit">
+                                                        onclick="editPengumuman({{ $item->id_pengumuman }})" title="Edit">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </button>
                                                 <button class="btn btn-sm" style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;" 
-                                                        onclick="deletePengumuman({{ $item->id }}, '{{ addslashes($item->judul) }}')" title="Hapus">
+                                                        onclick="deletePengumuman({{ $item->id_pengumuman }}, '{{ addslashes($item->judul) }}')" title="Hapus">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
                                             </div>
@@ -168,13 +178,21 @@
                         <input type="text" name="judul" class="form-control" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;" placeholder="Contoh: Jadwal Simulasi TO Akbar Gelombang II" required>
                     </div>
                     <div class="row g-3 mb-3">
-                        <div class="col-6">
-                            <label class="form-label fw-semibold" style="font-size:13px;color:#374151;">Tanggal Publikasi <span class="text-danger">*</span></label>
-                            <input type="datetime-local" name="tanggal_publikasi" class="form-control" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;" required>
+                        <div class="col-4">
+                            <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Tanggal Publikasi <span class="text-danger">*</span></label>
+                            <input type="datetime-local" name="tanggal_publikasi" class="form-control" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
                         </div>
-                        <div class="col-6">
-                            <label class="form-label fw-semibold" style="font-size:13px;color:#374151;">Status <span class="text-danger">*</span></label>
-                            <select name="status" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;" required>
+                        <div class="col-4">
+                            <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Target <span class="text-danger">*</span></label>
+                            <select name="target_role" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
+                                <option value="semua">Semua</option>
+                                <option value="siswa">Siswa saja</option>
+                                <option value="guru">Guru saja</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Status <span class="text-danger">*</span></label>
+                            <select name="status" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
                                 <option value="aktif">Aktif</option>
                                 <option value="nonaktif">Nonaktif</option>
                             </select>
@@ -217,13 +235,21 @@
                         <input type="text" name="judul" id="edit_judul" class="form-control" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;" required>
                     </div>
                     <div class="row g-3 mb-3">
-                        <div class="col-6">
-                            <label class="form-label fw-semibold" style="font-size:13px;color:#374151;">Tanggal Publikasi <span class="text-danger">*</span></label>
-                            <input type="datetime-local" name="tanggal_publikasi" id="edit_tanggal_publikasi" class="form-control" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;" required>
+                        <div class="col-4">
+                            <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Tanggal Publikasi <span class="text-danger">*</span></label>
+                            <input type="datetime-local" name="tanggal_publikasi" id="edit_tanggal_publikasi" class="form-control" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
                         </div>
-                        <div class="col-6">
-                            <label class="form-label fw-semibold" style="font-size:13px;color:#374151;">Status <span class="text-danger">*</span></label>
-                            <select name="status" id="edit_status" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;" required>
+                        <div class="col-4">
+                            <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Target <span class="text-danger">*</span></label>
+                            <select name="target_role" id="edit_target_role" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
+                                <option value="semua">Semua</option>
+                                <option value="siswa">Siswa saja</option>
+                                <option value="guru">Guru saja</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Status <span class="text-danger">*</span></label>
+                            <select name="status" id="edit_status" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
                                 <option value="aktif">Aktif</option>
                                 <option value="nonaktif">Nonaktif</option>
                             </select>
@@ -263,11 +289,15 @@
                     <h5 class="fw-bold text-dark mb-0" id="detail_judul"></h5>
                 </div>
                 <div class="row g-3 mb-3 border-top border-bottom py-2 my-2">
-                    <div class="col-6">
+                    <div class="col-4">
                         <label class="text-secondary small d-block">Tanggal Publikasi</label>
-                        <p class="text-dark mb-0 fw-semibold" id="detail_tanggal_publikasi"></p>
+                        <p class="text-dark mb-0 fw-semibold" id="detail_tanggal_publikasi" style="font-size: 13px;"></p>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
+                        <label class="text-secondary small d-block">Target Pembaca</label>
+                        <div id="detail_target_badge"></div>
+                    </div>
+                    <div class="col-4">
                         <label class="text-secondary small d-block">Status Tampil</label>
                         <div id="detail_status_badge"></div>
                     </div>
@@ -332,6 +362,16 @@
                     badgeBox.innerHTML = '<span class="badge bg-secondary px-3 py-2"><i class="bi bi-dash-circle-fill me-1"></i> Nonaktif</span>';
                 }
 
+                // Target badge
+                const targetBox = document.getElementById('detail_target_badge');
+                if (item.target_role === 'semua') {
+                    targetBox.innerHTML = '<span class="badge bg-primary px-3 py-2"><i class="bi bi-people-fill me-1"></i> Semua</span>';
+                } else if (item.target_role === 'siswa') {
+                    targetBox.innerHTML = '<span class="badge bg-warning text-dark px-3 py-2"><i class="bi bi-mortarboard-fill me-1"></i> Siswa</span>';
+                } else {
+                    targetBox.innerHTML = '<span class="badge bg-info text-dark px-3 py-2"><i class="bi bi-person-workspace me-1"></i> Guru</span>';
+                }
+
                 const modal = new bootstrap.Modal(document.getElementById('modalDetailPengumuman'));
                 modal.show();
             })
@@ -353,6 +393,7 @@
                 // Fill fields
                 document.getElementById('edit_judul').value = item.judul;
                 document.getElementById('edit_isi').value = item.isi;
+                document.getElementById('edit_target_role').value = item.target_role;
                 document.getElementById('edit_status').value = item.status;
                 
                 // Format date to YYYY-MM-DDTHH:MM

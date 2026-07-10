@@ -29,7 +29,7 @@ class AdminGuruController extends Controller
             'nama'         => 'required|string|max:100',
             'spesialisasi' => 'required|string|max:50',
             'whatsapp'     => 'nullable|string|max:20',
-            'email'        => 'required|email|max:100|unique:gurus,email',
+            'email'        => 'required|email|max:100|unique:guru,email',
             'password'     => 'required|string|min:6',
             'bio'          => 'nullable|string',
         ]);
@@ -50,7 +50,7 @@ class AdminGuruController extends Controller
             'nama'         => 'required|string|max:100',
             'spesialisasi' => 'required|string|max:50',
             'whatsapp'     => 'nullable|string|max:20',
-            'email'        => 'required|email|max:100|unique:gurus,email,' . $id,
+            'email'        => 'required|email|max:100|unique:guru,email,' . $id . ',id_guru',
             'password'     => 'nullable|string|min:6',
             'bio'          => 'nullable|string',
         ]);

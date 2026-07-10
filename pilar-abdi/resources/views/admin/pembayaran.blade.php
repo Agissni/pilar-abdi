@@ -156,22 +156,30 @@
                                             @endif
 
                                             @if($payment->status === 'pending')
-                                                <form action="/admin/pembayaran/{{ $payment->id }}/verify" method="POST" style="display:inline-block;">
+                                                <form action="/admin/pembayaran/{{ $payment->id_pembayaran }}/verify" method="POST" style="display:inline-block;">
                                                     @csrf
                                                     <button type="submit" name="action" value="accept" 
                                                             class="btn btn-sm btn-success fw-semibold"
                                                             style="border-radius:8px; padding:6px 12px; font-size:12px;"
-                                                            onclick="return confirm('Apakah Anda yakin ingin MENERIMA pembayaran ini?')">
+                                                            data-confirm="Siswa akan diaktifkan setelah pembayaran ini diterima."
+                                                            data-confirm-title="Terima Pembayaran?"
+                                                            data-confirm-button="Ya, Terima"
+                                                            data-confirm-color="#198754"
+                                                            data-confirm-type="question">
                                                         Terima
                                                     </button>
                                                 </form>
 
-                                                <form action="/admin/pembayaran/{{ $payment->id }}/verify" method="POST" style="display:inline-block;">
+                                                <form action="/admin/pembayaran/{{ $payment->id_pembayaran }}/verify" method="POST" style="display:inline-block;">
                                                     @csrf
                                                     <button type="submit" name="action" value="reject" 
                                                             class="btn btn-sm btn-danger fw-semibold"
                                                             style="border-radius:8px; padding:6px 12px; font-size:12px;"
-                                                            onclick="return confirm('Apakah Anda yakin ingin MENOLAK pembayaran ini?')">
+                                                            data-confirm="Siswa harus mengunggah ulang bukti transfer jika pembayaran ditolak."
+                                                            data-confirm-title="Tolak Pembayaran?"
+                                                            data-confirm-button="Ya, Tolak"
+                                                            data-confirm-color="#dc3545"
+                                                            data-confirm-type="warning">
                                                         Tolak
                                                     </button>
                                                 </form>

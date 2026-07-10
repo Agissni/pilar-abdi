@@ -126,15 +126,15 @@
                                         <td>
                                             <div class="d-flex justify-content-center gap-2">
                                                 <button class="btn btn-sm" style="background:#e0f2fe;color:#0369a1;border:none;border-radius:8px;" 
-                                                        onclick="showDetail({{ $q->id }})" title="Detail Soal">
+                                                        onclick="showDetail({{ $q->id_tryout_question }})" title="Detail Soal">
                                                     <i class="bi bi-eye-fill"></i> Detail
                                                 </button>
                                                 <button class="btn btn-sm" style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;" 
-                                                        onclick="editQuestion({{ $q->id }})" title="Edit Soal">
+                                                        onclick="editQuestion({{ $q->id_tryout_question }})" title="Edit Soal">
                                                     <i class="bi bi-pencil-fill"></i>
                                                 </button>
                                                 <button class="btn btn-sm" style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;" 
-                                                        onclick="deleteQuestion({{ $q->id }}, {{ $q->nomor_soal }})" title="Hapus Soal">
+                                                        onclick="deleteQuestion({{ $q->id_tryout_question }}, {{ $q->nomor_soal }})" title="Hapus Soal">
                                                     <i class="bi bi-trash-fill"></i>
                                                 </button>
                                             </div>
@@ -160,7 +160,7 @@
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form action="/admin/tryout/{{ $tryout->id }}/soal" method="POST">
+            <form action="/admin/tryout/{{ $tryout->id_tryout }}/soal" method="POST">
                 @csrf
                 <div class="modal-body px-4 py-3" style="max-height: 70vh; overflow-y: auto;">
                     <div class="row g-3 mb-3">

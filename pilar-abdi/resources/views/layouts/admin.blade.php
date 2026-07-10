@@ -548,14 +548,6 @@
             Kelola Pengumuman
         </a>
 
-        <div class="sidebar-section-label mt-2">Website</div>
-
-        <a href="/" target="_blank"
-           class="sidebar-nav-item">
-            <i class="bi bi-globe"></i>
-            Lihat Website
-            <i class="bi bi-box-arrow-up-right ms-auto" style="font-size:11px; opacity:.5;"></i>
-        </a>
     </nav>
 
     <div class="sidebar-footer">
@@ -567,7 +559,7 @@
                 <div class="admin-profile-name">{{ $admin->name ?? 'Admin' }}</div>
                 <div class="admin-profile-role">Administrator</div>
             </div>
-            <a href="/logout" class="btn-logout-mini" title="Logout" onclick="return confirm('Apakah Anda yakin ingin keluar?');">
+            <a href="/logout" class="btn-logout-mini" title="Logout" data-confirm="Sesi Anda akan diakhiri." data-confirm-title="Yakin Ingin Keluar?" data-confirm-button="Ya, Keluar" data-confirm-color="#e53e3e" data-confirm-type="question">
                 <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
@@ -599,7 +591,7 @@
                     <span class="notif-dot"></span>
                 @endif
             </a>
-            <a href="/logout" class="topbar-btn" title="Logout" onclick="return confirm('Apakah Anda yakin ingin keluar?');">
+            <a href="/logout" class="topbar-btn" title="Logout" data-confirm="Sesi Anda akan diakhiri." data-confirm-title="Yakin Ingin Keluar?" data-confirm-button="Ya, Keluar" data-confirm-color="#e53e3e" data-confirm-type="question">
                 <i class="bi bi-box-arrow-right"></i>
             </a>
         </div>
@@ -627,6 +619,87 @@
         document.getElementById('adminSidebar').classList.remove('open');
         document.getElementById('sidebarOverlay').classList.remove('show');
     }
+</script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    // Global override for window.alert
+    window.alert = function(message) {
+        Swal.fire({
+            text: message,
+            icon: 'warning',
+            confirmButtonColor: '#071739',
+            confirmButtonText: 'OK'
+        });
+    };
+
+    // Generic confirmation handler via SweetAlert2 attributes
+    document.addEventListener('click', function(e) {
+        const confirmEl = e.target.closest('[data-confirm]');
+        if (confirmEl) {
+            e.preventDefault();
+            const message = confirmEl.getAttribute('data-confirm');
+            const title = confirmEl.getAttribute('data-confirm-title') || 'Apakah Anda yakin?';
+            const type = confirmEl.getAttribute('data-confirm-type') || 'warning';
+            const buttonText = confirmEl.getAttribute('data-confirm-button') || 'Ya, Lanjutkan';
+            const buttonColor = confirmEl.getAttribute('data-confirm-color') || '#071739';
+
+            Swal.fire({
+                title: title,
+                text: message,
+                icon: type,
+                showCancelButton: true,
+                confirmButtonColor: buttonColor,
+                cancelButtonColor: '#64748b',
+                confirmButtonText: buttonText,
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    if (confirmEl.tagName === 'A') {
+                        window.location.href = confirmEl.getAttribute('href');
+                    } else {
+                        const form = confirmEl.closest('form');
+                        if (form) {
+                            if (confirmEl.getAttribute('name')) {
+                                const hiddenInput = document.createElement('input');
+                                hiddenInput.type = 'hidden';
+                                hiddenInput.name = confirmEl.getAttribute('name');
+                                hiddenInput.value = confirmEl.getAttribute('value');
+                                form.appendChild(hiddenInput);
+                            }
+                            form.submit();
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    // Flash message toasts
+    @if(session('success'))
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 3500,
+            timerProgressBar: true
+        });
+    @endif
+
+    @if(session('error'))
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: "{{ session('error') }}",
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true
+        });
+    @endif
 </script>
 
 @yield('scripts')

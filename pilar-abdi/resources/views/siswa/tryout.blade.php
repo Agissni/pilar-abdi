@@ -87,7 +87,7 @@
                                     </div>
                                     <button class="btn w-100 py-3 fw-bold btn-start-exam text-white" 
                                             style="background: #071739; border-radius: 12px;"
-                                            onclick="goToInstructions('{{ $to->id }}', '{{ addslashes($to->nama_tryout) }}', {{ $to->jumlah_soal }}, {{ $to->durasi }})">
+                                            onclick="goToInstructions('{{ $to->id_tryout }}', '{{ addslashes($to->nama_tryout) }}', {{ $to->jumlah_soal }}, {{ $to->durasi }})">
                                         MULAI SEKARANG
                                     </button>
                                 </div>
@@ -1014,6 +1014,21 @@ function submitExam() {
         
         descriptionText.innerHTML = `<strong>Mohon maaf, Anda belum memenuhi passing grade.</strong> Anda masih di bawah ambang batas pada kategori: <strong>${alasan.join(', ')}</strong>. Tingkatkan latihan soal Anda di kategori tersebut untuk menembus ujian yang sesungguhnya.`;
     }
+
+    // Simpan hasil ke database secara asynchronous
+    axios.post(`/tryout/${selectedTryout.id}/submit`, {
+        score_twk: twkScore,
+        score_tiu: tiuScore,
+        score_tkp: tkpScore,
+        score_total: totalScore,
+        status: isLulus ? 'lulus' : 'tidak_lulus'
+    })
+    .then(res => {
+        console.log('Nilai berhasil disimpan ke database:', res.data);
+    })
+    .catch(err => {
+        console.error('Gagal menyimpan nilai ke database:', err);
+    });
 
     goToState('results');
 }

@@ -52,14 +52,147 @@ class SiswaController extends Controller
 
         // Fetch active announcements from database (max 3, newest first)
         $announcements = \App\Models\Pengumuman::where('status', 'aktif')
+            ->whereIn('target_role', ['semua', 'siswa'])
             ->orderBy('tanggal_publikasi', 'desc')
             ->take(3)
             ->get();
 
+        // Bimbingan Privat 1-on-1 calculations
+        $gurus = \App\Models\Guru::orderBy('nama', 'asc')->get();
+        $riwayatBimbingan = \App\Models\BimbinganPrivat::with('guru')
+            ->where('id_user', $user->id_user)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $package = strtolower($user->package ?? '');
+        if (str_contains($package, 'pro')) {
+            $totalKuota = 5;
+        } elseif (str_contains($package, 'intensif')) {
+            $totalKuota = 3;
+        } else {
+            $totalKuota = 0;
+        }
+
+        $usedSesi = \App\Models\BimbinganPrivat::where('id_user', $user->id_user)
+            ->where('status', '!=', 'dibatalkan')
+            ->count();
+
+        $sisaKuota = max(0, $totalKuota - $usedSesi);
+
         return view('siswa.dashboard', [
             'user' => $user,
             'sekdin' => $sekdinInfo,
-            'announcements' => $announcements
+            'announcements' => $announcements,
+            'gurus' => $gurus,
+            'riwayatBimbingan' => $riwayatBimbingan,
+            'totalKuota' => $totalKuota,
+            'sisaKuota' => $sisaKuota,
         ]);
+    }
+
+    public function bookingBimbingan(Request $request)
+    {
+        $userId = $request->session()->get('user_id');
+        $user = User::findOrFail($userId);
+
+        $package = strtolower($user->package ?? '');
+        if (str_contains($package, 'pro')) {
+            $totalKuota = 5;
+        } elseif (str_contains($package, 'intensif')) {
+            $totalKuota = 3;
+        } else {
+            $totalKuota = 0;
+        }
+
+        $usedSesi = \App\Models\BimbinganPrivat::where('id_user', $user->id_user)
+            ->where('status', '!=', 'dibatalkan')
+            ->count();
+
+        $sisaKuota = max(0, $totalKuota - $usedSesi);
+
+        if ($sisaKuota <= 0) {
+            return back()->with('error', 'Kuota konsultasi Anda sudah habis atau paket Anda tidak mendukung bimbingan privat.');
+        }
+
+        $data = $request->validate([
+            'id_guru' => 'required|exists:guru,id_guru',
+            'tgl_konsultasi' => 'required|date|after_or_equal:today',
+            'jam_konsultasi' => 'required',
+            'topik' => 'required|string',
+        ], [
+            'id_guru.required' => 'Mentor/Guru harus dipilih.',
+            'tgl_konsultasi.required' => 'Tanggal bimbingan harus diisi.',
+            'tgl_konsultasi.after_or_equal' => 'Tanggal bimbingan tidak boleh hari kemarin.',
+            'jam_konsultasi.required' => 'Jam bimbingan harus diisi.',
+            'topik.required' => 'Topik bimbingan harus diisi.',
+        ]);
+
+        $data['id_user'] = $user->id_user;
+        $data['status'] = 'pending';
+
+        \App\Models\BimbinganPrivat::create($data);
+
+        return back()->with('success', 'Jadwal konsultasi 1-on-1 berhasil diajukan. Menunggu persetujuan mentor.');
+    }
+
+    public function submitTryout(Request $request, $id)
+    {
+        $userId = $request->session()->get('user_id');
+        if (!$userId) {
+            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
+        }
+
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json(['status' => 'error', 'message' => 'User not found'], 404);
+        }
+
+        $tryout = \App\Models\Tryout::findOrFail($id);
+
+        $data = $request->validate([
+            'score_twk' => 'required|integer',
+            'score_tiu' => 'required|integer',
+            'score_tkp' => 'required|integer',
+            'score_total' => 'required|integer',
+            'status' => 'required|in:lulus,tidak_lulus',
+        ]);
+
+        $attempt = \App\Models\TryoutAttempt::create([
+            'id_user' => $user->id_user,
+            'id_tryout' => $tryout->id_tryout,
+            'score_twk' => $data['score_twk'],
+            'score_tiu' => $data['score_tiu'],
+            'score_tkp' => $data['score_tkp'],
+            'score_total' => $data['score_total'],
+            'status' => $data['status'],
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Hasil tryout berhasil disimpan.',
+            'data' => $attempt
+        ]);
+    }
+
+    public function hasilTryout(Request $request)
+    {
+        $userId = $request->session()->get('user_id');
+        if (!$userId) {
+            return redirect('/login');
+        }
+
+        $user = User::findOrFail($userId);
+        $attempts = \App\Models\TryoutAttempt::with('tryout')
+            ->where('id_user', $user->id_user)
+            ->latest()
+            ->get();
+
+        $stats = [
+            'total' => $attempts->count(),
+            'lulus' => $attempts->where('status', 'lulus')->count(),
+            'tidak_lulus' => $attempts->where('status', 'tidak_lulus')->count(),
+        ];
+
+        return view('siswa.hasil', compact('user', 'attempts', 'stats'));
     }
 }

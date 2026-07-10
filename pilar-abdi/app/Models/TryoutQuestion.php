@@ -10,9 +10,10 @@ class TryoutQuestion extends Model
     use HasFactory;
 
     protected $table = 'tryout_questions';
+    protected $primaryKey = 'id_tryout_question';
 
     protected $fillable = [
-        'tryout_id',
+        'id_tryout',
         'nomor_soal',
         'kategori',
         'pertanyaan',
@@ -27,6 +28,6 @@ class TryoutQuestion extends Model
 
     public function tryout()
     {
-        return $this->belongsTo(Tryout::class, 'tryout_id');
+        return $this->belongsTo(Tryout::class, 'id_tryout', 'id_tryout');
     }
 }

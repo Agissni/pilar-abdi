@@ -29,7 +29,7 @@ class AdminKelasController extends Controller
         $data = $request->validate([
             'nama_kelas'  => 'required|string|max:100',
             'materi'      => 'required|string|max:50',
-            'guru_id'     => 'nullable|exists:gurus,id',
+            'id_guru'     => 'nullable|exists:guru,id_guru',
             'hari'        => 'nullable|string|max:20',
             'jam'         => 'nullable|string|max:20',
             'deskripsi'   => 'nullable|string',
@@ -48,7 +48,7 @@ class AdminKelasController extends Controller
         $data = $request->validate([
             'nama_kelas'  => 'required|string|max:100',
             'materi'      => 'required|string|max:50',
-            'guru_id'     => 'nullable|exists:gurus,id',
+            'id_guru'     => 'nullable|exists:guru,id_guru',
             'hari'        => 'nullable|string|max:20',
             'jam'         => 'nullable|string|max:20',
             'deskripsi'   => 'nullable|string',

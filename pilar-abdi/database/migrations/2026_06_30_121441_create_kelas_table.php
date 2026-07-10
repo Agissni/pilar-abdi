@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kelas', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_kelas');
             $table->string('nama_kelas');
             $table->string('materi');         // TIU, TWK, TKP, dll
-            $table->unsignedBigInteger('guru_id')->nullable();
+            $table->unsignedBigInteger('id_guru')->nullable();
             $table->string('hari')->nullable();   // Senin, Selasa, dll
             $table->string('jam')->nullable();    // 19.00 WIB
             $table->text('deskripsi')->nullable();
             $table->timestamps();
 
-            $table->foreign('guru_id')->references('id')->on('gurus')->onDelete('set null');
+            $table->foreign('id_guru')->references('id_guru')->on('guru')->onDelete('set null');
         });
     }
 

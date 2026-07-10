@@ -89,12 +89,12 @@
                             <div class="d-flex gap-2">
                                 <button class="btn btn-sm fw-semibold"
                                         style="background:#fef3c7;color:#92400e;border:none;border-radius:8px;padding:5px 12px;"
-                                        onclick="editKelas({{ $k->id }}, '{{ addslashes($k->nama_kelas) }}', '{{ addslashes($k->materi) }}', '{{ $k->guru_id ?? '' }}', '{{ addslashes($k->hari ?? '') }}', '{{ addslashes($k->jam ?? '') }}', '{{ addslashes($k->deskripsi ?? '') }}')">
+                                        onclick="editKelas({{ $k->id_kelas }}, '{{ addslashes($k->nama_kelas) }}', '{{ addslashes($k->materi) }}', '{{ $k->id_guru ?? '' }}', '{{ addslashes($k->hari ?? '') }}', '{{ addslashes($k->jam ?? '') }}', '{{ addslashes($k->deskripsi ?? '') }}')">
                                     <i class="bi bi-pencil-fill me-1"></i>Edit
                                 </button>
                                 <button class="btn btn-sm fw-semibold"
                                         style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;padding:5px 12px;"
-                                        onclick="hapusKelas({{ $k->id }}, '{{ addslashes($k->nama_kelas) }}')">
+                                        onclick="hapusKelas({{ $k->id_kelas }}, '{{ addslashes($k->nama_kelas) }}')">
                                     <i class="bi bi-trash-fill me-1"></i>Hapus
                                 </button>
                             </div>
@@ -142,10 +142,10 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label fw-semibold" style="font-size:13px;color:#374151;">Guru Pengajar</label>
-                            <select name="guru_id" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;">
+                            <select name="id_guru" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;">
                                 <option value="">-- Pilih Guru --</option>
                                 @foreach($gurus as $g)
-                                <option value="{{ $g->id }}">{{ $g->nama }} ({{ $g->spesialisasi }})</option>
+                                <option value="{{ $g->id_guru }}">{{ $g->nama }} ({{ $g->spesialisasi }})</option>
                                 @endforeach
                             </select>
                         </div>
@@ -221,10 +221,10 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label fw-semibold" style="font-size:13px;color:#374151;">Guru Pengajar</label>
-                            <select name="guru_id" id="edit_guru_id" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;">
+                            <select name="id_guru" id="edit_guru_id" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:14px;">
                                 <option value="">-- Pilih Guru --</option>
                                 @foreach($gurus as $g)
-                                <option value="{{ $g->id }}">{{ $g->nama }} ({{ $g->spesialisasi }})</option>
+                                <option value="{{ $g->id_guru }}">{{ $g->nama }} ({{ $g->spesialisasi }})</option>
                                 @endforeach
                             </select>
                         </div>

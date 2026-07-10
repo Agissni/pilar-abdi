@@ -48,7 +48,25 @@ class User extends Authenticatable
 
     // Relasi ke tabel pembayaran
     public function payments()
-{
-    return $this->hasMany(Payment::class, 'id_user', 'id_user');
-}
+    {
+        return $this->hasMany(Payment::class, 'id_user', 'id_user');
+    }
+
+    // Relasi ke tabel pengumuman
+    public function announcements()
+    {
+        return $this->hasMany(Pengumuman::class, 'id_user', 'id_user');
+    }
+
+    // Relasi ke bimbingan privat
+    public function bimbinganPrivat()
+    {
+        return $this->hasMany(BimbinganPrivat::class, 'id_user', 'id_user');
+    }
+
+    // Relasi ke kelas (Many-to-Many via kelas_siswa)
+    public function kelas()
+    {
+        return $this->belongsToMany(Kelas::class, 'kelas_siswa', 'id_user', 'id_kelas', 'id_user', 'id_kelas');
+    }
 }

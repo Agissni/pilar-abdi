@@ -14,7 +14,7 @@ class GuruController extends Controller
         $guru = Guru::findOrFail($guruId);
 
         // Fetch classes taught by this teacher
-        $kelas = Kelas::where('guru_id', $guruId)->latest()->get();
+        $kelas = Kelas::where('id_guru', $guruId)->latest()->get();
 
         return view('guru.dashboard', compact('guru', 'kelas'));
     }
@@ -22,7 +22,7 @@ class GuruController extends Controller
     public function updateKelas(Request $request, $id)
     {
         $guruId = $request->session()->get('guru_id');
-        $kelas = Kelas::where('guru_id', $guruId)->findOrFail($id);
+        $kelas = Kelas::where('id_guru', $guruId)->findOrFail($id);
 
         $data = $request->validate([
             'hari'       => 'required|string|max:20',
@@ -49,5 +49,65 @@ class GuruController extends Controller
         $kelas->update($updateData);
 
         return redirect('/guru/dashboard')->with('success', 'Jadwal dan materi kelas ' . $kelas->nama_kelas . ' berhasil diperbarui.');
+    }
+
+    public function siswa(Request $request)
+    {
+        $guruId = $request->session()->get('guru_id');
+        $guru = Guru::findOrFail($guruId);
+
+        $keyword = $request->query('q');
+        $siswaQuery = \App\Models\User::where('role', 'siswa')->where('status', 'active');
+        
+        if ($keyword) {
+            $siswaQuery->where(function($q) use ($keyword) {
+                $q->where('name', 'like', "%$keyword%")
+                  ->orWhere('email', 'like', "%$keyword%")
+                  ->orWhere('sekdin', 'like', "%$keyword%");
+            });
+        }
+        
+        $siswa = $siswaQuery->latest()->paginate(15);
+
+        return view('guru.siswa', compact('guru', 'siswa', 'keyword'));
+    }
+
+    public function konsultasi(Request $request)
+    {
+        $guruId = $request->session()->get('guru_id');
+        $guru = Guru::findOrFail($guruId);
+
+        // Fetch bimbingan privat targeting this guru
+        $bimbingan = \App\Models\BimbinganPrivat::with('siswa')
+            ->where('id_guru', $guruId)
+            ->orderBy('tgl_konsultasi', 'desc')
+            ->orderBy('jam_konsultasi', 'desc')
+            ->get();
+
+        return view('guru.konsultasi', compact('guru', 'bimbingan'));
+    }
+
+    public function approveKonsultasi(Request $request, $id)
+    {
+        $guruId = $request->session()->get('guru_id');
+        $bimbingan = \App\Models\BimbinganPrivat::where('id_guru', $guruId)->findOrFail($id);
+
+        $bimbingan->update([
+            'status' => 'disetujui'
+        ]);
+
+        return redirect('/guru/konsultasi')->with('success', 'Jadwal bimbingan privat berhasil disetujui.');
+    }
+
+    public function rejectKonsultasi(Request $request, $id)
+    {
+        $guruId = $request->session()->get('guru_id');
+        $bimbingan = \App\Models\BimbinganPrivat::where('id_guru', $guruId)->findOrFail($id);
+
+        $bimbingan->update([
+            'status' => 'dibatalkan'
+        ]);
+
+        return redirect('/guru/konsultasi')->with('success', 'Jadwal bimbingan privat berhasil ditolak/dibatalkan.');
     }
 }

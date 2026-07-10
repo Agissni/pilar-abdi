@@ -44,6 +44,7 @@ Route::middleware(['admin'])->group(function () {
     // Admin routes — menggunakan AdminController dengan data real
     Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']);
     Route::get('/admin/siswa',     [App\Http\Controllers\AdminController::class, 'siswa']);
+    Route::post('/admin/siswa/{id}/toggle-status', [App\Http\Controllers\AdminController::class, 'toggleStatus']);
 
     // Guru CRUD
     Route::get('/admin/guru',          [App\Http\Controllers\AdminGuruController::class, 'index']);
@@ -70,6 +71,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/tryout/soal/{id}',                 [App\Http\Controllers\AdminTryoutQuestionController::class, 'show']);
     Route::put('/admin/tryout/soal/{id}',                 [App\Http\Controllers\AdminTryoutQuestionController::class, 'update']);
     Route::delete('/admin/tryout/soal/{id}',              [App\Http\Controllers\AdminTryoutQuestionController::class, 'destroy']);
+    Route::post('/admin/tryout/{tryout_id}/soal/sync',    [App\Http\Controllers\AdminTryoutQuestionController::class, 'sync']);
 
     // Pengumuman CRUD
     Route::get('/admin/pengumuman',          [App\Http\Controllers\AdminPengumumanController::class, 'index']);
@@ -113,10 +115,28 @@ Route::middleware(['siswa'])->group(function () {
         $tryouts = \App\Models\Tryout::latest()->get();
         return view('siswa.tryout', compact('user', 'tryouts'));
     });
+
+    Route::post('/tryout/{id}/submit', [App\Http\Controllers\SiswaController::class, 'submitTryout']);
+    Route::get('/hasil-tryout', [App\Http\Controllers\SiswaController::class, 'hasilTryout']);
+    Route::post('/siswa/bimbingan/booking', [App\Http\Controllers\SiswaController::class, 'bookingBimbingan']);
 });
 
 // Guru routes group
 Route::middleware(['guru'])->group(function () {
     Route::get('/guru/dashboard', [App\Http\Controllers\GuruController::class, 'dashboard']);
     Route::post('/guru/kelas/{id}/update', [App\Http\Controllers\GuruController::class, 'updateKelas']);
+    Route::get('/guru/siswa', [App\Http\Controllers\GuruController::class, 'siswa']);
+
+    // Guru Tryout & Questions CRUD (restricted by specialization)
+    Route::get('/guru/tryout',                      [App\Http\Controllers\GuruTryoutController::class, 'index']);
+    Route::get('/guru/tryout/{tryout_id}/soal',     [App\Http\Controllers\GuruTryoutController::class, 'soal']);
+    Route::post('/guru/tryout/{tryout_id}/soal',    [App\Http\Controllers\GuruTryoutController::class, 'storeSoal']);
+    Route::get('/guru/tryout/soal/{id}',            [App\Http\Controllers\GuruTryoutController::class, 'showSoal']);
+    Route::put('/guru/tryout/soal/{id}',            [App\Http\Controllers\GuruTryoutController::class, 'updateSoal']);
+    Route::delete('/guru/tryout/soal/{id}',         [App\Http\Controllers\GuruTryoutController::class, 'destroySoal']);
+
+    // Guru Bimbingan/Konsultasi 1-on-1
+    Route::get('/guru/konsultasi',                  [App\Http\Controllers\GuruController::class, 'konsultasi']);
+    Route::post('/guru/konsultasi/{id}/approve',    [App\Http\Controllers\GuruController::class, 'approveKonsultasi']);
+    Route::post('/guru/konsultasi/{id}/reject',     [App\Http\Controllers\GuruController::class, 'rejectKonsultasi']);
 });
