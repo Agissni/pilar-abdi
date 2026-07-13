@@ -75,9 +75,9 @@
 
                                     <select id="paket" name="package" class="form-select form-select-lg" required>
                                         <option value="">-- Pilih Paket --</option>
-                                        <option value="reguler">Paket Reguler - Rp 1.250.000 (3 Bulan)</option>
-                                        <option value="intensif">Paket Intensif - Rp 2.150.000 (6 Bulan) ⭐ Rekomendasi</option>
-                                        <option value="tahunan">Paket Tahunan - Rp 3.750.000 (12 Bulan)</option>
+                                        <option value="reguler">Paket Dasar - Rp 890.000 (3 Bulan)</option>
+                                        <option value="intensif">Paket Intensif - Rp 1.650.000 (6 Bulan) ⭐ Rekomendasi</option>
+                                        <option value="tahunan">Paket Pro - Rp 2.750.000 (12 Bulan)</option>
                                     </select>
 
                                 </div>
@@ -147,11 +147,11 @@
                                     $package = $registered['package'] ?? old('package');
                                     $packageName = 'Paket';
                                     if ($package === 'reguler') {
-                                        $packageName = 'Paket Reguler - Rp 1.250.000 (3 Bulan)';
+                                        $packageName = 'Paket Dasar - Rp 890.000 (3 Bulan)';
                                     } elseif ($package === 'intensif') {
-                                        $packageName = 'Paket Intensif - Rp 2.150.000 (6 Bulan) ⭐ Rekomendasi';
+                                        $packageName = 'Paket Intensif - Rp 1.650.000 (6 Bulan) ⭐ Rekomendasi';
                                     } elseif ($package === 'tahunan') {
-                                        $packageName = 'Paket Tahunan - Rp 3.750.000 (12 Bulan)';
+                                        $packageName = 'Paket Pro - Rp 2.750.000 (12 Bulan)';
                                     }
                                 @endphp
 
@@ -162,7 +162,7 @@
                                     <p class="text-muted"><small>Silakan simpan email dan password Anda. Password ini tidak akan ditampilkan lagi.</small></p>
                                 @endif
                                 <p><strong>Paket :</strong> {{ $packageName }}</p>
-                                <p><strong>Total Pembayaran :</strong> {{ $package === 'reguler' ? 'Rp 1.250.000' : ($package === 'intensif' ? 'Rp 2.150.000' : ($package === 'tahunan' ? 'Rp 3.750.000' : '-')) }}</p>
+                                <p><strong>Total Pembayaran :</strong> {{ $package === 'reguler' ? 'Rp 890.000' : ($package === 'intensif' ? 'Rp 1.650.000' : ($package === 'tahunan' ? 'Rp 2.750.000' : '-')) }}</p>
                                 <p><strong>Status :</strong> Menunggu Pembayaran</p>
                                 <hr>
                                 <p>Silakan lanjut ke pembayaran untuk mengaktifkan akun bimbingan.</p>
@@ -197,12 +197,12 @@ function daftarBerhasil(event) {
 
     let harga = "";
 
-    if (paket.includes("Reguler")) {
-        harga = "Rp 1.250.000";
+    if (paket.includes("Dasar")) {
+        harga = "Rp 890.000";
     } else if (paket.includes("Intensif")) {
-        harga = "Rp 2.150.000";
-    } else if (paket.includes("Tahunan")) {
-        harga = "Rp 3.750.000";
+        harga = "Rp 1.650.000";
+    } else if (paket.includes("Pro")) {
+        harga = "Rp 2.750.000";
     }
 
     document.getElementById("formPendaftaran").classList.add("d-none");
@@ -227,9 +227,9 @@ function setPaketFromQuery() {
 
     const paketSelect = document.getElementById('paket');
     const paketOptions = {
-        reguler: 'Paket Reguler - Rp 1.250.000 (3 Bulan)',
-        intensif: 'Paket Intensif - Rp 2.150.000 (6 Bulan) ⭐ Rekomendasi',
-        tahunan: 'Paket Tahunan - Rp 3.750.000 (12 Bulan)'
+        reguler: 'Paket Dasar - Rp 890.000 (3 Bulan)',
+        intensif: 'Paket Intensif - Rp 1.650.000 (6 Bulan) ⭐ Rekomendasi',
+        tahunan: 'Paket Pro - Rp 2.750.000 (12 Bulan)'
     };
     const selectedText = paketOptions[paketParam.toLowerCase()];
     if (!selectedText) return;

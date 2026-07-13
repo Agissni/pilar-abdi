@@ -22,6 +22,7 @@ class Kelas extends Model
         'gmeet_link',
         'materi_pdf_path',
         'materi_pdf_name',
+        'link_rekaman',
     ];
 
     // Relasi ke guru

@@ -149,6 +149,24 @@ class SiswaController extends Controller
 
         $tryout = \App\Models\Tryout::findOrFail($id);
 
+        // Server-side check of remaining attempts quota
+        $attemptsCount = \App\Models\TryoutAttempt::where('id_user', $user->id_user)->count();
+        $package = strtolower($user->package ?? '');
+        if (str_contains($package, 'pro')) {
+            $limit = 17;
+        } elseif (str_contains($package, 'intensif')) {
+            $limit = 6;
+        } else {
+            $limit = 3; // Paket Dasar / Reguler
+        }
+
+        if ($limit !== -1 && $attemptsCount >= $limit) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Kuota pengerjaan Tryout Anda untuk paket ini telah habis.'
+            ], 403);
+        }
+
         $data = $request->validate([
             'score_twk' => 'required|integer',
             'score_tiu' => 'required|integer',
@@ -194,5 +212,34 @@ class SiswaController extends Controller
         ];
 
         return view('siswa.hasil', compact('user', 'attempts', 'stats'));
+    }
+
+    public function printRapor(Request $request, $id)
+    {
+        $userId = $request->session()->get('user_id');
+        if (!$userId) {
+            return redirect('/login');
+        }
+
+        $attempt = \App\Models\TryoutAttempt::with(['user', 'tryout'])
+            ->where('id_user', $userId)
+            ->findOrFail($id);
+
+        return view('siswa.print_rapor', compact('attempt'));
+    }
+
+    public function printSertifikat(Request $request, $id)
+    {
+        $userId = $request->session()->get('user_id');
+        if (!$userId) {
+            return redirect('/login');
+        }
+
+        $attempt = \App\Models\TryoutAttempt::with(['user', 'tryout'])
+            ->where('id_user', $userId)
+            ->where('status', 'lulus')
+            ->findOrFail($id);
+
+        return view('siswa.print_sertifikat', compact('attempt'));
     }
 }

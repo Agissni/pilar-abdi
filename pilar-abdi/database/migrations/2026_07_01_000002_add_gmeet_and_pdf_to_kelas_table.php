@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('gmeet_link')->nullable();
             $table->string('materi_pdf_path')->nullable();
             $table->string('materi_pdf_name')->nullable();
+            $table->string('link_rekaman')->nullable();
         });
     }
 
@@ -24,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('kelas', function (Blueprint $table) {
-            $table->dropColumn(['gmeet_link', 'materi_pdf_path', 'materi_pdf_name']);
+            $table->dropColumn(['gmeet_link', 'materi_pdf_path', 'materi_pdf_name', 'link_rekaman']);
         });
     }
 };

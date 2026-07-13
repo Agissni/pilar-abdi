@@ -58,14 +58,15 @@
                 <table class="table table-hover align-middle mb-0" style="font-size: 14px;">
                     <thead class="table-light">
                         <tr>
-                            <th class="py-3 px-4 text-center" style="width: 70px;">No</th>
-                            <th class="py-3">Nama Paket Tryout</th>
-                            <th class="py-3 text-center" style="width: 110px;">Skor TWK</th>
-                            <th class="py-3 text-center" style="width: 110px;">Skor TIU</th>
-                            <th class="py-3 text-center" style="width: 110px;">Skor TKP</th>
-                            <th class="py-3 text-center" style="width: 110px;">Total Skor</th>
-                            <th class="py-3 text-center" style="width: 180px;">Status</th>
-                            <th class="py-3 text-center" style="width: 180px;">Tanggal Pengerjaan</th>
+                            <th class="py-3 px-4 text-center" style="width: 50px;">No</th>
+                            <th class="py-3">Nama Paket Ujian</th>
+                            <th class="py-3 text-center" style="width: 90px;">Skor TWK</th>
+                            <th class="py-3 text-center" style="width: 90px;">Skor TIU</th>
+                            <th class="py-3 text-center" style="width: 90px;">Skor TKP</th>
+                            <th class="py-3 text-center" style="width: 100px;">Total Skor</th>
+                            <th class="py-3 text-center" style="width: 130px;">Status</th>
+                            <th class="py-3 text-center" style="width: 150px;">Tanggal</th>
+                            <th class="py-3 text-center" style="width: 220px;">Laporan & Dokumen</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,7 +111,23 @@
                                         @endif
                                     </td>
                                     <td class="text-center text-muted fw-semibold">
-                                        {{ $item->created_at->format('d M Y, H:i') }}
+                                        {{ $item->created_at->format('d M Y') }}
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex gap-2 justify-content-center">
+                                            <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/print" target="_blank" class="btn btn-sm btn-outline-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px;">
+                                                <i class="bi bi-printer-fill"></i> Rapor
+                                            </a>
+                                            @if($item->status === 'lulus')
+                                                <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/certificate" target="_blank" class="btn btn-sm btn-warning text-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; background-color: #f5b93b; border-color: #f5b93b;">
+                                                    <i class="bi bi-award-fill"></i> Sertifikat
+                                                </a>
+                                            @else
+                                                <button class="btn btn-sm btn-light text-muted fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; border: 1px dashed #ccc; cursor: not-allowed;" disabled>
+                                                    <i class="bi bi-lock-fill"></i> Sertifikat
+                                                </button>
+                                            @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

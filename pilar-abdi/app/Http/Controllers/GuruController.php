@@ -28,6 +28,7 @@ class GuruController extends Controller
             'hari'       => 'required|string|max:20',
             'jam'        => 'required|string|max:20',
             'gmeet_link' => 'nullable|url|max:255',
+            'link_rekaman' => 'nullable|url|max:255',
             'materi_pdf' => 'nullable|file|mimes:pdf|max:10240', // Max 10MB
         ]);
 
@@ -35,6 +36,7 @@ class GuruController extends Controller
             'hari'       => $data['hari'],
             'jam'        => $data['jam'],
             'gmeet_link' => $data['gmeet_link'],
+            'link_rekaman' => $data['link_rekaman'],
         ];
 
         if ($request->hasFile('materi_pdf')) {

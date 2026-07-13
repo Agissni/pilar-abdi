@@ -9,7 +9,18 @@
     <div id="state-list" class="state-section">
         <div class="text-center mb-5">
             <h1 class="fw-bold" style="color:#071739;">Try Out Online</h1>
-            <p class="text-muted">Simulasi CAT SKD Nasional Terintegrasi</p>
+            <p class="text-muted mb-3">Simulasi CAT SKD Nasional Terintegrasi</p>
+            
+            <div class="d-inline-flex align-items-center bg-white shadow-sm border rounded-pill px-4 py-2" style="font-size: 14px;">
+                @if($limit === -1)
+                    <span class="fw-semibold text-primary"><i class="bi bi-award-fill me-1 text-warning"></i> Paket Pro: Akses Tryout Tanpa Batas</span>
+                @else
+                    <span class="fw-semibold text-secondary">
+                        <i class="bi bi-clock-history me-1 text-primary"></i> Sisa Kuota Tryout: 
+                        <strong class="text-primary fs-5 ms-1">{{ $remainingAttempts }}</strong> / {{ $limit }} Sesi
+                    </span>
+                @endif
+            </div>
         </div>
 
         <div class="row g-4 justify-content-center">
@@ -85,11 +96,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn w-100 py-3 fw-bold btn-start-exam text-white" 
-                                            style="background: #071739; border-radius: 12px;"
-                                            onclick="goToInstructions('{{ $to->id_tryout }}', '{{ addslashes($to->nama_tryout) }}', {{ $to->jumlah_soal }}, {{ $to->durasi }})">
-                                        MULAI SEKARANG
-                                    </button>
+                                    @if($limit !== -1 && $remainingAttempts <= 0)
+                                        <button class="btn w-100 py-3 fw-bold text-white bg-secondary" style="border-radius: 12px;" disabled>
+                                            <i class="bi bi-lock-fill me-1"></i> KUOTA HABIS
+                                        </button>
+                                    @else
+                                        <button class="btn w-100 py-3 fw-bold btn-start-exam text-white" 
+                                                style="background: #071739; border-radius: 12px;"
+                                                onclick="goToInstructions('{{ $to->id_tryout }}', '{{ addslashes($to->nama_tryout) }}', {{ $to->jumlah_soal }}, {{ $to->durasi }})">
+                                            MULAI SEKARANG
+                                        </button>
+                                    @endif
                                 </div>
                             </div>
                         @else
@@ -320,7 +337,7 @@
                 <div class="card shadow-lg border-0" style="border-radius: 20px; overflow: hidden;">
                     
                     <div class="text-center py-5 text-white position-relative" id="result-header-bg" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);">
-                        <div class="position-absolute top-50 start-50 translate-middle opacity-5">
+                        <div class="position-absolute top-50 start-50 translate-middle" style="opacity: 0.05; color: white; pointer-events: none;">
                             <i class="bi bi-trophy-fill" style="font-size: 200px;"></i>
                         </div>
                         <h5 class="text-uppercase tracking-wide text-warning fw-bold mb-2">Hasil Evaluasi</h5>

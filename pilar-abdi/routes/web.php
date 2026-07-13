@@ -113,11 +113,27 @@ Route::middleware(['siswa'])->group(function () {
     Route::get('/tryout', function () {
         $user = \App\Models\User::find(session('user_id'));
         $tryouts = \App\Models\Tryout::latest()->get();
-        return view('siswa.tryout', compact('user', 'tryouts'));
+        
+        $attemptsCount = \App\Models\TryoutAttempt::where('id_user', $user->id_user)->count();
+        $package = strtolower($user->package ?? '');
+        
+        if (str_contains($package, 'pro')) {
+            $limit = 17;
+        } elseif (str_contains($package, 'intensif')) {
+            $limit = 6;
+        } else {
+            $limit = 3; // Paket Dasar / Reguler
+        }
+        
+        $remainingAttempts = ($limit === -1) ? 999 : max(0, $limit - $attemptsCount);
+        
+        return view('siswa.tryout', compact('user', 'tryouts', 'attemptsCount', 'limit', 'remainingAttempts'));
     });
 
     Route::post('/tryout/{id}/submit', [App\Http\Controllers\SiswaController::class, 'submitTryout']);
     Route::get('/hasil-tryout', [App\Http\Controllers\SiswaController::class, 'hasilTryout']);
+    Route::get('/hasil-tryout/{id}/print', [App\Http\Controllers\SiswaController::class, 'printRapor']);
+    Route::get('/hasil-tryout/{id}/certificate', [App\Http\Controllers\SiswaController::class, 'printSertifikat']);
     Route::post('/siswa/bimbingan/booking', [App\Http\Controllers\SiswaController::class, 'bookingBimbingan']);
 });
 

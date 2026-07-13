@@ -65,6 +65,12 @@
                                         <i class="bi bi-file-earmark-pdf-fill text-danger"></i> Unduh Materi PDF
                                     </a>
                                 @endif
+
+                                @if($k->link_rekaman)
+                                    <a href="{{ $k->link_rekaman }}" target="_blank" class="btn btn-outline-info w-100 fw-bold py-2 mt-2 d-flex align-items-center justify-content-center gap-2" style="border-radius: 8px; font-size:14px;">
+                                        <i class="bi bi-play-btn-fill"></i> Tonton Rekaman Kelas
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </div>

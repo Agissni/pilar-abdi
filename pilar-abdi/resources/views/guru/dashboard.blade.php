@@ -128,7 +128,8 @@
                                                     '{{ addslashes($k->hari ?? '') }}',
                                                     '{{ addslashes($k->jam ?? '') }}',
                                                     '{{ addslashes($k->gmeet_link ?? '') }}',
-                                                    '{{ addslashes($k->materi_pdf_name ?? '') }}'
+                                                    '{{ addslashes($k->materi_pdf_name ?? '') }}',
+                                                    '{{ addslashes($k->link_rekaman ?? '') }}'
                                                 )">
                                             <i class="bi bi-gear-fill me-1"></i>Kelola
                                         </button>
@@ -182,6 +183,10 @@
                             <input type="url" name="gmeet_link" id="manage_gmeet_link" class="form-control" style="border-radius:10px; font-size:14px;" placeholder="https://meet.google.com/xxx-xxxx-xxx">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label fw-semibold" style="font-size: 13px; color: var(--teal-dark);">Link Rekaman Video (Google Drive / YouTube)</label>
+                            <input type="url" name="link_rekaman" id="manage_link_rekaman" class="form-control" style="border-radius:10px; font-size:14px;" placeholder="https://drive.google.com/drive/folders/... atau https://youtube.com/playlist?...">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label fw-semibold" style="font-size: 13px; color: var(--teal-dark);">Unggah Materi PDF <small class="text-muted">(Maks. 10MB)</small></label>
                             <input type="file" name="materi_pdf" class="form-control" style="border-radius:10px; font-size:14px;" accept="application/pdf">
                             <div id="current_pdf_container" class="mt-2 d-none">
@@ -207,11 +212,12 @@
 
 @section('scripts')
     <script>
-    function showManageModal(id, nama, hari, jam, gmeet, pdfName) {
+    function showManageModal(id, nama, hari, jam, gmeet, pdfName, linkRekaman) {
         document.getElementById('formManageKelas').action = '/guru/kelas/' + id + '/update';
         document.getElementById('manage_nama_kelas').value = nama;
         document.getElementById('manage_jam').value = jam;
         document.getElementById('manage_gmeet_link').value = gmeet;
+        document.getElementById('manage_link_rekaman').value = linkRekaman || '';
 
         // Set select hari
         const selHari = document.getElementById('manage_hari');

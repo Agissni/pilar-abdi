@@ -90,11 +90,11 @@
                                         <div class="mb-2"><strong>Sekolah Tujuan:</strong> {{ strtoupper($user->sekdin ?? 'Belum dipilih') }}</div>
                                         <div class="mb-2"><strong>Total Pembayaran:</strong> 
                                             @if($user->package === 'reguler')
-                                                Rp 1.250.000
+                                                Rp 890.000
                                             @elseif($user->package === 'intensif')
-                                                Rp 2.150.000
+                                                Rp 1.650.000
                                             @elseif($user->package === 'tahunan')
-                                                Rp 3.750.000
+                                                Rp 2.750.000
                                             @else
                                                 -
                                             @endif
