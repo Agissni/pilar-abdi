@@ -41,7 +41,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/pembayaran', [App\Http\Controllers\PaymentController::class, 'indexAdmin']);
     Route::post('/admin/pembayaran/{id}/verify', [App\Http\Controllers\PaymentController::class, 'verify']);
 
-    // Admin routes — menggunakan AdminController dengan data real
+    // Admin routes 
     Route::get('/admin/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard']);
     Route::get('/admin/siswa',     [App\Http\Controllers\AdminController::class, 'siswa']);
     Route::post('/admin/siswa/{id}/toggle-status', [App\Http\Controllers\AdminController::class, 'toggleStatus']);
@@ -100,7 +100,7 @@ Route::get('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout
 Route::get('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'show']);
 Route::post('/forgot-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'reset']);
 
-// Student routes group (only for active students)
+// Student routes group 
 Route::middleware(['siswa'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\SiswaController::class, 'dashboard']);
 
@@ -145,7 +145,7 @@ Route::middleware(['guru'])->group(function () {
     Route::post('/guru/kelas/{id}/update', [App\Http\Controllers\GuruController::class, 'updateKelas']);
     Route::get('/guru/siswa', [App\Http\Controllers\GuruController::class, 'siswa']);
 
-    // Guru Tryout & Questions CRUD (restricted by specialization)
+    // Guru Tryout & Questions CRUD 
     Route::get('/guru/tryout',                      [App\Http\Controllers\GuruTryoutController::class, 'index']);
     Route::get('/guru/tryout/{tryout_id}/soal',     [App\Http\Controllers\GuruTryoutController::class, 'soal']);
     Route::post('/guru/tryout/{tryout_id}/soal',    [App\Http\Controllers\GuruTryoutController::class, 'storeSoal']);
