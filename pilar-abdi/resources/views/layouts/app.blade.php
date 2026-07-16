@@ -120,10 +120,10 @@
                         <span class="fw-semibold">Email:</span> <a href="mailto:info@pilarabdi.id">info@pilarabdi.id</a>
                     </div>
                     <div>
-                        <span class="fw-semibold">Telepon:</span> 0812-3456-7890
+                        <span class="fw-semibold">Telepon:</span> +62 831-9445-7799
                     </div>
                     <div>
-                        <span class="fw-semibold">Alamat:</span> Jakarta, Indonesia
+                        <span class="fw-semibold">Alamat:</span> Jl. Pendidikan No. 12, Depok, Jawa Barat
                     </div>
                 </div>
             </div>
