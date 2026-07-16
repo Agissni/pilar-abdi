@@ -102,6 +102,83 @@ class DatabaseSeeder extends Seeder
                 'status' => 'aktif',
             ]
         );
+
+        // 6. Seed default Tryout
+        $tryout = \App\Models\Tryout::updateOrCreate(
+            ['nama_tryout' => 'Try Out CAT SKD Nasional I'],
+            [
+                'deskripsi' => 'Simulasi Try Out CAT SKD Kedinasan Nasional pertama dengan materi lengkap TWK, TIU, TKP.',
+                'durasi' => 100,
+                'jumlah_soal' => 3,
+                'tanggal_mulai' => '2026-07-01 00:00:00',
+                'tanggal_berakhir' => '2026-07-31 23:59:59',
+                'status' => 'aktif',
+            ]
+        );
+
+        // 7. Seed default questions for this Tryout
+        \App\Models\TryoutQuestion::updateOrCreate(
+            ['id_tryout' => $tryout->id_tryout, 'nomor_soal' => 1],
+            [
+                'kategori' => 'TWK',
+                'pertanyaan' => 'Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 disahkan pada tanggal...',
+                'pilihan_a' => '17 Agustus 1945',
+                'pilihan_b' => '18 Agustus 1945',
+                'pilihan_c' => '19 Agustus 1945',
+                'pilihan_d' => '20 Agustus 1945',
+                'pilihan_e' => '21 Agustus 1945',
+                'jawaban_benar' => 'B',
+                'pembahasan' => 'UUD 1945 disahkan oleh PPKI pada tanggal 18 Agustus 1945, sehari setelah proklamasi kemerdekaan.'
+            ]
+        );
+
+        \App\Models\TryoutQuestion::updateOrCreate(
+            ['id_tryout' => $tryout->id_tryout, 'nomor_soal' => 2],
+            [
+                'kategori' => 'TIU',
+                'pertanyaan' => 'Jika x = 5 dan y = 3, maka nilai dari x^2 - y^2 adalah...',
+                'pilihan_a' => '8',
+                'pilihan_b' => '16',
+                'pilihan_c' => '25',
+                'pilihan_d' => '34',
+                'pilihan_e' => '40',
+                'jawaban_benar' => 'B',
+                'pembahasan' => 'x^2 - y^2 = (5^2) - (3^2) = 25 - 9 = 16.'
+            ]
+        );
+
+        \App\Models\TryoutQuestion::updateOrCreate(
+            ['id_tryout' => $tryout->id_tryout, 'nomor_soal' => 3],
+            [
+                'kategori' => 'TKP',
+                'pertanyaan' => 'Anda melihat rekan kerja Anda sedang kesulitan menyelesaikan pekerjaannya karena sistem komputer yang lambat, tindakan Anda...',
+                'pilihan_a' => 'Mendiamkannya karena itu bukan tugas saya',
+                'pilihan_b' => 'Melaporkan ke atasan agar diganti komputernya',
+                'pilihan_c' => 'Membantu menyelesaikannya setelah pekerjaan saya sendiri selesai',
+                'pilihan_d' => 'Memarahinya karena bekerja lamban',
+                'pilihan_e' => 'Menyuruhnya pulang saja',
+                'jawaban_benar' => 'C',
+                'pembahasan' => 'Membantu rekan kerja setelah pekerjaan kita selesai mencerminkan sikap profesionalisme dan jejaring kerja.'
+            ]
+        );
+
+        // 8. Find seeded student and seed tryout attempt
+        $student = \App\Models\User::where('email', 'siswa@pilarabdi.id')->first();
+        if ($student) {
+            \App\Models\TryoutAttempt::updateOrCreate(
+                [
+                    'id_user' => $student->id_user,
+                    'id_tryout' => $tryout->id_tryout,
+                ],
+                [
+                    'score_twk' => 85,
+                    'score_tiu' => 110,
+                    'score_tkp' => 175,
+                    'score_total' => 370,
+                    'status' => 'lulus',
+                ]
+            );
+        }
     }
 }
 

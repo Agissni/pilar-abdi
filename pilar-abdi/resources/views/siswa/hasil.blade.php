@@ -118,15 +118,9 @@
                                             <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/print" target="_blank" class="btn btn-sm btn-outline-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px;">
                                                 <i class="bi bi-printer-fill"></i> Rapor
                                             </a>
-                                            @if($item->status === 'lulus')
-                                                <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/certificate" target="_blank" class="btn btn-sm btn-warning text-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; background-color: #f5b93b; border-color: #f5b93b;">
-                                                    <i class="bi bi-award-fill"></i> Sertifikat
-                                                </a>
-                                            @else
-                                                <button class="btn btn-sm btn-light text-muted fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; border: 1px dashed #ccc; cursor: not-allowed;" disabled>
-                                                    <i class="bi bi-lock-fill"></i> Sertifikat
-                                                </button>
-                                            @endif
+                                            <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/certificate" class="btn btn-sm btn-warning text-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; background-color: #f5b93b; border-color: #f5b93b;">
+                                                <i class="bi bi-file-earmark-bar-graph-fill"></i> Detail Nilai
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

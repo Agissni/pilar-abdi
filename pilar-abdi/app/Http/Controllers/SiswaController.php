@@ -237,10 +237,13 @@ class SiswaController extends Controller
 
         $attempt = \App\Models\TryoutAttempt::with(['user', 'tryout'])
             ->where('id_user', $userId)
-            ->where('status', 'lulus')
             ->findOrFail($id);
 
-        return view('siswa.print_sertifikat', compact('attempt'));
+        $questions = \App\Models\TryoutQuestion::where('id_tryout', $attempt->id_tryout)
+            ->orderBy('nomor_soal', 'asc')
+            ->get();
+
+        return view('siswa.print_sertifikat', compact('attempt', 'questions'));
     }
 
     public function getTryoutQuestions(Request $request, $id)

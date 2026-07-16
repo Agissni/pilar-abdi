@@ -220,7 +220,7 @@
         <div class="row g-3 mb-4 align-items-center bg-white p-3 shadow-sm rounded-4 border">
             <div class="col-md-6 col-lg-8">
                 <h5 class="fw-bold mb-1 text-dark" id="exam-package-title">Try Out Mini Simulator I</h5>
-                <span class="badge bg-primary px-3 py-2 fs-7" id="question-category-badge" style="border-radius: 20px;">Kategori: TWK</span>
+                <span class="badge bg-primary px-3 py-2 fs-7 d-none" id="question-category-badge" style="border-radius: 20px;">Kategori: TWK</span>
             </div>
             <div class="col-md-6 col-lg-4 text-md-end">
                 <div class="d-inline-flex align-items-center gap-2 px-4 py-2 bg-danger bg-opacity-10 text-danger fw-bold rounded-pill" style="border: 1px solid rgba(220,53,69,0.2);">
@@ -817,7 +817,6 @@ function renderQuestion(index) {
 
     // Info header
     document.getElementById('current-question-number-title').textContent = `Soal No. ${index + 1} dari ${activeQuestions.length}`;
-    document.getElementById('question-category-badge').textContent = `Kategori: ${q.category}`;
     document.getElementById('question-text-box').textContent = `${index + 1}. ${q.question}`;
 
     // Render Options
@@ -1074,13 +1073,11 @@ function submitExam() {
                 </a>
             `;
             
-            if (isLulus) {
-                buttonsHtml += `
-                    <a href="/hasil-tryout/${attemptId}/certificate" target="_blank" class="btn btn-warning px-4 py-3 fw-bold text-dark" style="border-radius: 12px; display: inline-flex; align-items: center;">
-                        <i class="bi bi-patch-check-fill me-2"></i>UNDUH SERTIFIKAT
-                    </a>
-                `;
-            }
+            buttonsHtml += `
+                <a href="/hasil-tryout/${attemptId}/certificate" class="btn btn-warning px-4 py-3 fw-bold text-dark" style="border-radius: 12px; display: inline-flex; align-items: center;">
+                    <i class="bi bi-file-earmark-bar-graph-fill me-2"></i>LIHAT DETAIL NILAI
+                </a>
+            `;
             
             buttonsHtml += `
                 <button class="btn btn-primary px-4 py-3 fw-bold text-white border-0" 
