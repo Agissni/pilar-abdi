@@ -205,10 +205,12 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <div class="feature-box text-center">
-                                🚀
-                                <h5>Strategi Lolos</h5>
-                            </div>
+                            <a href="{{ url('/strategi-lolos') }}" class="text-decoration-none text-dark">
+                                <div class="feature-box text-center">
+                                    🚀
+                                    <h5>Strategi Lolos</h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>

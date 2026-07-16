@@ -201,7 +201,7 @@
                                 </button>
                             </div>
                             <div class="col-6">
-                                <button class="btn text-white w-100 py-3 fw-bold" style="background:#071739; border-radius: 12px;" onclick="startExam()">
+                                <button id="btn-start-exam-action" class="btn text-white w-100 py-3 fw-bold" style="background:#071739; border-radius: 12px;" onclick="startExam()">
                                     Mulai Sekarang
                                 </button>
                             </div>
@@ -398,8 +398,8 @@
                             </div>
                         </div>
 
-                        <div class="text-center mt-5">
-                            <button class="btn btn-primary px-5 py-3 fw-bold text-white border-0" 
+                        <div class="d-flex flex-wrap justify-content-center gap-3 mt-5" id="results-actions-container">
+                            <button class="btn btn-primary px-4 py-3 fw-bold text-white border-0" 
                                     style="background:#071739; border-radius: 12px;"
                                     onclick="goToState('list')">
                                 KEMBALI KE DAFTAR TRY OUT
@@ -733,25 +733,47 @@ function goToInstructions(id, title, totalQuestions, duration) {
 }
 
 function startExam() {
-    // Reset Ujian
-    currentQuestionIndex = 0;
-    savedAnswers = {};
-    raguStatus = {};
-    timeRemaining = selectedTryout.duration * 60;
+    const btn = document.getElementById('btn-start-exam-action');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Memuat Soal...`;
+    btn.disabled = true;
 
-    // Set package title
-    document.getElementById('exam-package-title').textContent = selectedTryout.title;
+    axios.get(`/tryout/${selectedTryout.id}/questions`)
+        .then(res => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            
+            if (res.data.status === 'success' && res.data.questions && res.data.questions.length > 0) {
+                // Set questions from DB
+                activeQuestions = res.data.questions;
+                selectedTryout.totalQuestions = activeQuestions.length; // Override with actual DB question count
+                
+                // Reset Ujian
+                currentQuestionIndex = 0;
+                savedAnswers = {};
+                raguStatus = {};
+                timeRemaining = selectedTryout.duration * 60;
 
-    // Generate dynamic questions list based on totalQuestions count
-    activeQuestions = generateExamQuestions(selectedTryout.totalQuestions);
+                // Set package title
+                document.getElementById('exam-package-title').textContent = selectedTryout.title;
 
-    // Render Ujian
-    renderQuestion(0);
-    renderNavigationGrid();
-    goToState('exam');
+                // Render Ujian
+                renderQuestion(0);
+                renderNavigationGrid();
+                goToState('exam');
 
-    // Timer
-    startTimer();
+                // Timer
+                startTimer();
+            } else {
+                alert('Maaf, ujian tryout ini belum memiliki soal. Hubungi Admin atau Guru untuk mengisi soal terlebih dahulu.');
+            }
+        })
+        .catch(err => {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            console.error('Gagal mengambil soal dari database:', err);
+            alert('Gagal mengambil soal dari database. Silakan coba lagi.');
+        });
 }
 
 function startTimer() {
@@ -1042,6 +1064,34 @@ function submitExam() {
     })
     .then(res => {
         console.log('Nilai berhasil disimpan ke database:', res.data);
+        if (res.data.status === 'success' && res.data.data) {
+            const attemptId = res.data.data.id_tryout_attempt;
+            const isLulus = res.data.data.status === 'lulus';
+            
+            let buttonsHtml = `
+                <a href="/hasil-tryout/${attemptId}/print" target="_blank" class="btn btn-outline-dark px-4 py-3 fw-bold" style="border-radius: 12px; display: inline-flex; align-items: center;">
+                    <i class="bi bi-printer-fill me-2"></i>CETAK RAPOR HASIL
+                </a>
+            `;
+            
+            if (isLulus) {
+                buttonsHtml += `
+                    <a href="/hasil-tryout/${attemptId}/certificate" target="_blank" class="btn btn-warning px-4 py-3 fw-bold text-dark" style="border-radius: 12px; display: inline-flex; align-items: center;">
+                        <i class="bi bi-patch-check-fill me-2"></i>UNDUH SERTIFIKAT
+                    </a>
+                `;
+            }
+            
+            buttonsHtml += `
+                <button class="btn btn-primary px-4 py-3 fw-bold text-white border-0" 
+                        style="background:#071739; border-radius: 12px;"
+                        onclick="goToState('list')">
+                    KEMBALI KE DAFTAR
+                </button>
+            `;
+            
+            document.getElementById('results-actions-container').innerHTML = buttonsHtml;
+        }
     })
     .catch(err => {
         console.error('Gagal menyimpan nilai ke database:', err);

@@ -81,6 +81,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/kelas') }}">Kelas</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/tryout') }}">Tryout</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/hasil-tryout') }}">Hasil Tryout</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/strategi-lolos') }}">Strategi Lolos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modalProfilSaya">Profil</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-outline-warning text-white px-3 ms-2" href="{{ url('/logout') }}" data-confirm="Sesi Anda akan diakhiri." data-confirm-title="Yakin Ingin Keluar?" data-confirm-button="Ya, Keluar" data-confirm-color="#e53e3e" data-confirm-type="question">Keluar</a></li>
                 @else

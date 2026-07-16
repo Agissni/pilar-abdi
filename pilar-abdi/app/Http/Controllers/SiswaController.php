@@ -65,10 +65,10 @@ class SiswaController extends Controller
             ->get();
 
         $package = strtolower($user->package ?? '');
-        if (str_contains($package, 'pro')) {
+        if (str_contains($package, 'pro') || str_contains($package, 'tahunan')) {
             $totalKuota = 5;
         } elseif (str_contains($package, 'intensif')) {
-            $totalKuota = 3;
+            $totalKuota = 2;
         } else {
             $totalKuota = 0;
         }
@@ -96,10 +96,10 @@ class SiswaController extends Controller
         $user = User::findOrFail($userId);
 
         $package = strtolower($user->package ?? '');
-        if (str_contains($package, 'pro')) {
+        if (str_contains($package, 'pro') || str_contains($package, 'tahunan')) {
             $totalKuota = 5;
         } elseif (str_contains($package, 'intensif')) {
-            $totalKuota = 3;
+            $totalKuota = 2;
         } else {
             $totalKuota = 0;
         }
@@ -152,7 +152,7 @@ class SiswaController extends Controller
         // Server-side check of remaining attempts quota
         $attemptsCount = \App\Models\TryoutAttempt::where('id_user', $user->id_user)->count();
         $package = strtolower($user->package ?? '');
-        if (str_contains($package, 'pro')) {
+        if (str_contains($package, 'pro') || str_contains($package, 'tahunan')) {
             $limit = 17;
         } elseif (str_contains($package, 'intensif')) {
             $limit = 6;
@@ -241,5 +241,58 @@ class SiswaController extends Controller
             ->findOrFail($id);
 
         return view('siswa.print_sertifikat', compact('attempt'));
+    }
+
+    public function getTryoutQuestions(Request $request, $id)
+    {
+        $userId = $request->session()->get('user_id');
+        if (!$userId) {
+            return response()->json(['status' => 'error', 'message' => 'Unauthorized'], 401);
+        }
+
+        $tryout = \App\Models\Tryout::findOrFail($id);
+        $dbQuestions = \App\Models\TryoutQuestion::where('id_tryout', $id)
+            ->orderBy('nomor_soal', 'asc')
+            ->get();
+
+        $questions = $dbQuestions->map(function ($q) {
+            $correct = strtoupper($q->jawaban_benar);
+            $optionsList = ['A', 'B', 'C', 'D', 'E'];
+            $points = [];
+            
+            if ($q->kategori === 'TKP') {
+                $correctIndex = array_search($correct, $optionsList);
+                if ($correctIndex === false) $correctIndex = 0;
+                
+                foreach ($optionsList as $index => $opt) {
+                    $distance = abs($index - $correctIndex);
+                    $score = 5 - $distance;
+                    if ($score < 1) $score = 1;
+                    $points[$opt] = $score;
+                }
+            }
+
+            return [
+                'id' => $q->nomor_soal,
+                'db_id' => $q->id_tryout_question,
+                'category' => $q->kategori,
+                'categoryFull' => $q->kategori === 'TWK' ? 'Tes Wawasan Kebangsaan (TWK)' : ($q->kategori === 'TIU' ? 'Tes Inteligensia Umum (TIU)' : 'Tes Karakteristik Pribadi (TKP)'),
+                'question' => $q->pertanyaan,
+                'options' => [
+                    'A' => 'A. ' . $q->pilihan_a,
+                    'B' => 'B. ' . $q->pilihan_b,
+                    'C' => 'C. ' . $q->pilihan_c,
+                    'D' => 'D. ' . $q->pilihan_d,
+                    'E' => 'E. ' . $q->pilihan_e,
+                ],
+                'correct' => $correct,
+                'points' => $points
+            ];
+        });
+
+        return response()->json([
+            'status' => 'success',
+            'questions' => $questions
+        ]);
     }
 }

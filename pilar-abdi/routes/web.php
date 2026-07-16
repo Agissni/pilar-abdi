@@ -117,7 +117,7 @@ Route::middleware(['siswa'])->group(function () {
         $attemptsCount = \App\Models\TryoutAttempt::where('id_user', $user->id_user)->count();
         $package = strtolower($user->package ?? '');
         
-        if (str_contains($package, 'pro')) {
+        if (str_contains($package, 'pro') || str_contains($package, 'tahunan')) {
             $limit = 17;
         } elseif (str_contains($package, 'intensif')) {
             $limit = 6;
@@ -131,9 +131,11 @@ Route::middleware(['siswa'])->group(function () {
     });
 
     Route::post('/tryout/{id}/submit', [App\Http\Controllers\SiswaController::class, 'submitTryout']);
+    Route::get('/tryout/{id}/questions', [App\Http\Controllers\SiswaController::class, 'getTryoutQuestions']);
     Route::get('/hasil-tryout', [App\Http\Controllers\SiswaController::class, 'hasilTryout']);
     Route::get('/hasil-tryout/{id}/print', [App\Http\Controllers\SiswaController::class, 'printRapor']);
     Route::get('/hasil-tryout/{id}/certificate', [App\Http\Controllers\SiswaController::class, 'printSertifikat']);
+    Route::get('/strategi-lolos', function () { return view('siswa.strategi'); });
     Route::post('/siswa/bimbingan/booking', [App\Http\Controllers\SiswaController::class, 'bookingBimbingan']);
 });
 
