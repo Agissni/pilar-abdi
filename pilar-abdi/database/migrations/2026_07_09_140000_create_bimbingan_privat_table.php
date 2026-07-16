@@ -6,9 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+ 
     public function up(): void
     {
         Schema::create('bimbingan_privat', function (Blueprint $table) {
@@ -21,15 +19,11 @@ return new class extends Migration
             $table->enum('status', ['pending', 'disetujui', 'selesai', 'dibatalkan'])->default('pending');
             $table->timestamps();
 
-            // Foreign Key Constraints
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->foreign('id_guru')->references('id_guru')->on('guru')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('bimbingan_privat');
