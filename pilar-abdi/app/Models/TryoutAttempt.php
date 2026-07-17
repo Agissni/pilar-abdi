@@ -20,6 +20,11 @@ class TryoutAttempt extends Model
         'score_tkp',
         'score_total',
         'status',
+        'answers',
+    ];
+
+    protected $casts = [
+        'answers' => 'array',
     ];
 
     public function user()

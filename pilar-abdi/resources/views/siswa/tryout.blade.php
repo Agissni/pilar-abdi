@@ -1059,7 +1059,8 @@ function submitExam() {
         score_tiu: tiuScore,
         score_tkp: tkpScore,
         score_total: totalScore,
-        status: isLulus ? 'lulus' : 'tidak_lulus'
+        status: isLulus ? 'lulus' : 'tidak_lulus',
+        answers: savedAnswers
     })
     .then(res => {
         console.log('Nilai berhasil disimpan ke database:', res.data);

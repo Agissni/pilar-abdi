@@ -139,6 +139,10 @@
             @else
                 <div class="d-flex flex-column gap-4">
                     @foreach($questions as $index => $q)
+                        @php
+                            $studentAns = isset($attempt->answers) && isset($attempt->answers[$q->id_tryout_question]) ? strtoupper($attempt->answers[$q->id_tryout_question]) : null;
+                            $correctAns = strtoupper($q->jawaban_benar);
+                        @endphp
                         <div class="p-3 p-md-4 rounded-4 bg-light border border-opacity-50 border-secondary text-start position-relative">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span class="badge bg-primary px-3 py-1.5 text-uppercase fw-bold" style="font-size: 10px; border-radius: 30px;">
@@ -152,26 +156,27 @@
 
                             <!-- Options List -->
                             <div class="d-flex flex-column gap-2 mb-3">
-                                <div class="p-2.5 rounded-3 border bg-white small d-flex gap-2">
-                                    <span class="fw-bold text-secondary">A.</span>
-                                    <span>{{ $q->pilihan_a }}</span>
-                                </div>
-                                <div class="p-2.5 rounded-3 border bg-white small d-flex gap-2">
-                                    <span class="fw-bold text-secondary">B.</span>
-                                    <span>{{ $q->pilihan_b }}</span>
-                                </div>
-                                <div class="p-2.5 rounded-3 border bg-white small d-flex gap-2">
-                                    <span class="fw-bold text-secondary">C.</span>
-                                    <span>{{ $q->pilihan_c }}</span>
-                                </div>
-                                <div class="p-2.5 rounded-3 border bg-white small d-flex gap-2">
-                                    <span class="fw-bold text-secondary">D.</span>
-                                    <span>{{ $q->pilihan_d }}</span>
-                                </div>
-                                <div class="p-2.5 rounded-3 border bg-white small d-flex gap-2">
-                                    <span class="fw-bold text-secondary">E.</span>
-                                    <span>{{ $q->pilihan_e }}</span>
-                                </div>
+                                @foreach(['A' => $q->pilihan_a, 'B' => $q->pilihan_b, 'C' => $q->pilihan_c, 'D' => $q->pilihan_d, 'E' => $q->pilihan_e] as $key => $val)
+                                    @php
+                                        $style = 'background-color: #ffffff; border: 1px solid #dee2e6;';
+                                        $badge = '';
+                                        if ($studentAns === $key && $correctAns === $key) {
+                                            $style = 'border: 2px solid #10b981 !important; background-color: #ecfdf5;';
+                                            $badge = '<span class="badge bg-success text-white ms-auto" style="font-size: 9px; border-radius: 30px;"><i class="bi bi-check-circle-fill"></i> Jawaban Anda (Benar)</span>';
+                                        } elseif ($studentAns === $key) {
+                                            $style = 'border: 2px solid #ef4444 !important; background-color: #fef2f2;';
+                                            $badge = '<span class="badge bg-danger text-white ms-auto" style="font-size: 9px; border-radius: 30px;"><i class="bi bi-x-circle-fill"></i> Jawaban Anda (Salah)</span>';
+                                        } elseif ($correctAns === $key) {
+                                            $style = 'border: 2px solid #10b981 !important; background-color: #ecfdf5;';
+                                            $badge = '<span class="badge bg-success text-white ms-auto" style="font-size: 9px; border-radius: 30px;"><i class="bi bi-check-lg"></i> Kunci Jawaban</span>';
+                                        }
+                                    @endphp
+                                    <div class="p-2.5 rounded-3 d-flex gap-2 align-items-center small" style="{{ $style }}">
+                                        <span class="fw-bold text-secondary">{{ $key }}.</span>
+                                        <span>{{ $val }}</span>
+                                        {!! $badge !!}
+                                    </div>
+                                @endforeach
                             </div>
 
                             <!-- Answer Key & Explanation -->

@@ -173,6 +173,7 @@ class SiswaController extends Controller
             'score_tkp' => 'required|integer',
             'score_total' => 'required|integer',
             'status' => 'required|in:lulus,tidak_lulus',
+            'answers' => 'nullable|array',
         ]);
 
         $attempt = \App\Models\TryoutAttempt::create([
@@ -183,6 +184,7 @@ class SiswaController extends Controller
             'score_tkp' => $data['score_tkp'],
             'score_total' => $data['score_total'],
             'status' => $data['status'],
+            'answers' => $data['answers'] ?? null,
         ]);
 
         return response()->json([

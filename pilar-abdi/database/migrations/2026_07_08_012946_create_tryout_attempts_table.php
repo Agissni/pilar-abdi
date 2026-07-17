@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('score_tkp');
             $table->integer('score_total');
             $table->enum('status', ['lulus', 'tidak_lulus']);
+            $table->json('answers')->nullable();
             $table->timestamps();
         });
     }
