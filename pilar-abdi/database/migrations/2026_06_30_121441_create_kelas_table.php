@@ -10,10 +10,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('kelas', function (Blueprint $table) {
-            $table->id('id_kelas');
+            $table->increments('id_kelas');
             $table->string('nama_kelas');
             $table->string('materi');         // TIU, TWK, TKP, dll
-            $table->unsignedBigInteger('id_guru')->nullable();
+            $table->unsignedInteger('id_guru')->nullable();
             $table->string('hari')->nullable();   // Senin, Selasa, dll
             $table->string('jam')->nullable();    // 19.00 WIB
             $table->text('deskripsi')->nullable();

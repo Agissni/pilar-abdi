@@ -10,8 +10,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tryout_questions', function (Blueprint $table) {
-            $table->id('id_tryout_question');
-            $table->foreignId('id_tryout')->nullable()->constrained('tryouts', 'id_tryout')->onDelete('cascade');
+            $table->increments('id_tryout_question');
+            $table->unsignedInteger('id_tryout')->nullable();
             $table->integer('nomor_soal');
             $table->enum('kategori', ['TIU', 'TWK', 'TKP']);
             $table->text('pertanyaan');
@@ -23,6 +23,8 @@ return new class extends Migration
             $table->char('jawaban_benar', 1);
             $table->text('pembahasan')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_tryout')->references('id_tryout')->on('tryouts')->onDelete('cascade');
         });
     }
 

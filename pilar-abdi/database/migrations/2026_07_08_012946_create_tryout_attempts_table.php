@@ -9,9 +9,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tryout_attempts', function (Blueprint $table) {
-            $table->id('id_tryout_attempt');
-            $table->foreignId('id_user')->constrained('users', 'id_user')->onDelete('cascade');
-            $table->foreignId('id_tryout')->constrained('tryouts', 'id_tryout')->onDelete('cascade');
+            $table->increments('id_tryout_attempt');
+            $table->unsignedInteger('id_user');
+            $table->unsignedInteger('id_tryout');
+            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
+            $table->foreign('id_tryout')->references('id_tryout')->on('tryouts')->onDelete('cascade');
             $table->integer('score_twk');
             $table->integer('score_tiu');
             $table->integer('score_tkp');

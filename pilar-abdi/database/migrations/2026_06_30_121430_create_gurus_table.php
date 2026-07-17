@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('guru', function (Blueprint $table) {
-            $table->id('id_guru');
+            $table->increments('id_guru');
             $table->string('nama');
             $table->string('spesialisasi');   // TIU, TWK, TKP, dll
             $table->string('whatsapp')->nullable();

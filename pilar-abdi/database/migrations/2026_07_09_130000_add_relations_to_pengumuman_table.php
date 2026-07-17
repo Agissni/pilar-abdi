@@ -10,7 +10,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pengumuman', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_user')->nullable()->after('id_pengumuman');
+            $table->unsignedInteger('id_user')->nullable()->after('id_pengumuman');
             
             $table->enum('target_role', ['semua', 'siswa', 'guru'])->default('semua')->after('isi');
 

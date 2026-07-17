@@ -10,9 +10,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bimbingan_privat', function (Blueprint $table) {
-            $table->id('id_bimbingan_privat');
-            $table->unsignedBigInteger('id_user');
-            $table->unsignedBigInteger('id_guru');
+            $table->increments('id_bimbingan_privat');
+            $table->unsignedInteger('id_user');
+            $table->unsignedInteger('id_guru');
             $table->date('tgl_konsultasi');
             $table->time('jam_konsultasi');
             $table->text('topik');

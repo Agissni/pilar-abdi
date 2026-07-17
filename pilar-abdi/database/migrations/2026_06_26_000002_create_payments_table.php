@@ -9,8 +9,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pembayaran', function (Blueprint $table) {
-            $table->id('id_pembayaran');
-            $table->unsignedBigInteger('id_user');
+            $table->increments('id_pembayaran');
+            $table->unsignedInteger('id_user');
             $table->string('bank')->nullable();
             $table->string('account_number')->nullable();
             $table->string('sender_name')->nullable();
