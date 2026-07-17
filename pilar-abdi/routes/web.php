@@ -135,7 +135,6 @@ Route::middleware(['siswa'])->group(function () {
     Route::get('/hasil-tryout', [App\Http\Controllers\SiswaController::class, 'hasilTryout']);
     Route::get('/hasil-tryout/{id}/print', [App\Http\Controllers\SiswaController::class, 'printRapor']);
     Route::get('/hasil-tryout/{id}/certificate', [App\Http\Controllers\SiswaController::class, 'printSertifikat']);
-    Route::get('/strategi-lolos', function () { return view('siswa.strategi'); });
     Route::post('/siswa/bimbingan/booking', [App\Http\Controllers\SiswaController::class, 'bookingBimbingan']);
 });
 

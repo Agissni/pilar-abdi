@@ -37,9 +37,13 @@ class SiswaController extends Controller
         if (isset($sekdins[$sekdinKey])) {
             $sekdinInfo = $sekdins[$sekdinKey];
         } else {
-            // fallback: search by name
+            // fallback: search by name or key substring containment
             foreach ($sekdins as $key => $info) {
-                if (strtolower($info['name']) === $sekdinKey) {
+                if (
+                    strtolower($info['name']) === $sekdinKey || 
+                    str_contains(strtolower($info['name']), $sekdinKey) || 
+                    str_contains($sekdinKey, $key)
+                ) {
                     $sekdinInfo = $info;
                     break;
                 }

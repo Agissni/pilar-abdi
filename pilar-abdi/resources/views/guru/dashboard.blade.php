@@ -143,6 +143,36 @@
         </div>
     </div>
 
+    {{-- Announcements Section --}}
+    <div class="content-card-custom mt-4">
+        <div class="card-header-custom d-flex align-items-center gap-2">
+            <i class="bi bi-bell-fill text-primary"></i>
+            <h6 class="card-title-custom mb-0">Pengumuman Terbaru</h6>
+        </div>
+        <div class="card-body p-4 bg-white" style="border-radius: 0 0 16px 16px;">
+            <div class="d-flex flex-column gap-3">
+                @if($announcements->isEmpty())
+                    <div class="text-center py-4 text-muted">
+                        <i class="bi bi-bell-slash text-secondary mb-2" style="font-size: 32px; opacity: 0.5;"></i>
+                        <p class="mb-0 small fw-semibold">Belum ada pengumuman terbaru.</p>
+                    </div>
+                @else
+                    @foreach($announcements as $ann)
+                        <div class="p-3 rounded border" style="background-color: #fafbfc;">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="badge bg-warning bg-opacity-10 text-dark-emphasis small" style="font-size: 10px;">
+                                    {{ $ann->tanggal_publikasi->format('d M Y, H:i') }}
+                                </span>
+                            </div>
+                            <h6 class="fw-bold text-dark mb-1" style="font-size: 13px;">{{ $ann->judul }}</h6>
+                            <p class="text-secondary mb-0 small" style="line-height: 1.4; white-space: pre-line;">{{ $ann->isi }}</p>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    </div>
+
     {{-- ===== MODAL KELOLA JADWAL & MATERI ===== --}}
     <div class="modal fade" id="modalManageKelas" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">

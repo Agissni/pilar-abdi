@@ -16,7 +16,14 @@ class GuruController extends Controller
         // Fetch classes taught by this teacher
         $kelas = Kelas::where('id_guru', $guruId)->latest()->get();
 
-        return view('guru.dashboard', compact('guru', 'kelas'));
+        // Fetch active announcements for teacher (max 3, newest first)
+        $announcements = \App\Models\Pengumuman::where('status', 'aktif')
+            ->whereIn('target_role', ['semua', 'guru'])
+            ->orderBy('tanggal_publikasi', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('guru.dashboard', compact('guru', 'kelas', 'announcements'));
     }
 
     public function updateKelas(Request $request, $id)
