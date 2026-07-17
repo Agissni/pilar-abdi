@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         // 4. Buat 3 akun guru baru (1 guru untuk 1 materi/spesialisasi)
         // Guru TWK
-        Guru::create([
+        $guruSri = Guru::create([
             'nama'         => 'Sri Wahyuni, S.Pd.',
             'spesialisasi' => 'TWK',
             'whatsapp'     => '081234567801',
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Guru TIU
-        Guru::create([
+        $guruBudi = Guru::create([
             'nama'         => 'Budi Santoso, M.Pd.',
             'spesialisasi' => 'TIU',
             'whatsapp'     => '083178560055',
@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Guru TKP
-        Guru::create([
+        $guruDewi = Guru::create([
             'nama'         => 'Dewi Lestari, S.Psi.',
             'spesialisasi' => 'TKP',
             'whatsapp'     => '081234567803',
@@ -178,6 +178,46 @@ class DatabaseSeeder extends Seeder
                     'status' => 'lulus',
                 ]
             );
+        }
+
+        // 9. Seed default classes and link to Guru
+        $kelasTwk = \App\Models\Kelas::create([
+            'nama_kelas' => 'Kelas Pendalaman TWK',
+            'materi' => 'TWK',
+            'id_guru' => $guruSri->id_guru,
+            'hari' => 'Senin',
+            'jam' => '19.00 - 21.00 WIB',
+            'deskripsi' => 'Fokus materi Pilar Kebangsaan, Pancasila, dan UUD 1945.',
+            'gmeet_link' => 'https://meet.google.com/abc-defg-hij',
+        ]);
+
+        $kelasTiu = \App\Models\Kelas::create([
+            'nama_kelas' => 'Kelas TIU Penalaran Numerik',
+            'materi' => 'TIU',
+            'id_guru' => $guruBudi->id_guru,
+            'hari' => 'Rabu',
+            'jam' => '19.00 - 21.00 WIB',
+            'deskripsi' => 'Strategi cepat perhitungan aljabar, perbandingan kuantitatif, dan deret angka.',
+            'gmeet_link' => 'https://meet.google.com/klm-nopq-rst',
+        ]);
+
+        $kelasTkp = \App\Models\Kelas::create([
+            'nama_kelas' => 'Kelas Aspek Karakteristik Pribadi',
+            'materi' => 'TKP',
+            'id_guru' => $guruDewi->id_guru,
+            'hari' => 'Jumat',
+            'jam' => '19.00 - 21.00 WIB',
+            'deskripsi' => 'Latihan studi kasus kepribadian, sosial budaya, dan profesionalisme pelayanan publik.',
+            'gmeet_link' => 'https://meet.google.com/uvw-xyza-bcd',
+        ]);
+
+        // Link student to all classes
+        if ($student) {
+            \Illuminate\Support\Facades\DB::table('kelas_siswa')->insert([
+                ['id_user' => $student->id_user, 'id_kelas' => $kelasTwk->id_kelas, 'created_at' => now(), 'updated_at' => now()],
+                ['id_user' => $student->id_user, 'id_kelas' => $kelasTiu->id_kelas, 'created_at' => now(), 'updated_at' => now()],
+                ['id_user' => $student->id_user, 'id_kelas' => $kelasTkp->id_kelas, 'created_at' => now(), 'updated_at' => now()],
+            ]);
         }
     }
 }

@@ -1069,12 +1069,6 @@ function submitExam() {
             const isLulus = res.data.data.status === 'lulus';
             
             let buttonsHtml = `
-                <a href="/hasil-tryout/${attemptId}/print" target="_blank" class="btn btn-outline-dark px-4 py-3 fw-bold" style="border-radius: 12px; display: inline-flex; align-items: center;">
-                    <i class="bi bi-printer-fill me-2"></i>CETAK RAPOR HASIL
-                </a>
-            `;
-            
-            buttonsHtml += `
                 <a href="/hasil-tryout/${attemptId}/certificate" class="btn btn-warning px-4 py-3 fw-bold text-dark" style="border-radius: 12px; display: inline-flex; align-items: center;">
                     <i class="bi bi-file-earmark-bar-graph-fill me-2"></i>LIHAT DETAIL NILAI
                 </a>

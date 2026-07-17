@@ -115,10 +115,7 @@
                                     </td>
                                     <td class="text-center">
                                         <div class="d-flex gap-2 justify-content-center">
-                                            <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/print" target="_blank" class="btn btn-sm btn-outline-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px;">
-                                                <i class="bi bi-printer-fill"></i> Rapor
-                                            </a>
-                                            <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/certificate" class="btn btn-sm btn-warning text-dark fw-bold py-1 px-2 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; background-color: #f5b93b; border-color: #f5b93b;">
+                                            <a href="/hasil-tryout/{{ $item->id_tryout_attempt }}/certificate" class="btn btn-sm btn-warning text-dark fw-bold py-1.5 px-3 d-inline-flex align-items-center gap-1" style="border-radius: 8px; font-size: 11px; background-color: #f5b93b; border-color: #f5b93b;">
                                                 <i class="bi bi-file-earmark-bar-graph-fill"></i> Detail Nilai
                                             </a>
                                         </div>

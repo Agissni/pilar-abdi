@@ -8,8 +8,8 @@
     <!-- WELCOME BANNER -->
     <div class="card border-0 shadow-sm mb-4 p-4 text-white position-relative overflow-hidden" 
          style="background: linear-gradient(135deg, #071739 0%, #1e293b 100%); border-radius: 20px;">
-        <div class="position-absolute top-0 end-0 p-3 opacity-10">
-            <i class="bi bi-mortarboard-fill" style="font-size: 150px; transform: rotate(15deg); display: block;"></i>
+        <div class="position-absolute top-0 end-0 p-3" style="opacity: 0.12; pointer-events: none;">
+            <img src="{{ asset('assets/' . $sekdin['logo']) }}" alt="{{ $sekdin['name'] }}" style="width: 150px; height: 150px; object-fit: contain; transform: rotate(15deg); display: block;">
         </div>
         <div class="row align-items-center position-relative">
             <div class="col-md-8">

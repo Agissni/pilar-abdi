@@ -373,7 +373,7 @@
             </div>
             <div class="signature-box">
                 <p style="margin: 0; font-size: 13px;">Depok, {{ now()->format('d F Y') }}</p>
-                <div class="signature-line">Hendrawan Prasetyo, M.B.A.</div>
+                <div class="signature-line">Kayla Najwa Riana Agisni, S.Tr.Kom</div>
                 <div class="signature-title">Direktur Utama Pilar Abdi</div>
             </div>
         </div>

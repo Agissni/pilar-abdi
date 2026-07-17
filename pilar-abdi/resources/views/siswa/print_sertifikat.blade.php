@@ -93,8 +93,8 @@
                 
                 <!-- Director Signature -->
                 <div class="col-sm-4 order-2 order-sm-1">
-                    <div class="mx-auto" style="width: 180px; border-bottom: 2px solid #071739; padding-top: 40px; font-size: 13px; font-weight: 700; color: #0f172a;">
-                        Hendrawan Prasetyo, M.B.A.
+                    <div class="mx-auto" style="width: 250px; border-bottom: 2px solid #071739; padding-top: 40px; font-size: 13px; font-weight: 700; color: #0f172a;">
+                        Kayla Najwa Riana Agisni, S.Tr.Kom
                     </div>
                     <div class="text-muted small mt-1" style="font-size: 11px;">Direktur Utama Pilar Abdi</div>
                 </div>
