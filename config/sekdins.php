@@ -30,7 +30,6 @@ return [
             'Tes Wawasan Kebangsaan (TWK) - Penguasaan materi NKRI, Pancasila, UUD 1945, dan pilar kebangsaan.',
             'Tes Inteligensia Umum (TIU) - Kemampuan analisis numerik, verbal, logis, dan analitis.',
             'Tes Karakteristik Pribadi (TKP) - Sosial budaya, profesionalisme, TIK, pelayanan publik, dan anti radikalisme.',
-            'Bahasa Inggris & Akademik - Pemahaman tata bahasa Inggris dasar/lanjut serta pemecahan masalah numerik kuantitatif.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Pancasila, UUD 1945, NKRI)', 'status' => 'Selesai', 'progress' => 100],
@@ -107,15 +106,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Tes kemampuan dasar wajib kedinasan.',
-            'Matematika Akademik & Statistik - Aljabar, kalkulus, statistika dasar, teori peluang, dan logika matematika.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Pilar Negara, Bahasa Indonesia)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Analitik, Kuantitatif, Verbal)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Pelayanan Publik, Anti Radikalisme)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika & Statistika STIS', 'status' => 'Sedang Berjalan', 'progress' => 60],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus STIS', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Matematika & SKD STIS', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD STIS', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik STIS', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -145,15 +142,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Penilaian materi kompetensi dasar.',
-            'Tes Kompetensi Bidang (TKB) STMKG - Fisika, Matematika, dan Bahasa Inggris tingkat menengah/lanjut.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (SKD Kebangsaan)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Numerik & Logika Analitik)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Jejaring Kerja & Profesionalisme)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Fisika & Matematika Terapan STMKG', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus STMKG', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Fisika/Matematika STMKG', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD STMKG', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik STMKG', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -172,7 +167,7 @@ return [
         ],
         'terms' => [
             'Administrasi lengkap',
-            'Bebas narkoba dan catatan kriminal',
+            'Bebas narkoba and catatan kriminal',
         ],
         'selection' => [
             'Seleksi Administrasi',
@@ -183,15 +178,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Penilaian kompetensi dasar.',
-            'Tes Akademik Matematika & TI (Dasar Komputer & Jaringan) - Matematika diskrit, aljabar, dan teknologi informasi.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (SKD Kebangsaan)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Figural & Logika)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (TIK & Profesionalisme)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika Diskrit & TI Dasar Poltek SSN', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Poltek SSN', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik Poltek SSN', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Poltek SSN', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Poltek SSN', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -221,14 +214,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Uji pengetahuan dan kemampuan dasar.',
-            'Tes Potensi Akademik (TPA) - Pengukuran tingkat inteligensia, logika spasial, dan penalaran analitis.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (NKRI, Bhinneka Tunggal Ika)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Analisis Pola Bilangan, Figural)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Sosial Budaya & Anti Radikalisme)', 'status' => 'Sedang Berjalan', 'progress' => 60],
-            ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar SKD & TPA STIN', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik STIN', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar SKD STIN', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD STIN', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik STIN', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -258,10 +250,9 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Tes kompetensi dasar.',
-            'Hukum Dasar & Tata Negara (Umum) - Pengenalan dasar ilmu hukum sipil dan tata negara untuk penunjang akademik.'
         ],
         'roadmap' => [
-            ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Pancasila, Hukum Tata Negara)', 'status' => 'Selesai', 'progress' => 100],
+            ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Pancasila, UUD 1945)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Analogi & Kuantitatif)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Jejaring Kerja & Integritas)', 'status' => 'Sedang Berjalan', 'progress' => 70],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar SKD Kemenkumham', 'status' => 'Belum Mulai', 'progress' => 0],
@@ -295,7 +286,6 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Uji kemampuan dasar.',
-            'Bahasa Inggris & Wawasan Hubungan Internasional - Pemahaman tata bahasa, vocabulary, dan analisis wacana global.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (UUD 1945, Bela Negara)', 'status' => 'Selesai', 'progress' => 100],
@@ -331,15 +321,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Pengujian materi kompetensi dasar.',
-            'Tes Matematika & Fisika Kemenhub - Rumus dasar kinematika, aljabar, dan pemahaman logika transportasi darat.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (SKD Kebangsaan)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Analitis & Numerik)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Sosial Budaya & Pelayanan)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika & Fisika Dasar Kemenhub', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -368,15 +356,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Pengujian materi kompetensi dasar.',
-            'Tes Akademik Maritim (Matematika & Fisika Terapan) - Logika navigasi maritim, perhitungan posisi, dan fisika terapan.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Nasionalisme & Integritas)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Hitung Cepat & Analitis)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Jejaring Kerja & Profesionalisme)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika & Fisika Terapan Maritim', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Maritim', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik Maritim Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -405,53 +391,50 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Pengujian materi kompetensi dasar.',
-            'Tes Akademik Kemenhub (Matematika & Fisika) - Keilmuan eksak pendukung profesi pelayaran.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (SKD Kebangsaan)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Figural & Silogisme)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Profesionalisme & TIK)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika & Fisika Terapan Maritim', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Maritim', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik Maritim Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
     ],
     'pip-makassar' => [
-        'name' => 'Politeknik Pembangunan Pertanian (POLBANGTAN)',
-        'ministry' => 'Kementerian Pertanian',
-        'location' => 'Beberapa lokasi (Medan, Bogor, Yogyakarta-Magelang, Malang, Gowa, Manokwari)',
-        'logo' => 'polbangtan.png',
-        'background' => 'polbangtan.png',
-        'description' => 'Institusi pendidikan vokasi di bawah Kementan yang fokus mencetak wirausahawan muda pertanian dan tenaga ahli profesional di bidang pertanian.',
+        'name' => 'Politeknik Ilmu Pelayaran (PIP Makassar)',
+        'ministry' => 'Kementerian Perhubungan',
+        'location' => 'Makassar, Sulawesi Selatan',
+        'logo' => 'PIP.png',
+        'background' => 'PIP.png',
+        'description' => 'PIP Makassar melatih calon perwira pelayaran niaga dan ahli pelabuhan laut di Indonesia timur.',
         'requirements' => [
-            'Lulusan SMA/SMK Pertanian/MA sederajat.',
-            'Maksimal 21-22 tahun (tergantung ketentuan tahun berjalan).',
-            'Sehat jasmani dan rohani.',
-            'Tidak memiliki riwayat penyakit yang menghambat proses pendidikan di lapangan.'
+            'WNI maksimal 22 tahun',
+            'Lulus SMA/SMK/MA sederajat',
+            'Sehat jasmani dan rohani',
         ],
         'terms' => [
-            'Pendaftaran melalui portal resmi PMB Polbangtan (biasanya terpisah dari SSCASN Dikdin).',
-            'Seleksi Administrasi, Tes Tulis, dan Wawancara.'
+            'Administrasi lengkap',
+            'Surat sehat',
         ],
         'selection' => [
             'Seleksi Administrasi',
-            'Tes Potensi Akademik',
-            'Wawancara & Psikotes',
-            'Pengumuman Final'
+            'SKD',
+            'Tes kesehatan',
+            'Pengumuman'
         ],
         'materi' => [
-            'Tes Potensi Akademik (TPA) - Pengukuran kemampuan logika dan matematika dasar.',
-            'Pengetahuan Pertanian Dasar - Materi biologi, sains dasar, dan wawasan agribisnis.'
+            'Tes SKD (TWK, TIU, TKP) - Pengujian materi kompetensi dasar.',
         ],
         'roadmap' => [
-            ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar Potensi Akademik (TPA Logika)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar Biologi & Sains Pertanian', 'status' => 'Sedang Berjalan', 'progress' => 50],
-            ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar PMB Polbangtan', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Polbangtan', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Nasionalisme & Integritas)', 'status' => 'Selesai', 'progress' => 100],
+            ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Figural & Silogisme)', 'status' => 'Selesai', 'progress' => 100],
+            ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Profesionalisme & TIK)', 'status' => 'Selesai', 'progress' => 100],
+            ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Maritim', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 5: Try Out Ujian Akhir dan Evaluasi Hasil PMB', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
     ],
     'polbangtan' => [
@@ -473,19 +456,21 @@ return [
         ],
         'selection' => [
             'Seleksi Administrasi',
-            'Tes Potensi Akademik',
+            'Tes SKD (TWK, TIU, TKP)',
             'Wawancara & Psikotes',
             'Pengumuman Final'
         ],
         'materi' => [
-            'Tes Potensi Akademik (TPA) - Pengukuran kemampuan logika dan matematika dasar.',
-            'Pengetahuan Pertanian Dasar - Materi biologi, sains dasar, dan wawasan agribisnis.'
+            'Tes Wawasan Kebangsaan (TWK) - Penguasaan materi NKRI, Pancasila, UUD 1945, dan pilar kebangsaan.',
+            'Tes Inteligensia Umum (TIU) - Kemampuan analisis numerik, verbal, logis, dan analitis.',
+            'Tes Karakteristik Pribadi (TKP) - Sosial budaya, profesionalisme, TIK, pelayanan publik, dan anti radikalisme.',
         ],
         'roadmap' => [
-            ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar Potensi Akademik (TPA Logika)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar Biologi & Sains Pertanian', 'status' => 'Sedang Berjalan', 'progress' => 50],
-            ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar PMB Polbangtan', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Polbangtan', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (Pancasila, UUD 1945, NKRI)', 'status' => 'Selesai', 'progress' => 100],
+            ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Verbal, Numerik, Figural)', 'status' => 'Selesai', 'progress' => 100],
+            ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Pelayanan Publik, Profesionalisme)', 'status' => 'Sedang Berjalan', 'progress' => 50],
+            ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar SKD', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Ujian Akhir dan Evaluasi Hasil PMB', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -514,15 +499,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Pengujian materi kompetensi dasar.',
-            'Tes Matematika & Fisika Kemenhub - Logika mekanika, listrik dasar, rumus kecepatan, aljabar, dan fisika dasar.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (SKD Kebangsaan)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Analitis & Logika)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Orientasi Pelayanan & TIK)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika & Fisika Dasar Kemenhub', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
@@ -551,15 +534,13 @@ return [
         ],
         'materi' => [
             'Tes SKD (TWK, TIU, TKP) - Pengujian materi kompetensi dasar.',
-            'Tes Matematika & Fisika Kemenhub - Rumus dasar kinematika, aljabar, dinamika, dan logika logistik.'
         ],
         'roadmap' => [
             ['tahap' => 'Tahap 1.1: Memahami Konsep Dasar TWK (SKD Kebangsaan)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.2: Memahami Konsep Dasar TIU (Kemampuan Analitis & Numerik)', 'status' => 'Selesai', 'progress' => 100],
             ['tahap' => 'Tahap 1.3: Memahami Konsep Dasar TKP (Jejaring Kerja & Profesionalisme)', 'status' => 'Selesai', 'progress' => 100],
-            ['tahap' => 'Tahap 1.4: Memahami Konsep Matematika & Fisika Dasar Kemenhub', 'status' => 'Sedang Berjalan', 'progress' => 50],
             ['tahap' => 'Tahap 2: Mengerjakan Latihan Soal Dasar & Soal Khusus Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
-            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
+            ['tahap' => 'Tahap 3: Mengikuti Try Out Pertama SKD Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 4: Pendalaman Materi dan Pembahasan Soal Lanjutan', 'status' => 'Belum Mulai', 'progress' => 0],
             ['tahap' => 'Tahap 5: Try Out Akhir dan Evaluasi Hasil Akademik Kemenhub', 'status' => 'Belum Mulai', 'progress' => 0],
         ]
