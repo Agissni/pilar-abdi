@@ -212,7 +212,7 @@
                             <label class="form-label fw-semibold" style="font-size: 13px; color: var(--teal-dark);">Link Google Meet</label>
                             <input type="url" name="gmeet_link" id="manage_gmeet_link" class="form-control" style="border-radius:10px; font-size:14px;" placeholder="https://meet.google.com/xxx-xxxx-xxx">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-3" style="display: none;">
                             <label class="form-label fw-semibold" style="font-size: 13px; color: var(--teal-dark);">Link Rekaman Video (Google Drive / YouTube)</label>
                             <input type="url" name="link_rekaman" id="manage_link_rekaman" class="form-control" style="border-radius:10px; font-size:14px;" placeholder="https://drive.google.com/drive/folders/... atau https://youtube.com/playlist?...">
                         </div>
