@@ -30,6 +30,18 @@ class RegisterController extends Controller
             'package' => 'required|string|max:100',
             'sekdin' => 'required|string|max:100',
             'address' => 'required|string',
+        ], [
+            'name.required' => 'Nama lengkap wajib diisi.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah terdaftar.',
+            'whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal terdiri dari 6 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'package.required' => 'Pilihan paket wajib dipilih.',
+            'sekdin.required' => 'Sekolah kedinasan tujuan wajib dipilih.',
+            'address.required' => 'Alamat lengkap wajib diisi.',
         ]);
 
         // Simpan password asli hanya untuk ditampilkan sekali

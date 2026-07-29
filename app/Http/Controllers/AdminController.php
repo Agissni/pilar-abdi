@@ -40,10 +40,8 @@ class AdminController extends Controller
         $totalGuru       = Guru::count();
         $totalKelas      = Kelas::count();
 
-        // 5 pembayaran terbaru
         $recentPayments  = Payment::with('user')->latest()->take(5)->get();
 
-        // 5 siswa terbaru
         $recentSiswa     = User::where('role', 'siswa')->latest()->take(5)->get();
 
         return view('admin.dashboard', compact(
