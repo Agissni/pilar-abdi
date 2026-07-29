@@ -37,7 +37,7 @@ class SiswaController extends Controller
         if (isset($sekdins[$sekdinKey])) {
             $sekdinInfo = $sekdins[$sekdinKey];
         } else {
-            // fallback: search by name or key substring containment
+            // cadangan: cari berdasarkan nama atau kecocokan kata kunci sekolah kedinasan
             foreach ($sekdins as $key => $info) {
                 if (
                     strtolower($info['name']) === $sekdinKey || 
@@ -54,14 +54,14 @@ class SiswaController extends Controller
             $sekdinInfo = $sekdins['lainnya'];
         }
 
-        // Fetch active announcements from database (max 3, newest first)
+        // Mengambil pengumuman aktif dari database (maksimal 3, terbaru dahulu)
         $announcements = \App\Models\Pengumuman::where('status', 'aktif')
             ->whereIn('target_role', ['semua', 'siswa'])
             ->orderBy('tanggal_publikasi', 'desc')
             ->take(3)
             ->get();
 
-        // Bimbingan Privat 1-on-1 calculations
+        // Perhitungan kuota Bimbingan Privat 1-on-1 siswa
         $gurus = \App\Models\Guru::orderBy('nama', 'asc')->get();
         $riwayatBimbingan = \App\Models\BimbinganPrivat::with('guru')
             ->where('id_user', $user->id_user)
@@ -153,7 +153,7 @@ class SiswaController extends Controller
 
         $tryout = \App\Models\Tryout::findOrFail($id);
 
-        // Server-side check of remaining attempts quota
+        // Pemeriksaan server-side untuk sisa kuota pengerjaan tryout siswa
         $attemptsCount = \App\Models\TryoutAttempt::where('id_user', $user->id_user)->count();
         $package = strtolower($user->package ?? '');
         if (str_contains($package, 'pro') || str_contains($package, 'tahunan')) {

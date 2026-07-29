@@ -127,13 +127,6 @@
                             <option value="TIU">TIU (Tes Intelegensia Umum)</option>
                             <option value="TWK">TWK (Tes Wawasan Kebangsaan)</option>
                             <option value="TKP">TKP (Tes Karakteristik Pribadi)</option>
-                            <option value="SKD">SKD (Seleksi Kompetensi Dasar)</option>
-                            <option value="SKB">SKB (Seleksi Kompetensi Bidang)</option>
-                            <option value="Matematika">Matematika</option>
-                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                            <option value="Bahasa Inggris">Bahasa Inggris</option>
-                            <option value="Psikotes">Psikotes</option>
-                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="row g-3 mb-3">
@@ -192,13 +185,6 @@
                             <option value="TIU">TIU</option>
                             <option value="TWK">TWK</option>
                             <option value="TKP">TKP</option>
-                            <option value="SKD">SKD</option>
-                            <option value="SKB">SKB</option>
-                            <option value="Matematika">Matematika</option>
-                            <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                            <option value="Bahasa Inggris">Bahasa Inggris</option>
-                            <option value="Psikotes">Psikotes</option>
-                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="row g-3 mb-3">
@@ -272,7 +258,7 @@ function editGuru(id, nama, spesialisasi, whatsapp, email, bio) {
     document.getElementById('edit_whatsapp').value = whatsapp;
     document.getElementById('edit_email').value = email;
     document.getElementById('edit_bio').value = bio;
-    // Set select
+    // Pilih opsi spesialisasi yang sesuai
     const sel = document.getElementById('edit_spesialisasi');
     for (let opt of sel.options) {
         opt.selected = (opt.value === spesialisasi);

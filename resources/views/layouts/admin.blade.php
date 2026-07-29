@@ -624,7 +624,7 @@
 <!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    // Global override for window.alert
+    // Pengganti global fungsi window.alert menggunakan SweetAlert2
     window.alert = function(message) {
         Swal.fire({
             text: message,
@@ -634,7 +634,7 @@
         });
     };
 
-    // Generic confirmation handler via SweetAlert2 attributes
+    // Handler konfirmasi otomatis untuk tombol dengan atribut data-confirm
     document.addEventListener('click', function(e) {
         const confirmEl = e.target.closest('[data-confirm]');
         if (confirmEl) {
@@ -676,7 +676,7 @@
         }
     });
 
-    // Flash message toasts
+    // Tampilkan pesan sukses popup menggunakan SweetAlert2
     @if(session('success'))
         Swal.fire({
             toast: true,

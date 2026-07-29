@@ -186,8 +186,8 @@
                             <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Target <span class="text-danger">*</span></label>
                             <select name="target_role" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
                                 <option value="semua">Semua</option>
-                                <option value="siswa">Siswa saja</option>
-                                <option value="guru">Guru saja</option>
+                                <option value="siswa">Siswa</option>
+                                <option value="guru">Guru</option>
                             </select>
                         </div>
                         <div class="col-4">
@@ -243,8 +243,8 @@
                             <label class="form-label fw-semibold" style="font-size:12px;color:#374151;">Target <span class="text-danger">*</span></label>
                             <select name="target_role" id="edit_target_role" class="form-select" style="border-radius:10px;border-color:#e2e8f0;font-size:13px;" required>
                                 <option value="semua">Semua</option>
-                                <option value="siswa">Siswa saja</option>
-                                <option value="guru">Guru saja</option>
+                                <option value="siswa">Siswa</option>
+                                <option value="guru">Guru</option>
                             </select>
                         </div>
                         <div class="col-4">
@@ -342,7 +342,7 @@
 
 @section('scripts')
 <script>
-    // AJAX DETAIL FETCH
+    // AMBIL DETAIL DATA PENGUMUMAN DENGAN AJAX
     function showDetail(id) {
         axios.get(`/admin/pengumuman/${id}`)
             .then(res => {
@@ -350,11 +350,11 @@
                 document.getElementById('detail_judul').textContent = item.judul;
                 document.getElementById('detail_isi').textContent = item.isi;
                 
-                // Format dates
+                // Format tanggal publikasi
                 const pubDate = new Date(item.tanggal_publikasi);
                 document.getElementById('detail_tanggal_publikasi').textContent = pubDate.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
-                // Badge status
+                // Tampilkan badge status aktif/nonaktif
                 const badgeBox = document.getElementById('detail_status_badge');
                 if (item.status === 'aktif') {
                     badgeBox.innerHTML = '<span class="badge bg-success px-3 py-2"><i class="bi bi-check-circle-fill me-1"></i> Aktif</span>';
@@ -362,7 +362,7 @@
                     badgeBox.innerHTML = '<span class="badge bg-secondary px-3 py-2"><i class="bi bi-dash-circle-fill me-1"></i> Nonaktif</span>';
                 }
 
-                // Target badge
+                // Tampilkan badge target penerima pengumuman
                 const targetBox = document.getElementById('detail_target_badge');
                 if (item.target_role === 'semua') {
                     targetBox.innerHTML = '<span class="badge bg-primary px-3 py-2"><i class="bi bi-people-fill me-1"></i> Semua</span>';
@@ -381,22 +381,22 @@
             });
     }
 
-    // POPULATE EDIT MODAL
+    // MASUKKAN DATA KE MODAL EDIT
     function editPengumuman(id) {
         axios.get(`/admin/pengumuman/${id}`)
             .then(res => {
                 const item = res.data.data;
                 
-                // Set form action
+                // Atur URL aksi form untuk update data
                 document.getElementById('formEditPengumuman').action = `/admin/pengumuman/${id}`;
                 
-                // Fill fields
+                // Isi kolom-kolom input form edit
                 document.getElementById('edit_judul').value = item.judul;
                 document.getElementById('edit_isi').value = item.isi;
                 document.getElementById('edit_target_role').value = item.target_role;
                 document.getElementById('edit_status').value = item.status;
                 
-                // Format date to YYYY-MM-DDTHH:MM
+                // Format nilai tanggal untuk input HTML datetime-local
                 const pubDateStr = item.tanggal_publikasi.substring(0, 16);
                 document.getElementById('edit_tanggal_publikasi').value = pubDateStr;
 
@@ -409,7 +409,7 @@
             });
     }
 
-    // TRIGGER DELETE CONFIRMATION
+    // PICU MODAL KONFIRMASI HAPUS DATA
     function deletePengumuman(id, title) {
         document.getElementById('formHapusPengumuman').action = `/admin/pengumuman/${id}`;
         document.getElementById('hapus_judul').textContent = title;

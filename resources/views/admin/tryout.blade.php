@@ -364,7 +364,7 @@
 
 @section('scripts')
 <script>
-    // AJAX DETAIL FETCH
+    // AMBIL DETAIL DATA TRYOUT DENGAN AJAX
     function showDetail(id) {
         axios.get(`/admin/tryout/${id}`)
             .then(res => {
@@ -374,13 +374,13 @@
                 document.getElementById('detail_jumlah_soal').textContent = `${to.jumlah_soal} Soal`;
                 document.getElementById('detail_durasi').textContent = `${to.durasi} Menit`;
                 
-                // Format dates
+                // Format tanggal mulai dan berakhir
                 const start = new Date(to.tanggal_mulai);
                 const end = new Date(to.tanggal_berakhir);
                 document.getElementById('detail_tanggal_mulai').textContent = start.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
                 document.getElementById('detail_tanggal_berakhir').textContent = end.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
-                // Badge status
+                // Tampilkan badge status tryout
                 const badgeBox = document.getElementById('detail_status_badge');
                 if (to.status === 'aktif') {
                     badgeBox.innerHTML = '<span class="badge bg-success px-3 py-2"><i class="bi bi-check-circle-fill me-1"></i> Aktif</span>';
@@ -399,22 +399,22 @@
             });
     }
 
-    // POPULATE EDIT MODAL
+    // MASUKKAN DATA KE MODAL EDIT
     function editTryout(id) {
         axios.get(`/admin/tryout/${id}`)
             .then(res => {
                 const to = res.data.data;
                 
-                // Set form action
+                // Atur URL aksi form untuk update data
                 document.getElementById('formEditTryout').action = `/admin/tryout/${id}`;
                 
-                // Fill fields
+                // Isi kolom-kolom input form edit
                 document.getElementById('edit_nama_tryout').value = to.nama_tryout;
                 document.getElementById('edit_deskripsi').value = to.deskripsi || '';
                 document.getElementById('edit_jumlah_soal').value = to.jumlah_soal;
                 document.getElementById('edit_durasi').value = to.durasi;
                 
-                // Format dates to YYYY-MM-DDTHH:MM
+                // Format nilai tanggal untuk input HTML datetime-local
                 const start = to.tanggal_mulai.substring(0, 16);
                 const end = to.tanggal_berakhir.substring(0, 16);
                 
@@ -431,7 +431,7 @@
             });
     }
 
-    // TRIGGER DELETE CONFIRMATION
+    // PICU MODAL KONFIRMASI HAPUS DATA
     function deleteTryout(id, name) {
         document.getElementById('formHapusTryout').action = `/admin/tryout/${id}`;
         document.getElementById('hapus_nama_tryout').textContent = name;

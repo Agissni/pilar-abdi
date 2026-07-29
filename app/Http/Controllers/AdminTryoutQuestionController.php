@@ -13,12 +13,12 @@ class AdminTryoutQuestionController extends Controller
     {
         $tryout = Tryout::findOrFail($tryout_id);
         
-        // Fetch all questions from the general bank grouped by category
+        // Ambil semua soal dari bank soal umum yang dikelompokkan per kategori
         $questions_twk = TryoutQuestion::where('kategori', 'TWK')->orderBy('id_tryout_question', 'asc')->get();
         $questions_tiu = TryoutQuestion::where('kategori', 'TIU')->orderBy('id_tryout_question', 'asc')->get();
         $questions_tkp = TryoutQuestion::where('kategori', 'TKP')->orderBy('id_tryout_question', 'asc')->get();
 
-        // Selected question IDs for this tryout
+        // ID soal terpilih untuk paket tryout ini
         $selected_ids = $tryout->questions()->pluck('id_tryout_question')->toArray();
 
         return view('admin.kelola_paket', compact('tryout', 'questions_twk', 'questions_tiu', 'questions_tkp', 'selected_ids'));
@@ -28,7 +28,7 @@ class AdminTryoutQuestionController extends Controller
     {
         $tryout = Tryout::findOrFail($tryout_id);
 
-        // Validation rule: limit of questions
+        // Aturan validasi: batas maksimal jumlah soal
         $existingCount = $tryout->questions()->count();
         if ($existingCount >= $tryout->jumlah_soal) {
             return redirect()->back()
@@ -116,7 +116,7 @@ class AdminTryoutQuestionController extends Controller
         
         $question->delete();
 
-        // Re-sequence remaining questions
+        // Urutkan kembali nomor soal untuk soal-soal yang tersisa
         $remaining = TryoutQuestion::where('id_tryout', $tryoutId)
             ->where('nomor_soal', '>', $deletedNum)
             ->orderBy('nomor_soal', 'asc')
@@ -142,14 +142,14 @@ class AdminTryoutQuestionController extends Controller
                 ->withErrors(['limit' => 'Jumlah soal terpilih (' . count($questionIds) . ') melebihi batas maksimal (' . $tryout->jumlah_soal . ') untuk Try Out ini.']);
         }
 
-        // Unassign questions currently in this tryout
+        // Lepas relasi soal-soal yang saat ini ada di tryout ini
         TryoutQuestion::where('id_tryout', $tryout->id_tryout)->update(['id_tryout' => null]);
 
-        // Assign newly selected questions
+        // Hubungkan soal-soal yang baru dipilih ke tryout
         if (!empty($questionIds)) {
             TryoutQuestion::whereIn('id_tryout_question', $questionIds)->update(['id_tryout' => $tryout->id_tryout]);
 
-            // Re-sequence nomor_soal for selected questions starting from 1 to N
+            // Urutkan ulang nomor_soal untuk soal terpilih mulai dari 1 sampai N
             $questions = TryoutQuestion::where('id_tryout', $tryout->id_tryout)
                 ->orderBy('kategori', 'asc')
                 ->orderBy('id_tryout_question', 'asc')

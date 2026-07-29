@@ -52,7 +52,7 @@ class GuruTryoutController extends Controller
             return redirect('/guru/dashboard')->withErrors(['access' => 'Akses ditolak.']);
         }
 
-        // Limit count check
+        // Cek batas maksimal jumlah soal
         $totalCount = $tryout->questions()->count();
         if ($totalCount >= $tryout->jumlah_soal) {
             return redirect()->back()
@@ -81,7 +81,7 @@ class GuruTryoutController extends Controller
 
         $data['id_tryout'] = $tryout->id_tryout;
         $data['kategori'] = $specialization;
-        $data['nomor_soal'] = $totalCount + 1; // Append to sequence
+        $data['nomor_soal'] = $totalCount + 1; // Tambahkan ke urutan paling akhir
 
         TryoutQuestion::create($data);
 
@@ -158,7 +158,7 @@ class GuruTryoutController extends Controller
 
         $question->delete();
 
-        // Re-sequence remaining questions for this tryout
+        // Urutkan kembali nomor soal untuk soal-soal yang tersisa
         $remaining = TryoutQuestion::where('id_tryout', $tryoutId)
             ->where('nomor_soal', '>', $deletedNum)
             ->orderBy('nomor_soal', 'asc')

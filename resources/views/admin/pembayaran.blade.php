@@ -286,14 +286,14 @@ function showProofModal(data) {
     document.getElementById('modal_time').textContent = data.time + ' WIB';
     document.getElementById('modal_note').textContent = data.note ? data.note : '-';
     
-    // Set image and link
+    // Tampilkan gambar bukti transfer dan tautan unduhan
     const imgEl = document.getElementById('modal_proof_img');
     imgEl.src = data.image;
     
     const linkEl = document.getElementById('modal_download_link');
     linkEl.href = data.image;
 
-    // Show modal
+    // Tampilkan modal bukti pembayaran
     new bootstrap.Modal(document.getElementById('modalBuktiPembayaran')).show();
 }
 </script>

@@ -286,7 +286,7 @@
             const checkedCount = document.querySelectorAll('.question-checkbox:checked').length;
             counterSpan.textContent = checkedCount;
 
-            // Warn if over limit
+            // Berikan warna peringatan merah jika jumlah terpilih melebihi batas maksimal
             if (checkedCount > limit) {
                 counterSpan.className = 'text-danger fw-extrabold';
             } else if (checkedCount === limit) {
@@ -300,7 +300,7 @@
             cb.addEventListener('change', updateCounter);
         });
 
-        // Initialize counter
+        // Inisialisasi perhitungan awal jumlah terpilih
         updateCounter();
     });
 </script>

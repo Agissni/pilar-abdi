@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('nama_tryout');
             $table->text('deskripsi')->nullable();
             $table->integer('jumlah_soal');
-            $table->integer('durasi'); // in minutes
+            $table->integer('durasi'); // dalam satuan menit
             $table->dateTime('tanggal_mulai');
             $table->dateTime('tanggal_berakhir');
             $table->enum('status', ['aktif', 'belum_dimulai', 'selesai'])->default('belum_dimulai');

@@ -249,13 +249,13 @@
         document.getElementById('manage_gmeet_link').value = gmeet;
         document.getElementById('manage_link_rekaman').value = linkRekaman || '';
 
-        // Set select hari
+        // Pilih opsi hari bimbingan yang sesuai
         const selHari = document.getElementById('manage_hari');
         for (let opt of selHari.options) {
             opt.selected = (opt.value === hari);
         }
 
-        // Set current PDF badge
+        // Tampilkan informasi file PDF materi yang sudah diunggah jika ada
         const pdfCont = document.getElementById('current_pdf_container');
         const pdfText = document.getElementById('current_pdf_name');
         if (pdfName) {
@@ -265,7 +265,7 @@
             pdfCont.classList.add('d-none');
         }
 
-        // Show modal
+        // Tampilkan modal pengaturan kelas
         new bootstrap.Modal(document.getElementById('modalManageKelas')).show();
     }
     </script>

@@ -133,11 +133,6 @@
                                 <option value="TIU">TIU</option>
                                 <option value="TWK">TWK</option>
                                 <option value="TKP">TKP</option>
-                                <option value="SKD">SKD (Paket)</option>
-                                <option value="SKB">SKB</option>
-                                <option value="Matematika">Matematika</option>
-                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                                <option value="Psikotes">Psikotes</option>
                             </select>
                         </div>
                         <div class="col-6">
@@ -212,11 +207,6 @@
                                 <option value="TIU">TIU</option>
                                 <option value="TWK">TWK</option>
                                 <option value="TKP">TKP</option>
-                                <option value="SKD">SKD (Paket)</option>
-                                <option value="SKB">SKB</option>
-                                <option value="Matematika">Matematika</option>
-                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
-                                <option value="Psikotes">Psikotes</option>
                             </select>
                         </div>
                         <div class="col-6">
@@ -305,15 +295,15 @@ function editKelas(id, nama, materi, guruId, hari, jam, deskripsi) {
     document.getElementById('edit_jam').value = jam;
     document.getElementById('edit_deskripsi').value = deskripsi;
 
-    // Set materi
+    // Atur materi yang terpilih
     const selMateri = document.getElementById('edit_materi');
     for (let opt of selMateri.options) { opt.selected = (opt.value === materi); }
 
-    // Set guru
+    // Atur guru pengajar yang terpilih
     const selGuru = document.getElementById('edit_guru_id');
     for (let opt of selGuru.options) { opt.selected = (opt.value == guruId); }
 
-    // Set hari
+    // Atur hari bimbingan yang terpilih
     const selHari = document.getElementById('edit_hari');
     for (let opt of selHari.options) { opt.selected = (opt.value === hari); }
 

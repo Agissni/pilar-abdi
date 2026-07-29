@@ -13,10 +13,10 @@ class GuruController extends Controller
         $guruId = $request->session()->get('guru_id');
         $guru = Guru::findOrFail($guruId);
 
-        // Fetch classes taught by this teacher
+        // Ambil data kelas-kelas yang diajar oleh guru ini
         $kelas = Kelas::where('id_guru', $guruId)->latest()->get();
 
-        // Fetch active announcements for teacher (max 3, newest first)
+        // Ambil pengumuman aktif untuk guru (maksimal 3, terbaru dahulu)
         $announcements = \App\Models\Pengumuman::where('status', 'aktif')
             ->whereIn('target_role', ['semua', 'guru'])
             ->orderBy('tanggal_publikasi', 'desc')
@@ -36,7 +36,7 @@ class GuruController extends Controller
             'jam'        => 'required|string|max:20',
             'gmeet_link' => 'nullable|url|max:255',
             'link_rekaman' => 'nullable|url|max:255',
-            'materi_pdf' => 'nullable|file|mimes:pdf|max:10240', // Max 10MB
+            'materi_pdf' => 'nullable|file|mimes:pdf|max:10240', // Maksimal ukuran file 10MB
         ]);
 
         $updateData = [
@@ -86,7 +86,7 @@ class GuruController extends Controller
         $guruId = $request->session()->get('guru_id');
         $guru = Guru::findOrFail($guruId);
 
-        // Fetch bimbingan privat targeting this guru
+        // Ambil riwayat bimbingan privat yang ditujukan ke guru ini
         $bimbingan = \App\Models\BimbinganPrivat::with('siswa')
             ->where('id_guru', $guruId)
             ->orderBy('tgl_konsultasi', 'desc')

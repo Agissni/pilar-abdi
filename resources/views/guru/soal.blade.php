@@ -383,7 +383,7 @@
 
 @section('scripts')
 <script>
-    // AJAX DETAIL FETCH
+    // AMBIL DETAIL SOAL DENGAN AJAX
     function showDetail(id) {
         axios.get(`/guru/tryout/soal/${id}`)
             .then(res => {
@@ -392,7 +392,7 @@
                 document.getElementById('detail_nomor_soal').textContent = `Soal #${q.nomor_soal}`;
                 document.getElementById('detail_pertanyaan').textContent = q.pertanyaan;
                 
-                // Set options
+                // Tampilkan opsi pilihan ganda A sampai E
                 const opts = ['a', 'b', 'c', 'd', 'e'];
                 opts.forEach(opt => {
                     const li = document.getElementById(`detail_opt_${opt}`);
@@ -404,7 +404,7 @@
                     }
                 });
 
-                // Pembahasan
+                // Tampilkan penjelasan pembahasan soal
                 document.getElementById('detail_pembahasan').textContent = q.pembahasan || 'Tidak ada pembahasan.';
 
                 const modal = new bootstrap.Modal(document.getElementById('modalDetailSoal'));
@@ -416,16 +416,16 @@
             });
     }
 
-    // POPULATE EDIT MODAL
+    // MASUKKAN DATA KE MODAL EDIT
     function editQuestion(id) {
         axios.get(`/guru/tryout/soal/${id}`)
             .then(res => {
                 const q = res.data.data;
                 
-                // Set form action
+                // Atur URL aksi form untuk update data
                 document.getElementById('formEditSoal').action = `/guru/tryout/soal/${id}`;
                 
-                // Fill fields
+                // Isi kolom-kolom input form edit
                 document.getElementById('edit_pertanyaan').value = q.pertanyaan;
                 document.getElementById('edit_pilihan_a').value = q.pilihan_a;
                 document.getElementById('edit_pilihan_b').value = q.pilihan_b;
@@ -444,7 +444,7 @@
             });
     }
 
-    // TRIGGER DELETE CONFIRMATION
+    // PICU MODAL KONFIRMASI HAPUS DATA
     function deleteQuestion(id, num) {
         document.getElementById('formHapusSoal').action = `/guru/tryout/soal/${id}`;
         document.getElementById('hapus_nomor_soal').textContent = num;
