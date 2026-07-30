@@ -458,6 +458,24 @@
 
         </div>
     </div>
+
+     <div class="col-lg-4 col-md-6">
+                <div class="testimoni-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="isi">"BAGUS BANGET BIMBELNYAA."</p>
+                    <div class="profil">
+                        <div class="avatar">O</div>
+                        <div>
+                            <p class="nama">Cahyo Prianto<span class="badge-lulus">Lolos IPDN</span></p>
+                            <p class="sekolah">IPDN 2026</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </section>
 
 @endsection

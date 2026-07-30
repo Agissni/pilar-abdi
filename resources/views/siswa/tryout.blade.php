@@ -713,7 +713,7 @@ function generateExamQuestions(totalSoal) {
 }
 
 // NAVIGATION
-function goToState(stateName) {
+function goToState(stateName) { 
     document.querySelectorAll('.state-section').forEach(el => el.classList.add('d-none'));
     document.getElementById(`state-${stateName}`).classList.remove('d-none');
     window.scrollTo(0, 0);
