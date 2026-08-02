@@ -456,17 +456,14 @@
                 </div>
             </div>
 
-        </div>
-    </div>
-
-     <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6">
                 <div class="testimoni-card">
                     <div class="stars">★★★★★</div>
-                    <p class="isi">"BAGUS BANGET BIMBELNYAA."</p>
+                    <p class="isi">"Fokus pembelajarannya sesuai dengan kebutuhan tes kedinasan. Materi, tryout, dan bimbingannya membantu saya lebih siap menghadapi proses seleksi"</p>
                     <div class="profil">
                         <div class="avatar">O</div>
                         <div>
-                            <p class="nama">Cahyo Prianto<span class="badge-lulus">Lolos IPDN</span></p>
+                            <p class="nama">Cahyo Prianto, S.Pd., M.T<span class="badge-lulus">Lolos IPDN</span></p>
                             <p class="sekolah">IPDN 2026</p>
                         </div>
                     </div>
@@ -475,7 +472,6 @@
 
         </div>
     </div>
-
 </section>
 
 @endsection
