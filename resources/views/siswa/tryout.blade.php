@@ -443,7 +443,7 @@
 </div>
 
 <script>
-// QUIZ ENGINE DATA & LOGIC
+// DATA & LOGIKA ENGINE KUIS
 
 const questionsData = [
     // TWK (1-5)
@@ -663,7 +663,7 @@ const questionsData = [
     }
 ];
 
-// STATE VARIABLES
+// VARIABEL KONDISI / STATE
 let selectedTryout = {
     id: null,
     title: '',
@@ -672,16 +672,16 @@ let selectedTryout = {
 };
 let activeQuestions = [];
 let currentQuestionIndex = 0;
-let savedAnswers = {}; // { questionId: 'A' }
-let raguStatus = {}; // { questionId: true/false }
+let savedAnswers = {}; // Menyimpan jawaban siswa { idSoal: 'A' }
+let raguStatus = {}; // Menyimpan status ragu-ragu { idSoal: true/false }
 let timerInterval = null;
-let timeRemaining = 15 * 60; // in seconds
+let timeRemaining = 15 * 60; // Sisa waktu dalam detik
 
-// DYNAMIC QUESTION GENERATOR
+// GENERATOR SOAL DINAMIS
 function generateExamQuestions(totalSoal) {
     let list = [];
     
-    // Categorize questions split:
+    // Pembagian kategori soal secara proporsional:
     // TWK ~33%, TIU ~33%, TKP ~34%
     let numTwk = Math.ceil(totalSoal * 0.33);
     let numTiu = Math.ceil(totalSoal * 0.33);
@@ -698,7 +698,7 @@ function generateExamQuestions(totalSoal) {
             categoryFull = 'Tes Inteligensia Umum (TIU)';
         }
 
-        // Get matching base question from questionsData based on index and category to maintain consistency
+        // Ambil soal dasar yang sesuai dari questionsData berdasarkan index dan kategori agar konsisten
         let filteredBase = questionsData.filter(q => q.category === category);
         let baseQ = filteredBase[i % filteredBase.length];
         
@@ -712,7 +712,7 @@ function generateExamQuestions(totalSoal) {
     return list;
 }
 
-// NAVIGATION
+// NAVIGASI STATE / LAYAR
 function goToState(stateName) { 
     document.querySelectorAll('.state-section').forEach(el => el.classList.add('d-none'));
     document.getElementById(`state-${stateName}`).classList.remove('d-none');
@@ -744,9 +744,9 @@ function startExam() {
             btn.disabled = false;
             
             if (res.data.status === 'success' && res.data.questions && res.data.questions.length > 0) {
-                // Set questions from DB
+                // Setel soal dari database
                 activeQuestions = res.data.questions;
-                selectedTryout.totalQuestions = activeQuestions.length; // Override with actual DB question count
+                selectedTryout.totalQuestions = activeQuestions.length; // Timpa dengan jumlah soal asli dari database
                 
                 // Reset Ujian
                 currentQuestionIndex = 0;
@@ -754,15 +754,15 @@ function startExam() {
                 raguStatus = {};
                 timeRemaining = selectedTryout.duration * 60;
 
-                // Set package title
+                // Setel judul paket ujian
                 document.getElementById('exam-package-title').textContent = selectedTryout.title;
 
-                // Render Ujian
+                // Tampil soal pertama
                 renderQuestion(0);
                 renderNavigationGrid();
                 goToState('exam');
 
-                // Timer
+                // Jalankan penghitung waktu (timer)
                 startTimer();
             } else {
                 alert('Maaf, ujian tryout ini belum memiliki soal. Hubungi Admin atau Guru untuk mengisi soal terlebih dahulu.');
@@ -801,7 +801,7 @@ function updateTimerDisplay() {
     const timerEl = document.getElementById('exam-timer');
     timerEl.textContent = `${formattedMin}:${formattedSec}`;
 
-    if (timeRemaining < 120) { // < 2 Menit
+    if (timeRemaining < 120) { // Jika sisa waktu kurang dari 2 menit
         timerEl.parentElement.classList.remove('bg-danger', 'bg-opacity-10', 'text-danger');
         timerEl.parentElement.classList.add('bg-danger', 'text-white');
     } else {
@@ -810,16 +810,16 @@ function updateTimerDisplay() {
     }
 }
 
-// RENDERING
+// RENDERING TAMPILAN
 function renderQuestion(index) {
     currentQuestionIndex = index;
     const q = activeQuestions[index];
 
-    // Info header
+    // Header informasi soal
     document.getElementById('current-question-number-title').textContent = `Soal No. ${index + 1} dari ${activeQuestions.length}`;
     document.getElementById('question-text-box').textContent = `${index + 1}. ${q.question}`;
 
-    // Render Options
+    // Tampilkan Pilihan Jawaban
     const options = ['A', 'B', 'C', 'D', 'E'];
     options.forEach(opt => {
         const optionCard = document.querySelector(`#options-container .option-row:nth-child(${options.indexOf(opt) + 1})`);
@@ -829,7 +829,7 @@ function renderQuestion(index) {
         labelText.textContent = q.options[opt];
         inputRadio.value = opt;
 
-        // Check if answered
+        // Periksa apakah soal sudah dijawab oleh siswa
         if (savedAnswers[q.id] === opt) {
             inputRadio.checked = true;
             optionCard.classList.add('border-primary', 'bg-primary', 'bg-opacity-10');
@@ -839,14 +839,14 @@ function renderQuestion(index) {
         }
     });
 
-    // Ragu Ragu Checkbox
+    // Status Checkbox Ragu-Ragu
     const isRagu = raguStatus[q.id] || false;
     document.getElementById('check-ragu').checked = isRagu;
 
-    // Previous Button state
+    // Status Tombol Sebelumnya (dinonaktifkan jika di soal pertama)
     document.getElementById('btn-prev-question').disabled = index === 0;
 
-    // Next Button Text (Last question is "Selesai")
+    // Teks Tombol Selanjutnya (jika soal terakhir, ubah menjadi tombol "Selesai")
     const nextBtn = document.getElementById('btn-next-question');
     if (index === activeQuestions.length - 1) {
         nextBtn.innerHTML = `Selesai <i class="bi bi-check-circle-fill ms-1"></i>`;
@@ -858,7 +858,7 @@ function renderQuestion(index) {
         nextBtn.classList.remove('btn-success');
     }
 
-    // Highlight selected navigation button
+    // Beri sorotan pada tombol navigasi nomor soal yang sedang aktif
     document.querySelectorAll('.nav-grid-btn').forEach(btn => {
         btn.classList.remove('border-dark', 'border-2');
         if (parseInt(btn.dataset.index) === index) {
@@ -907,12 +907,12 @@ function updateNavButtonColor(btn, questionId) {
     }
 }
 
-// LOGIC CONTROLS
+// KONTROL LOGIKA
 function selectOption(opt) {
     const q = activeQuestions[currentQuestionIndex];
     savedAnswers[q.id] = opt;
 
-    // Highlight option
+    // Beri sorotan pada pilihan jawaban yang diklik
     const options = ['A', 'B', 'C', 'D', 'E'];
     options.forEach(o => {
         const optionCard = document.querySelector(`#options-container .option-row:nth-child(${options.indexOf(o) + 1})`);
@@ -926,7 +926,7 @@ function selectOption(opt) {
         }
     });
 
-    // Update Nav Grid
+    // Perbarui warna tombol navigasi soal
     const navBtn = document.querySelector(`.nav-grid-btn[data-index="${currentQuestionIndex}"]`);
     updateNavButtonColor(navBtn, q.id);
 }
@@ -935,7 +935,7 @@ function toggleRaguRagu(checkbox) {
     const q = activeQuestions[currentQuestionIndex];
     raguStatus[q.id] = checkbox.checked;
 
-    // Update Nav Grid
+    // Perbarui warna tombol navigasi soal
     const navBtn = document.querySelector(`.nav-grid-btn[data-index="${currentQuestionIndex}"]`);
     updateNavButtonColor(navBtn, q.id);
 }
@@ -973,14 +973,14 @@ function triggerSelesaiUjian() {
 }
 
 function submitExam() {
-    // Hide confirmation modal if open
+    // Sembunyikan modal konfirmasi selesai ujian jika sedang terbuka
     const modalEl = document.getElementById('confirmSelesaiModal');
     const modal = bootstrap.Modal.getInstance(modalEl);
     if (modal) modal.hide();
 
     clearInterval(timerInterval);
 
-    // Calculate Scores
+    // Hitung perolehan skor ujian
     let twkScore = 0;
     let tiuScore = 0;
     let tkpScore = 0;
@@ -1002,24 +1002,24 @@ function submitExam() {
 
     const totalScore = twkScore + tiuScore + tkpScore;
 
-    // Passing Grades (Scaled dynamically)
+    // Nilai Ambang Batas / Passing Grade (Dihitung dinamis berdasarkan jumlah soal)
     let numTwk = activeQuestions.filter(q => q.category === 'TWK').length;
     let numTiu = activeQuestions.filter(q => q.category === 'TIU').length;
     let numTkp = activeQuestions.filter(q => q.category === 'TKP').length;
 
-    const twkPass = Math.ceil(numTwk * 5 * 0.6); // 60%
-    const tiuPass = Math.ceil(numTiu * 5 * 0.6); // 60%
-    const tkpPass = Math.ceil(numTkp * 3.6); // 3.6 average per question
+    const twkPass = Math.ceil(numTwk * 5 * 0.6); // Batas TWK: 60% dari nilai maksimal
+    const tiuPass = Math.ceil(numTiu * 5 * 0.6); // Batas TIU: 60% dari nilai maksimal
+    const tkpPass = Math.ceil(numTkp * 3.6); // Batas TKP: rata-rata 3.6 poin per soal
 
     const isLulus = twkScore >= twkPass && tiuScore >= tiuPass && tkpScore >= tkpPass;
 
-    // Populate Results View
+    // Masukkan skor ke elemen tampilan hasil
     document.getElementById('res-score-twk').textContent = twkScore;
     document.getElementById('res-score-tiu').textContent = tiuScore;
     document.getElementById('res-score-tkp').textContent = tkpScore;
     document.getElementById('res-score-total').textContent = totalScore;
 
-    // Max potential score representation
+    // Tampilkan informasi batas minimum kelulusan dan nilai maksimal
     const maxScore = (numTwk * 5) + (numTiu * 5) + (numTkp * 5);
     document.getElementById('res-score-total').nextElementSibling.textContent = `Maks. ${maxScore}`;
     document.getElementById('res-score-twk').nextElementSibling.textContent = `Min. ${twkPass}`;
